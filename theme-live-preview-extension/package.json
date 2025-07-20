@@ -29,10 +29,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:themeLivePreview.openPreview",
-    "onCommand:themeLivePreview.openColorPicker",
-    "onCommand:themeLivePreview.navigateToItem",
-    "onView:themeEditor"
   ],
   "main": "./out/extension.js",
   "contributes": {
