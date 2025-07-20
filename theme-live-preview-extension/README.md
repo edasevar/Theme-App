@@ -11,8 +11,11 @@ A powerful VS Code extension that provides **live preview** and **real-time edit
 - 📝 **CSS Editor**: Edit theme CSS with live updates and syntax highlighting
 - 🔄 **Smart Theme Loading**: Load themes from `.json` and `.vsix` files seamlessly
 - 🎯 **Color Palette Extraction**: Visual color palette with hex codes and swatches
+- 🌈 **Advanced Color Picker**: Interactive color picker with VS Code integration
 - 📤 **CSS Export**: Export customized themes as clean, formatted CSS files
 - 🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
+- 🎯 **Theme Navigation**: Navigate directly to theme items in VS Code settings
+- 🔗 **VS Code Integration**: Apply colors directly to your current VS Code theme
 - ⚡ **Performance Optimized**: Fast loading and responsive UI
 - 🌈 **Multi-format Support**: Works with JSON themes and VSIX packages
 
@@ -77,9 +80,25 @@ code --install-extension theme-live-preview-0.0.1.vsix
 - **Real-time CSS Editor**: The left panel shows extracted theme CSS
 - **Instant Preview**: Edit CSS and see changes immediately in the preview
 - **Syntax Highlighting**: Full VS Code syntax highlighting in preview
-- **Color Swatches**: Visual representation of all theme colors
+- **Color Swatches**: Visual representation of all theme colors with interactive controls
 - **CSS Tools**: Use Format/Minify buttons to clean up your CSS
 - **Undo/Redo**: Full editing history with keyboard shortcuts
+
+### 🌈 Advanced Color Picker Features
+
+- **Interactive Color Picker**: Click the 🎨 button next to any color in the palette
+- **VS Code Integration**: Pick colors using VS Code's native color input
+- **Live Color Updates**: See color changes instantly in the preview
+- **Apply to VS Code**: Use the "Apply" button to apply colors directly to your current VS Code theme
+- **Color Validation**: Automatic validation for hex, rgb, rgba, hsl, and hsla color formats
+
+### 🎯 Theme Navigation & Integration
+
+- **Navigate to Theme Items**: Click on any color or theme item to navigate to it in VS Code
+- **VS Code Settings Integration**: Automatically opens relevant settings when navigating
+- **Theme Item Quick Access**: Use the navigation panel to jump to specific theme elements
+- **Settings JSON Integration**: Direct links to VS Code's `workbench.colorCustomizations`
+- **Real-time Theme Application**: Apply colors from preview directly to your VS Code interface
 
 ### 📤 Exporting Your Work
 
@@ -107,14 +126,26 @@ graph TD
     F --> G[Use in Web Projects]
 ```
 
-### Step-by-step Example
+### Updated Example Workflow
 
 1. **Download** a theme from VS Code Marketplace (`.vsix` file)
 2. **Open** the Theme Live Preview panel (`Ctrl+Shift+P` → "Open Theme Live Preview")
 3. **Load** the `.vsix` file using the context menu or command
 4. **See** the theme instantly converted to CSS with live preview
-5. **Edit** colors, fonts, and styles in real-time
-6. **Export** the customized CSS for your web projects
+5. **Pick Colors** using the 🎨 button next to any color in the palette
+6. **Navigate** to theme items by clicking on colors or using the navigation panel
+7. **Apply** colors directly to VS Code using the "Apply" button
+8. **Edit** colors, fonts, and styles in real-time with instant feedback
+9. **Export** the customized CSS for your web projects
+
+### New Color Picker Workflow
+
+1. **Load** any theme in the preview panel
+2. **Click** the 🎨 button next to any color in the color palette
+3. **Choose** a new color using VS Code's color picker
+4. **See** the change instantly applied to the preview
+5. **Apply** the color to your current VS Code theme with one click
+6. **Navigate** to VS Code settings to see the applied customizations
 
 ## ⚙️ Available Commands
 
@@ -123,6 +154,8 @@ graph TD
 | **Open Theme Live Preview** | `themeLivePreview.openPreview` | Opens the main preview panel |
 | **Load Theme File** | `themeLivePreview.loadTheme` | Load a theme from `.json` or `.vsix` file |
 | **Export CSS** | `themeLivePreview.exportCSS` | Export current theme as CSS file |
+| **Open Color Picker** | `themeLivePreview.openColorPicker` | Open advanced color picker for theme editing |
+| **Navigate to Theme Item** | `themeLivePreview.navigateToItem` | Navigate to specific theme items in VS Code |
 
 ### Keyboard Shortcuts
 
@@ -224,21 +257,28 @@ code --install-extension theme-live-preview-0.0.1.vsix
 
 ### Version 0.0.1 (Current)
 
-**🎉 Initial Release Features:**
+**🎉 Current Release Features:**
+
 - ✅ Basic theme loading and CSS conversion
 - ✅ Live preview with syntax highlighting  
 - ✅ CSS export functionality
 - ✅ Support for JSON and VSIX theme files
 - ✅ Real-time CSS editing capabilities
-- ✅ Color palette extraction
+- ✅ Color palette extraction with interactive controls
 - ✅ CSS formatting and minification tools
+- ✅ **NEW**: Advanced color picker with VS Code integration
+- ✅ **NEW**: Navigation to theme items in VS Code settings
+- ✅ **NEW**: Direct color application to current VS Code theme
 
 **🔮 Planned Features:**
+
 - Theme comparison mode
-- Custom color picker integration
-- Batch theme processing
-- Advanced CSS optimization
-- Theme marketplace integration
+- Custom color picker integration with advanced color theory tools
+- Batch theme processing and conversion
+- Advanced CSS optimization and compression
+- Theme marketplace integration and sharing
+- Export to multiple formats (SCSS, LESS, Stylus)
+- Theme accessibility analysis and recommendations
 
 ## 📄 License
 

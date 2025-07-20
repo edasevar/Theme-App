@@ -86,7 +86,84 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    context.subscriptions.push(openPreviewCommand, loadThemeCommand, exportCSSCommand);
+    // Command to open color picker
+    const openColorPickerCommand = vscode.commands.registerCommand('themeLivePreview.openColorPicker', async () => {
+        if (!previewPanel) {
+            vscode.window.showWarningMessage('Please open Theme Live Preview first');
+            return;
+        }
+
+        const currentColor = await vscode.window.showInputBox({
+            prompt: 'Enter current color value (hex, rgb, etc.)',
+            placeHolder: '#1e1e1e',
+            value: '#1e1e1e'
+        });
+
+        if (currentColor) {
+            previewPanel.openColorPicker(currentColor);
+        }
+    });
+
+    // Command to navigate to theme item in VS Code
+    const navigateToItemCommand = vscode.commands.registerCommand('themeLivePreview.navigateToItem', async (themeItem?: string) => {
+        let selectedItem = themeItem;
+
+        if (!selectedItem) {
+            const themeItems = [
+                'editor.background',
+                'editor.foreground',
+                'activityBar.background',
+                'activityBar.foreground',
+                'sideBar.background',
+                'sideBar.foreground',
+                'statusBar.background',
+                'statusBar.foreground',
+                'panel.background',
+                'panel.foreground',
+                'terminal.background',
+                'terminal.foreground',
+                'button.background',
+                'button.foreground',
+                'input.background',
+                'input.foreground',
+                'list.activeSelectionBackground',
+                'list.activeSelectionForeground',
+                'editorLineNumber.foreground',
+                'editorCursor.foreground'
+            ];
+
+            selectedItem = await vscode.window.showQuickPick(themeItems, {
+                placeHolder: 'Select a theme item to navigate to in VS Code'
+            });
+        }
+
+        if (selectedItem && previewPanel) {
+            previewPanel.navigateToThemeItem(selectedItem);
+            // Also show in VS Code settings if possible
+            await showThemeItemInSettings(selectedItem);
+        }
+    });
+
+    async function showThemeItemInSettings(themeItem: string) {
+        try {
+            // Open workbench.colorCustomizations in settings
+            await vscode.commands.executeCommand('workbench.action.openSettings', 'workbench.colorCustomizations');
+            
+            // Show information about the theme item
+            vscode.window.showInformationMessage(
+                `Theme item: ${themeItem}. You can customize this in "workbench.colorCustomizations" in settings.`,
+                'Open Settings JSON'
+            ).then(selection => {
+                if (selection === 'Open Settings JSON') {
+                    vscode.commands.executeCommand('workbench.action.openSettingsJson');
+                }
+            });
+        } catch (error) {
+            console.error('Error showing theme item in settings:', error);
+        }
+    }
+
+    context.subscriptions.push(openPreviewCommand, loadThemeCommand, exportCSSCommand, openColorPickerCommand, navigateToItemCommand);
 }
 
 export function deactivate() {

@@ -3,6 +3,10 @@
   "displayName": "Theme Live Preview",
   "description": "Live preview VS Code themes with CSS configuration",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edasevar/Theme-App.git"
+  },
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -11,7 +15,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:themeLivePreview.openPreview"
+    "onCommand:themeLivePreview.openPreview",
+    "onCommand:themeLivePreview.openColorPicker",
+    "onCommand:themeLivePreview.navigateToItem"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -30,6 +36,16 @@
         "command": "themeLivePreview.exportCSS",
         "title": "Export CSS",
         "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.openColorPicker",
+        "title": "Open Color Picker",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.navigateToItem",
+        "title": "Navigate to Theme Item",
+        "category": "Theme Preview"
       }
     ],
     "menus": {
@@ -42,6 +58,12 @@
         },
         {
           "command": "themeLivePreview.exportCSS"
+        },
+        {
+          "command": "themeLivePreview.openColorPicker"
+        },
+        {
+          "command": "themeLivePreview.navigateToItem"
         }
       ],
       "explorer/context": [
