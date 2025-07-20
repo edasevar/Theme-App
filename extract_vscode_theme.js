@@ -169,7 +169,7 @@ class VSCodeThemeExtractor {
      * @returns {string} CSS styles
      */
     generateTokenStyles(token) {
-        if (!token.settings) return null;
+        if (!token.settings) return '';
 
         const styles = [];
         const settings = token.settings;
@@ -202,7 +202,7 @@ class VSCodeThemeExtractor {
             });
         }
 
-        return styles.length > 0 ? styles.join('\n') : null;
+        return styles.length > 0 ? styles.join('\n') : '';
     }
 
     /**
@@ -257,5 +257,3 @@ if (require.main === module) {
 }
 
 module.exports = VSCodeThemeExtractor;
-
-npm install

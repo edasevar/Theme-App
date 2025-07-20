@@ -11,7 +11,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         this.themeExtractor = new ThemeExtractor();
     }
 
-    public resolveWebviewView(
+    public resolveWebviewView (
         webviewView: vscode.WebviewView,
         context: vscode.WebviewViewResolveContext,
         _token: vscode.CancellationToken,
@@ -65,33 +65,33 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         this._loadDefaultTheme();
     }
 
-    private _loadDefaultTheme() {
+    private _loadDefaultTheme () {
         this._currentTheme = {
             // Editor basics
             'editor.background': '#1e1e1e',
             'editor.foreground': '#d4d4d4',
             'editor.selectionBackground': '#264f78',
             'editor.lineHighlightBackground': '#2a2d2e',
-            
+
             // Activity Bar
             'activityBar.background': '#2d2d30',
             'activityBar.foreground': '#ffffff',
             'activityBarBadge.background': '#007acc',
             'activityBarBadge.foreground': '#ffffff',
-            
+
             // Side Bar
             'sideBar.background': '#252526',
             'sideBar.foreground': '#cccccc',
             'sideBarTitle.foreground': '#bbbbbb',
-            
+
             // Status Bar
             'statusBar.background': '#007acc',
             'statusBar.foreground': '#ffffff',
-            
+
             // Title Bar
             'titleBar.activeBackground': '#3c3c3c',
             'titleBar.activeForeground': '#cccccc',
-            
+
             // Buttons & Controls
             'button.background': '#0e639c',
             'button.foreground': '#ffffff',
@@ -99,18 +99,18 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             'input.foreground': '#cccccc',
             'dropdown.background': '#3c3c3c',
             'dropdown.foreground': '#cccccc',
-            
+
             // Lists
             'list.activeSelectionBackground': '#094771',
             'list.activeSelectionForeground': '#ffffff',
             'list.hoverBackground': '#2a2d2e',
-            
+
             // Tabs
             'tab.activeBackground': '#1e1e1e',
             'tab.activeForeground': '#ffffff',
             'tab.inactiveBackground': '#2d2d30',
             'tab.inactiveForeground': '#969696',
-            
+
             // Terminal basic colors
             'terminal.background': '#1e1e1e',
             'terminal.foreground': '#d4d4d4',
@@ -126,7 +126,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         this._refreshSidebar();
     }
 
-    private _refreshSidebar() {
+    private _refreshSidebar () {
         if (this._view) {
             this._view.webview.postMessage({
                 type: 'updateTheme',
@@ -135,12 +135,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    private _updatePreview() {
+    private _updatePreview () {
         // Send updated theme to any open preview panels
         vscode.commands.executeCommand('themeLivePreview.updatePreview', this._currentTheme);
     }
 
-    private async _loadTheme() {
+    private async _loadTheme () {
         const options: vscode.OpenDialogOptions = {
             canSelectFiles: true,
             canSelectFolders: false,
@@ -165,7 +165,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    private async _exportCSS() {
+    private async _exportCSS () {
         const saveUri = await vscode.window.showSaveDialog({
             filters: { 'CSS Files': ['css'] },
             defaultUri: vscode.Uri.file('theme.css')
@@ -181,7 +181,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    private async _exportJSON() {
+    private async _exportJSON () {
         const themeName = await vscode.window.showInputBox({
             prompt: 'Enter theme name',
             placeHolder: 'My Custom Theme'
@@ -204,7 +204,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    private async _exportVSIX() {
+    private async _exportVSIX () {
         const themeName = await vscode.window.showInputBox({
             prompt: 'Enter theme name for VSIX package',
             placeHolder: 'My Custom Theme'
@@ -227,13 +227,13 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    private _createNewTheme() {
+    private _createNewTheme () {
         this._currentTheme = {};
         this._loadDefaultTheme();
         vscode.window.showInformationMessage('New theme created!');
     }
 
-    private _getHtmlForWebview(webview: vscode.Webview) {
+    private _getHtmlForWebview (webview: vscode.Webview) {
         return `<!DOCTYPE html>
         <html lang="en">
         <head>

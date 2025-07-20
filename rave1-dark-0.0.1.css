@@ -155,7 +155,8 @@
 }
 
 /* TOKEN COLORS (Syntax Highlighting) */
-.source, .support-type-property-name-css {
+.source,
+.support-type-property-name-css {
   color: #f6fcfc;
 }
 
@@ -163,7 +164,8 @@
   color: #0013ea;
 }
 
-.entity-name-type-interface, .entity-name-type {
+.entity-name-type-interface,
+.entity-name-type {
   color: #0013ea;
 }
 
@@ -179,15 +181,21 @@
   color: #f6fcfc;
 }
 
-.entity-name-function-method, .meta-function-method {
+.entity-name-function-method,
+.meta-function-method {
   color: #e4f403;
 }
 
-.entity-name-function, .support-function, .meta-function-call-generic {
+.entity-name-function,
+.support-function,
+.meta-function-call-generic {
   color: #0013ea;
 }
 
-.variable, .meta-variable, .variable-other-object-property, .variable-other-readwrite-alias {
+.variable,
+.meta-variable,
+.variable-other-object-property,
+.variable-other-readwrite-alias {
   color: #f6fcfc;
 }
 
@@ -195,7 +203,8 @@
   color: #e4f403;
 }
 
-.variable-other-global, .variable-language-this {
+.variable-other-global,
+.variable-language-this {
   color: #f904cc;
 }
 
@@ -203,19 +212,24 @@
   color: #f6fcfc;
 }
 
-.variable-parameter, .meta-parameter {
+.variable-parameter,
+.meta-parameter {
   color: #f6fcfc;
 }
 
-.variable-other-property, .meta-property {
+.variable-other-property,
+.meta-property {
   color: #f6fcfc;
 }
 
-.string, .string-other-link, .markup-inline-raw-string-markdown {
+.string,
+.string-other-link,
+.markup-inline-raw-string-markdown {
   color: #f904cc;
 }
 
-.constant-character-escape, .constant-other-placeholder {
+.constant-character-escape,
+.constant-other-placeholder {
   color: #f6fcfc;
 }
 
@@ -223,19 +237,25 @@
   color: #da0000;
 }
 
-.keyword-control-import, .keyword-control-from, .keywaord-import {
+.keyword-control-import,
+.keyword-control-from,
+.keywaord-import {
   color: #da0000;
 }
 
-.storage-modifier, .keyword-modifier, .storage-type {
+.storage-modifier,
+.keyword-modifier,
+.storage-type {
   color: #da0000;
 }
 
-.comment, .punctuation-definition-comment {
+.comment,
+.punctuation-definition-comment {
   color: #b6b6b6;
 }
 
-.comment-documentation, .comment-line-documentation {
+.comment-documentation,
+.comment-line-documentation {
   color: #b6b6b6;
 }
 
@@ -243,7 +263,8 @@
   color: #1bba04;
 }
 
-.constant-language-boolean, .constant-language-json {
+.constant-language-boolean,
+.constant-language-json {
   color: #1bba04;
 }
 
@@ -251,7 +272,8 @@
   color: #da0000;
 }
 
-.entity-name-function-preprocessor, .meta-preprocessor {
+.entity-name-function-preprocessor,
+.meta-preprocessor {
   color: #e4f403;
 }
 
@@ -271,7 +293,8 @@
   color: #e4f403;
 }
 
-.entity-other-attribute-name, .meta-attribute {
+.entity-other-attribute-name,
+.meta-attribute {
   color: #0013ea;
 }
 
@@ -279,31 +302,40 @@
   color: #e4f403;
 }
 
-.variable-other-constant, .variable-readonly {
+.variable-other-constant,
+.variable-readonly {
   color: #e4f403;
 }
 
-.entity-name-label, .punctuation-definition-label {
+.entity-name-label,
+.punctuation-definition-label {
   color: #f904cc;
 }
 
-.entity-name-namespace, .storage-modifier-namespace, .markup-bold-markdown {
+.entity-name-namespace,
+.storage-modifier-namespace,
+.markup-bold-markdown {
   color: #0013ea;
 }
 
-.entity-name-module, .storage-modifier-module {
+.entity-name-module,
+.storage-modifier-module {
   color: #da0000;
 }
 
-.variable-type-parameter, .variable-parameter-type {
+.variable-type-parameter,
+.variable-parameter-type {
   color: #0013ea;
 }
 
-.keyword-control-exception, .keyword-control-trycatch {
+.keyword-control-exception,
+.keyword-control-trycatch {
   color: #da0000;
 }
 
-.meta-decorator, .punctuation-decorator, .entity-name-function-decorator {
+.meta-decorator,
+.punctuation-decorator,
+.entity-name-function-decorator {
   color: #0013ea;
 }
 
@@ -311,6 +343,11 @@
   color: #f6fcfc;
 }
 
-.punctuation, .punctuation-terminator, .punctuation-definition-tag, .punctuation-separator, .punctuation-definition-string, .punctuation-section-block {
+.punctuation,
+.punctuation-terminator,
+.punctuation-definition-tag,
+.punctuation-separator,
+.punctuation-definition-string,
+.punctuation-section-block {
   color: #f6fcfc;
 }

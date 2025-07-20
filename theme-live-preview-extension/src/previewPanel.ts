@@ -72,15 +72,15 @@ export class PreviewPanel {
         );
     }
 
-    public reveal(): void {
+    public reveal (): void {
         this._panel.reveal(vscode.ViewColumn.Beside);
     }
 
-    public onDidDispose(callback: () => void): void {
+    public onDidDispose (callback: () => void): void {
         this._panel.onDidDispose(callback, null, this._disposables);
     }
 
-    public updateTheme(cssData: string, themeName: string): void {
+    public updateTheme (cssData: string, themeName: string): void {
         this._currentCSS = cssData;
         this._currentThemeName = themeName;
         this._panel.webview.postMessage({
@@ -90,37 +90,37 @@ export class PreviewPanel {
         });
     }
 
-    public getCurrentCSS(): string {
+    public getCurrentCSS (): string {
         return this._currentCSS;
     }
 
-    public getCurrentThemeName(): string {
+    public getCurrentThemeName (): string {
         return this._currentThemeName;
     }
 
-    public async exportAsJSON(css: string, themeName: string, savePath: string): Promise<void> {
+    public async exportAsJSON (css: string, themeName: string, savePath: string): Promise<void> {
         await this.themeExtractor.exportAsJSON(css, themeName, savePath);
     }
 
-    public async exportAsVSIX(css: string, themeName: string, savePath: string): Promise<void> {
+    public async exportAsVSIX (css: string, themeName: string, savePath: string): Promise<void> {
         await this.themeExtractor.exportAsVSIX(css, themeName, savePath);
     }
 
-    public openColorPicker(currentColor: string): void {
+    public openColorPicker (currentColor: string): void {
         this._panel.webview.postMessage({
             command: 'openColorPicker',
             currentColor: currentColor
         });
     }
 
-    public navigateToThemeItem(themeItem: string): void {
+    public navigateToThemeItem (themeItem: string): void {
         this._panel.webview.postMessage({
             command: 'highlightThemeItem',
             themeItem: themeItem
         });
     }
 
-    private async handleColorPicker(currentColor: string, property: string): Promise<void> {
+    private async handleColorPicker (currentColor: string, property: string): Promise<void> {
         // Use VS Code's built-in color picker via input box with validation
         const newColor = await vscode.window.showInputBox({
             prompt: `Choose new color for ${property}`,
@@ -141,15 +141,15 @@ export class PreviewPanel {
         }
     }
 
-    private async applyColorToVSCode(property: string, color: string): Promise<void> {
+    private async applyColorToVSCode (property: string, color: string): Promise<void> {
         try {
             const config = vscode.workspace.getConfiguration();
             const colorCustomizations = config.get('workbench.colorCustomizations') as any || {};
-            
+
             colorCustomizations[property] = color;
-            
+
             await config.update('workbench.colorCustomizations', colorCustomizations, vscode.ConfigurationTarget.Global);
-            
+
             vscode.window.showInformationMessage(
                 `Applied ${property}: ${color} to VS Code theme`,
                 'Open Settings'
@@ -163,7 +163,7 @@ export class PreviewPanel {
         }
     }
 
-    private _getHtmlContent(): string {
+    private _getHtmlContent (): string {
         return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -934,7 +934,7 @@ export class PreviewPanel {
 </html>`;
     }
 
-    public dispose(): void {
+    public dispose (): void {
         this._panel.dispose();
         while (this._disposables.length) {
             const disposable = this._disposables.pop();

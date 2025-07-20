@@ -1,11 +1,10 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import * as path from 'path';
 import { ThemeExtractor } from './themeExtractor';
 import { PreviewPanel } from './previewPanel';
 import { SidebarProvider } from './sidebarProvider';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate (context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
 
     const themeExtractor = new ThemeExtractor();
@@ -164,11 +163,11 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    async function showThemeItemInSettings(themeItem: string) {
+    async function showThemeItemInSettings (themeItem: string) {
         try {
             // Open workbench.colorCustomizations in settings
             await vscode.commands.executeCommand('workbench.action.openSettings', 'workbench.colorCustomizations');
-            
+
             // Show information about the theme item
             vscode.window.showInformationMessage(
                 `Theme item: ${themeItem}. You can customize this in "workbench.colorCustomizations" in settings.`,
@@ -183,7 +182,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }
 
-    async function showStartupOptions(): Promise<boolean> {
+    async function showStartupOptions (): Promise<boolean> {
         const option = await vscode.window.showQuickPick([
             {
                 label: '📦 Load .vsix Theme File',
@@ -474,10 +473,10 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(
-        openPreviewCommand, 
-        loadThemeCommand, 
-        exportCSSCommand, 
-        openColorPickerCommand, 
+        openPreviewCommand,
+        loadThemeCommand,
+        exportCSSCommand,
+        openColorPickerCommand,
         navigateToItemCommand,
         showStartupOptionsCommand,
         enterCSSCommand,
@@ -488,6 +487,6 @@ export function activate(context: vscode.ExtensionContext) {
     );
 }
 
-export function deactivate() {
+export function deactivate () {
     console.log('Theme Live Preview extension is now deactivated');
 }
