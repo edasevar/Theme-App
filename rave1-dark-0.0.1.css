@@ -1,0 +1,316 @@
+/* rave1 */
+/* Type: dark */
+
+/* COLORS */
+:root {
+  --vscode-editor-background: #000000;
+  --vscode-editor-foreground: #f6fcfc;
+  --vscode-editor-hoverHighlightBackground: #6d6d6d66;
+  --vscode-editor-lineHighlightBackground: #242424;
+  --vscode-editor-selectionBackground: #92929288;
+  --vscode-editor-selectionHighlightBackground: #b6b6b611;
+  --vscode-editor-wordHighlightBackground: #6d6d6d11;
+  --vscode-editor-wordHighlightStrongBackground: #49494922;
+  --vscode-editor-findMatchBackground: #0013ea55;
+  --vscode-editor-findMatchHighlightBackground: #0013ea33;
+  --vscode-editor-findRangeHighlightBackground: #242424cc;
+  --vscode-editor-inactiveSelectionBackground: #92929266;
+  --vscode-editor-lineHighlightBorder: #494949;
+  --vscode-editor-rangeHighlightBackground: #24242444;
+  --vscode-notifications-background: #494949;
+  --vscode-editorInlayHint-typeBackground: #6d6d6d;
+  --vscode-editorInlayHint-typeForeground: #f6fcfc;
+  --vscode-editorWhitespace-foreground: #494949;
+  --vscode-editorIndentGuide-background1: #6d6d6d;
+  --vscode-editorHoverWidget-background: #494949;
+  --vscode-editorLineNumber-activeForeground: #f6fcfc;
+  --vscode-editorLineNumber-foreground: #929292;
+  --vscode-editorGutter-background: #000000;
+  --vscode-editorGutter-modifiedBackground: #f904cc;
+  --vscode-editorGutter-addedBackground: #f904cc;
+  --vscode-editorGutter-deletedBackground: #da0000;
+  --vscode-editorBracketMatch-background: #494949;
+  --vscode-editorBracketMatch-border: #6d6d6d;
+  --vscode-editorGroupHeader-tabsBackground: #000000;
+  --vscode-editorGroup-border: #6d6d6d;
+  --vscode-tab-activeBackground: #000000;
+  --vscode-tab-inactiveBackground: #242424;
+  --vscode-tab-inactiveForeground: #fffeff;
+  --vscode-tab-activeForeground: #f6fcfc;
+  --vscode-tab-hoverBackground: #6d6d6d;
+  --vscode-tab-unfocusedHoverBackground: #6d6d6d;
+  --vscode-tab-border: #6d6d6d;
+  --vscode-tab-activeModifiedBorder: #0013ea;
+  --vscode-tab-inactiveModifiedBorder: #e4f403;
+  --vscode-tab-unfocusedActiveModifiedBorder: #0013ea;
+  --vscode-tab-unfocusedInactiveModifiedBorder: #e4f403;
+  --vscode-editorWidget-background: #242424;
+  --vscode-editorWidget-border: #6d6d6d;
+  --vscode-editorSuggestWidget-background: #000000;
+  --vscode-editorSuggestWidget-border: #6d6d6d;
+  --vscode-editorSuggestWidget-foreground: #f6fcfc;
+  --vscode-editorSuggestWidget-highlightForeground: #fffeff;
+  --vscode-editorSuggestWidget-selectedBackground: #6d6d6d;
+  --vscode-peekView-border: #6d6d6d;
+  --vscode-peekViewEditor-background: #000000;
+  --vscode-peekViewEditor-matchHighlightBackground: #929292;
+  --vscode-peekViewResult-background: #242424;
+  --vscode-peekViewResult-fileForeground: #f6fcfc;
+  --vscode-peekViewResult-lineForeground: #fffeff;
+  --vscode-peekViewResult-matchHighlightBackground: #929292;
+  --vscode-peekViewResult-selectionBackground: #494949;
+  --vscode-peekViewResult-selectionForeground: #b6b6b6;
+  --vscode-peekViewTitle-background: #6d6d6d;
+  --vscode-peekViewTitleDescription-foreground: #fffeff;
+  --vscode-peekViewTitleLabel-foreground: #f6fcfc;
+  --vscode-merge-currentHeaderBackground: #f904cc44;
+  --vscode-merge-currentContentBackground: #f904cc44;
+  --vscode-merge-incomingHeaderBackground: #f904cc44;
+  --vscode-merge-incomingContentBackground: #f904cc44;
+  --vscode-merge-border: #6d6d6d;
+  --vscode-merge-commonContentBackground: #92929266;
+  --vscode-merge-commonHeaderBackground: #6d6d6d66;
+  --vscode-panel-background: #000000;
+  --vscode-panel-border: #6d6d6d;
+  --vscode-panelTitle-activeBorder: #929292;
+  --vscode-panelTitle-activeForeground: #f6fcfc;
+  --vscode-panelTitle-inactiveForeground: #fffeff;
+  --vscode-statusBar-background: #000000;
+  --vscode-statusBar-foreground: #f6fcfc;
+  --vscode-statusBar-border: #6d6d6d;
+  --vscode-statusBar-debuggingBackground: #da0000;
+  --vscode-statusBar-debuggingForeground: #f6fcfc;
+  --vscode-statusBar-noFolderBackground: #929292;
+  --vscode-statusBar-noFolderForeground: #b6b6b6;
+  --vscode-titleBar-activeBackground: #000000;
+  --vscode-titleBar-activeForeground: #f6fcfc;
+  --vscode-titleBar-inactiveBackground: #242424;
+  --vscode-titleBar-inactiveForeground: #fffeff;
+  --vscode-titleBar-border: #6d6d6d;
+  --vscode-menu-foreground: #f6fcfc;
+  --vscode-menu-background: #000000;
+  --vscode-menu-selectionForeground: #f6fcfc;
+  --vscode-menu-selectionBackground: #6d6d6d;
+  --vscode-menu-border: #6d6d6d;
+  --vscode-editorInlayHint-foreground: #fffeff;
+  --vscode-editorInlayHint-background: #6d6d6d;
+  --vscode-terminal-foreground: #f6fcfc;
+  --vscode-terminal-background: #000000;
+  --vscode-terminalCursor-foreground: #f6fcfc;
+  --vscode-terminalCursor-background: #000000;
+  --vscode-terminal-ansiRed: #da0000;
+  --vscode-terminal-ansiGreen: #f904cc;
+  --vscode-terminal-ansiYellow: #0013ea;
+  --vscode-terminal-ansiBlue: #e4f403;
+  --vscode-terminal-ansiMagenta: #f904cc;
+  --vscode-terminal-ansiCyan: #f904cc;
+  --vscode-activityBar-background: #000000;
+  --vscode-activityBar-foreground: #f6fcfc;
+  --vscode-activityBar-inactiveForeground: #fffeff;
+  --vscode-activityBar-activeBorder: #f6fcfc;
+  --vscode-activityBar-border: #6d6d6d;
+  --vscode-sideBar-background: #000000;
+  --vscode-sideBar-foreground: #f6fcfc;
+  --vscode-sideBar-border: #6d6d6d;
+  --vscode-sideBarTitle-foreground: #f6fcfc;
+  --vscode-sideBarSectionHeader-background: #242424;
+  --vscode-sideBarSectionHeader-foreground: #f6fcfc;
+  --vscode-sideBarSectionHeader-border: #6d6d6d;
+  --vscode-settings-headerForeground: #f6fcfc;
+  --vscode-settings-modifiedItemForeground: #da0000;
+  --vscode-settings-textInputForeground: #f6fcfc;
+  --vscode-textLink-foreground: #0013ea;
+  --vscode-sideBar-activeBackground: #929292;
+  --vscode-sideBar-activeForeground: #f6fcfc;
+  --vscode-sideBar-hoverBackground: #6d6d6d;
+  --vscode-sideBar-hoverForeground: #fffeff;
+  --vscode-sideBar-folderIcon-foreground: #f904cc;
+  --vscode-sideBar-fileIcon-foreground: #e4f403;
+  --vscode-list-foreground: #f6fcfc;
+  --vscode-list-inactiveSelectionBackground: #6d6d6d;
+  --vscode-list-activeSelectionBackground: #929292;
+  --vscode-list-inactiveSelectionForeground: #f6fcfc;
+  --vscode-list-activeSelectionForeground: #f6fcfc;
+  --vscode-list-focusOutline: #0013ea;
+  --vscode-list-inactiveFocusOutline: #6d6d6d;
+  --vscode-list-hoverForeground: #f6fcfc;
+  --vscode-list-hoverBackground: #6d6d6d;
+  --vscode-input-background: #242424;
+  --vscode-input-foreground: #f6fcfc;
+  --vscode-input-border: #6d6d6d;
+  --vscode-input-placeholderForeground: #fffeff;
+  --vscode-inputOption-activeBorder: #6d6d6d;
+  --vscode-inputOption-activeBackground: #494949;
+  --vscode-inputOption-activeForeground: #f6fcfc;
+  --vscode-dropdown-background: #242424;
+  --vscode-dropdown-foreground: #f6fcfc;
+  --vscode-dropdown-border: #6d6d6d;
+  --vscode-dropdown-listBackground: #000000;
+  --vscode-badge-background: #e4f403;
+  --vscode-activityBarBadge-background: #e4f403;
+  --vscode-button-background: #e4f403;
+  --vscode-button-foreground: #000000;
+  --vscode-badge-foreground: #000000;
+  --vscode-activityBarBadge-foreground: #000000;
+}
+
+/* TOKEN COLORS (Syntax Highlighting) */
+.source, .support-type-property-name-css {
+  color: #f6fcfc;
+}
+
+.entity-name-type-class {
+  color: #0013ea;
+}
+
+.entity-name-type-interface, .entity-name-type {
+  color: #0013ea;
+}
+
+.entity-name-type-struct {
+  color: #0013ea;
+}
+
+.entity-name-type-enum {
+  color: #0013ea;
+}
+
+.meta-object-literal-key {
+  color: #f6fcfc;
+}
+
+.entity-name-function-method, .meta-function-method {
+  color: #e4f403;
+}
+
+.entity-name-function, .support-function, .meta-function-call-generic {
+  color: #0013ea;
+}
+
+.variable, .meta-variable, .variable-other-object-property, .variable-other-readwrite-alias {
+  color: #f6fcfc;
+}
+
+.variable-other-object {
+  color: #e4f403;
+}
+
+.variable-other-global, .variable-language-this {
+  color: #f904cc;
+}
+
+.variable-other-local {
+  color: #f6fcfc;
+}
+
+.variable-parameter, .meta-parameter {
+  color: #f6fcfc;
+}
+
+.variable-other-property, .meta-property {
+  color: #f6fcfc;
+}
+
+.string, .string-other-link, .markup-inline-raw-string-markdown {
+  color: #f904cc;
+}
+
+.constant-character-escape, .constant-other-placeholder {
+  color: #f6fcfc;
+}
+
+.keyword {
+  color: #da0000;
+}
+
+.keyword-control-import, .keyword-control-from, .keywaord-import {
+  color: #da0000;
+}
+
+.storage-modifier, .keyword-modifier, .storage-type {
+  color: #da0000;
+}
+
+.comment, .punctuation-definition-comment {
+  color: #b6b6b6;
+}
+
+.comment-documentation, .comment-line-documentation {
+  color: #b6b6b6;
+}
+
+.constant-numeric {
+  color: #1bba04;
+}
+
+.constant-language-boolean, .constant-language-json {
+  color: #1bba04;
+}
+
+.keyword-operator {
+  color: #da0000;
+}
+
+.entity-name-function-preprocessor, .meta-preprocessor {
+  color: #e4f403;
+}
+
+.meta-preprocessor {
+  color: #f904cc;
+}
+
+.markup-underline-link {
+  color: #e4f403;
+}
+
+.entity-name-tag {
+  color: #da0000;
+}
+
+.support-class-component {
+  color: #e4f403;
+}
+
+.entity-other-attribute-name, .meta-attribute {
+  color: #0013ea;
+}
+
+.support-type {
+  color: #e4f403;
+}
+
+.variable-other-constant, .variable-readonly {
+  color: #e4f403;
+}
+
+.entity-name-label, .punctuation-definition-label {
+  color: #f904cc;
+}
+
+.entity-name-namespace, .storage-modifier-namespace, .markup-bold-markdown {
+  color: #0013ea;
+}
+
+.entity-name-module, .storage-modifier-module {
+  color: #da0000;
+}
+
+.variable-type-parameter, .variable-parameter-type {
+  color: #0013ea;
+}
+
+.keyword-control-exception, .keyword-control-trycatch {
+  color: #da0000;
+}
+
+.meta-decorator, .punctuation-decorator, .entity-name-function-decorator {
+  color: #0013ea;
+}
+
+.variable-function {
+  color: #f6fcfc;
+}
+
+.punctuation, .punctuation-terminator, .punctuation-definition-tag, .punctuation-separator, .punctuation-definition-string, .punctuation-section-block {
+  color: #f6fcfc;
+}

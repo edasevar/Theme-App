@@ -1,0 +1,70 @@
+{
+  "name": "theme-live-preview",
+  "displayName": "Theme Live Preview",
+  "description": "Live preview VS Code themes with CSS configuration",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:themeLivePreview.openPreview"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "themeLivePreview.openPreview",
+        "title": "Open Theme Live Preview",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.loadTheme",
+        "title": "Load Theme File",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.exportCSS",
+        "title": "Export CSS",
+        "category": "Theme Preview"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "themeLivePreview.openPreview"
+        },
+        {
+          "command": "themeLivePreview.loadTheme"
+        },
+        {
+          "command": "themeLivePreview.exportCSS"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "themeLivePreview.loadTheme",
+          "when": "resourceExtname == .json || resourceExtname == .vsix",
+          "group": "theme"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^16.18.126",
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  }
+}
