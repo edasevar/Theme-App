@@ -2,7 +2,21 @@
   "name": "theme-live-preview",
   "displayName": "Theme Live Preview",
   "description": "Live preview VS Code themes with CSS configuration",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "publisher": "theme-preview",
+  "author": {
+    "name": "Theme App Developer",
+    "email": "developer@themeapp.com"
+  },
+  "keywords": [
+    "theme",
+    "preview",
+    "css",
+    "color",
+    "customization",
+    "vscode",
+    "extension"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/edasevar/Theme-App.git"
@@ -17,7 +31,8 @@
   "activationEvents": [
     "onCommand:themeLivePreview.openPreview",
     "onCommand:themeLivePreview.openColorPicker",
-    "onCommand:themeLivePreview.navigateToItem"
+    "onCommand:themeLivePreview.navigateToItem",
+    "onView:themeEditor"
   ],
   "main": "./out/extension.js",
   "contributes": {

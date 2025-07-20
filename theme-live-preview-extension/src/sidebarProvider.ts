@@ -26,38 +26,49 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
         webviewView.webview.onDidReceiveMessage(async (data) => {
-            switch (data.type) {
-                case 'colorChange': {
-                    this._currentTheme[data.property] = data.value;
-                    this._updatePreview();
-                    break;
+            try {
+                switch (data.type) {
+                    case 'colorChange': {
+                        if (data.property && typeof data.value === 'string') {
+                            this._currentTheme[data.property] = data.value;
+                            this._updatePreview();
+                        }
+                        break;
+                    }
+                    case 'loadTheme': {
+                        await this._loadTheme();
+                        break;
+                    }
+                    case 'exportCSS': {
+                        await this._exportCSS();
+                        break;
+                    }
+                    case 'exportJSON': {
+                        await this._exportJSON();
+                        break;
+                    }
+                    case 'exportVSIX': {
+                        await this._exportVSIX();
+                        break;
+                    }
+                    case 'createNew': {
+                        this._createNewTheme();
+                        break;
+                    }
+                    case 'resetProperty': {
+                        if (data.property && this._currentTheme[data.property]) {
+                            delete this._currentTheme[data.property];
+                            this._updatePreview();
+                            this._refreshSidebar();
+                        }
+                        break;
+                    }
+                    default:
+                        console.warn('Unknown message type:', data.type);
                 }
-                case 'loadTheme': {
-                    await this._loadTheme();
-                    break;
-                }
-                case 'exportCSS': {
-                    await this._exportCSS();
-                    break;
-                }
-                case 'exportJSON': {
-                    await this._exportJSON();
-                    break;
-                }
-                case 'exportVSIX': {
-                    await this._exportVSIX();
-                    break;
-                }
-                case 'createNew': {
-                    this._createNewTheme();
-                    break;
-                }
-                case 'resetProperty': {
-                    delete this._currentTheme[data.property];
-                    this._updatePreview();
-                    this._refreshSidebar();
-                    break;
-                }
+            } catch (error) {
+                console.error('Error handling webview message:', error);
+                vscode.window.showErrorMessage(`Error: ${error instanceof Error ? error.message : String(error)}`);
             }
         });
 
@@ -140,97 +151,150 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         vscode.commands.executeCommand('themeLivePreview.updatePreview', this._currentTheme);
     }
 
-    private async _loadTheme () {
-        const options: vscode.OpenDialogOptions = {
-            canSelectFiles: true,
-            canSelectFolders: false,
-            canSelectMany: false,
-            filters: {
-                'Theme Files': ['json', 'vsix']
-            }
-        };
+    private async _loadTheme() {
+        try {
+            const options: vscode.OpenDialogOptions = {
+                canSelectFiles: true,
+                canSelectFolders: false,
+                canSelectMany: false,
+                filters: {
+                    'Theme Files': ['json', 'vsix']
+                }
+            };
 
-        const fileUri = await vscode.window.showOpenDialog(options);
-        if (fileUri && fileUri[0]) {
-            try {
-                const theme = await this.themeExtractor.extractTheme(fileUri[0].fsPath);
+            const fileUri = await vscode.window.showOpenDialog(options);
+            if (fileUri && fileUri[0]) {
+                const filePath = fileUri[0].fsPath;
+                console.log('Loading theme from:', filePath);
+                
+                const theme = await this.themeExtractor.extractTheme(filePath);
                 const themeData = this.themeExtractor.getCurrentThemeData() || {};
-                this._currentTheme = { ...this._currentTheme, ...themeData };
-                this._refreshSidebar();
-                this._updatePreview();
-                vscode.window.showInformationMessage('Theme loaded successfully!');
-            } catch (error) {
-                vscode.window.showErrorMessage(`Failed to load theme: ${error}`);
+                
+                // Validate theme data
+                if (typeof themeData === 'object' && themeData !== null) {
+                    this._currentTheme = { ...this._currentTheme, ...themeData };
+                    this._refreshSidebar();
+                    this._updatePreview();
+                    vscode.window.showInformationMessage('Theme loaded successfully!');
+                } else {
+                    throw new Error('Invalid theme data format');
+                }
             }
+        } catch (error) {
+            console.error('Failed to load theme:', error);
+            vscode.window.showErrorMessage(`Failed to load theme: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    private async _exportCSS () {
-        const saveUri = await vscode.window.showSaveDialog({
-            filters: { 'CSS Files': ['css'] },
-            defaultUri: vscode.Uri.file('theme.css')
-        });
+    private async _exportCSS() {
+        try {
+            if (Object.keys(this._currentTheme).length === 0) {
+                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
+                return;
+            }
 
-        if (saveUri) {
-            try {
+            const saveUri = await vscode.window.showSaveDialog({
+                filters: { 'CSS Files': ['css'] },
+                defaultUri: vscode.Uri.file('theme.css')
+            });
+
+            if (saveUri) {
                 await this.themeExtractor.exportAsCSS(this._currentTheme, saveUri.fsPath);
-                vscode.window.showInformationMessage('CSS exported successfully!');
-            } catch (error) {
-                vscode.window.showErrorMessage(`Failed to export CSS: ${error}`);
+                vscode.window.showInformationMessage(`CSS exported successfully to ${saveUri.fsPath}!`);
             }
+        } catch (error) {
+            console.error('Failed to export CSS:', error);
+            vscode.window.showErrorMessage(`Failed to export CSS: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    private async _exportJSON () {
-        const themeName = await vscode.window.showInputBox({
-            prompt: 'Enter theme name',
-            placeHolder: 'My Custom Theme'
-        });
+    private async _exportJSON() {
+        try {
+            if (Object.keys(this._currentTheme).length === 0) {
+                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
+                return;
+            }
 
-        if (themeName) {
-            const saveUri = await vscode.window.showSaveDialog({
-                filters: { 'JSON Files': ['json'] },
-                defaultUri: vscode.Uri.file(`${themeName.toLowerCase().replace(/\s+/g, '-')}-theme.json`)
+            const themeName = await vscode.window.showInputBox({
+                prompt: 'Enter theme name',
+                placeHolder: 'My Custom Theme',
+                validateInput: (value) => {
+                    if (!value || value.trim().length === 0) {
+                        return 'Theme name cannot be empty';
+                    }
+                    if (value.length > 50) {
+                        return 'Theme name too long (max 50 characters)';
+                    }
+                    return null;
+                }
             });
 
-            if (saveUri) {
-                try {
+            if (themeName) {
+                const sanitizedName = themeName.toLowerCase().replace(/[^a-z0-9-_\s]/g, '').replace(/\s+/g, '-');
+                const saveUri = await vscode.window.showSaveDialog({
+                    filters: { 'JSON Files': ['json'] },
+                    defaultUri: vscode.Uri.file(`${sanitizedName}-theme.json`)
+                });
+
+                if (saveUri) {
                     await this.themeExtractor.exportAsJSON(this._currentTheme, themeName, saveUri.fsPath);
-                    vscode.window.showInformationMessage('JSON theme exported successfully!');
-                } catch (error) {
-                    vscode.window.showErrorMessage(`Failed to export JSON: ${error}`);
+                    vscode.window.showInformationMessage(`JSON theme exported successfully to ${saveUri.fsPath}!`);
                 }
             }
+        } catch (error) {
+            console.error('Failed to export JSON:', error);
+            vscode.window.showErrorMessage(`Failed to export JSON: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    private async _exportVSIX () {
-        const themeName = await vscode.window.showInputBox({
-            prompt: 'Enter theme name for VSIX package',
-            placeHolder: 'My Custom Theme'
-        });
+    private async _exportVSIX() {
+        try {
+            if (Object.keys(this._currentTheme).length === 0) {
+                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
+                return;
+            }
 
-        if (themeName) {
-            const saveUri = await vscode.window.showSaveDialog({
-                filters: { 'VSIX Files': ['vsix'] },
-                defaultUri: vscode.Uri.file(`${themeName.toLowerCase().replace(/\s+/g, '-')}-theme.vsix`)
+            const themeName = await vscode.window.showInputBox({
+                prompt: 'Enter theme name for VSIX package',
+                placeHolder: 'My Custom Theme',
+                validateInput: (value) => {
+                    if (!value || value.trim().length === 0) {
+                        return 'Theme name cannot be empty';
+                    }
+                    if (value.length > 50) {
+                        return 'Theme name too long (max 50 characters)';
+                    }
+                    return null;
+                }
             });
 
-            if (saveUri) {
-                try {
+            if (themeName) {
+                const sanitizedName = themeName.toLowerCase().replace(/[^a-z0-9-_\s]/g, '').replace(/\s+/g, '-');
+                const saveUri = await vscode.window.showSaveDialog({
+                    filters: { 'VSIX Files': ['vsix'] },
+                    defaultUri: vscode.Uri.file(`${sanitizedName}-theme.vsix`)
+                });
+
+                if (saveUri) {
                     await this.themeExtractor.exportAsVSIX(this._currentTheme, themeName, saveUri.fsPath);
-                    vscode.window.showInformationMessage('VSIX package exported successfully!');
-                } catch (error) {
-                    vscode.window.showErrorMessage(`Failed to export VSIX: ${error}`);
+                    vscode.window.showInformationMessage(`VSIX package exported successfully to ${saveUri.fsPath}!`);
                 }
             }
+        } catch (error) {
+            console.error('Failed to export VSIX:', error);
+            vscode.window.showErrorMessage(`Failed to export VSIX: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    private _createNewTheme () {
-        this._currentTheme = {};
-        this._loadDefaultTheme();
-        vscode.window.showInformationMessage('New theme created!');
+    private _createNewTheme() {
+        try {
+            this._currentTheme = {};
+            this._loadDefaultTheme();
+            vscode.window.showInformationMessage('New theme created with default colors!');
+        } catch (error) {
+            console.error('Failed to create new theme:', error);
+            vscode.window.showErrorMessage(`Failed to create new theme: ${error instanceof Error ? error.message : String(error)}`);
+        }
     }
 
     private _getHtmlForWebview (webview: vscode.Webview) {
@@ -499,62 +563,102 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 }
                 
                 function renderThemeProperties() {
-                    const container = document.getElementById('theme-properties');
-                    container.innerHTML = '';
-                    
-                    Object.keys(themeCategories).forEach(category => {
-                        const section = document.createElement('div');
-                        section.className = 'theme-section';
+                    try {
+                        const container = document.getElementById('theme-properties');
+                        if (!container) {
+                            console.error('Theme properties container not found');
+                            return;
+                        }
                         
-                        const hasProperties = themeCategories[category].some(prop => currentTheme[prop]);
-                        const isCollapsed = !hasProperties; // Expand sections with existing properties
+                        container.innerHTML = '';
                         
-                        section.innerHTML = \`
-                            <div class="section-header" onclick="toggleSection('\${category}')">
-                                <span class="section-toggle \${isCollapsed ? 'collapsed' : ''}">▼</span>
-                                <span class="section-title">\${category}</span>
-                                <span class="section-count">(\${themeCategories[category].filter(prop => currentTheme[prop]).length}/\${themeCategories[category].length})</span>
-                            </div>
-                            <div class="section-content \${isCollapsed ? 'collapsed' : ''}" id="section-\${category.toLowerCase().replace(' ', '-')}">
-                            </div>
-                        \`;
-                        
-                        const contentDiv = section.querySelector('.section-content');
-                        themeCategories[category].forEach(property => {
-                            const value = currentTheme[property] || '';
-                            const item = createThemeItem(property, value, category.toLowerCase().replace(' ', '-'));
-                            contentDiv.appendChild(item);
+                        Object.keys(themeCategories).forEach(category => {
+                            try {
+                                const section = document.createElement('div');
+                                section.className = 'theme-section';
+                                
+                                const categoryProperties = themeCategories[category];
+                                if (!Array.isArray(categoryProperties)) {
+                                    console.warn('Invalid category properties for:', category);
+                                    return;
+                                }
+                                
+                                const hasProperties = categoryProperties.some(prop => currentTheme[prop]);
+                                const isCollapsed = !hasProperties; // Expand sections with existing properties
+                                
+                                const categoryId = category.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+                                section.innerHTML = \`
+                                    <div class="section-header" onclick="toggleSection('\${category}')">
+                                        <span class="section-toggle \${isCollapsed ? 'collapsed' : ''}">▼</span>
+                                        <span class="section-title">\${category}</span>
+                                        <span class="section-count">(\${categoryProperties.filter(prop => currentTheme[prop]).length}/\${categoryProperties.length})</span>
+                                    </div>
+                                    <div class="section-content \${isCollapsed ? 'collapsed' : ''}" id="section-\${categoryId}">
+                                    </div>
+                                \`;
+                                
+                                const contentDiv = section.querySelector('.section-content');
+                                if (contentDiv) {
+                                    categoryProperties.forEach(property => {
+                                        try {
+                                            const value = currentTheme[property] || '';
+                                            const item = createThemeItem(property, value, categoryId);
+                                            if (item) {
+                                                contentDiv.appendChild(item);
+                                            }
+                                        } catch (error) {
+                                            console.error('Error creating theme item for property:', property, error);
+                                        }
+                                    });
+                                }
+                                
+                                container.appendChild(section);
+                            } catch (error) {
+                                console.error('Error processing category:', category, error);
+                            }
                         });
                         
-                        container.appendChild(section);
-                    });
-                    
-                    // Add custom properties section if any exist
-                    const customProperties = Object.keys(currentTheme).filter(prop => 
-                        !Object.values(themeCategories).flat().includes(prop)
-                    );
-                    
-                    if (customProperties.length > 0) {
-                        const section = document.createElement('div');
-                        section.className = 'theme-section';
-                        section.innerHTML = \`
-                            <div class="section-header" onclick="toggleSection('Custom')">
-                                <span class="section-toggle">▼</span>
-                                <span class="section-title">Custom Properties</span>
-                                <span class="section-count">(\${customProperties.length})</span>
-                            </div>
-                            <div class="section-content" id="section-custom">
-                            </div>
-                        \`;
-                        
-                        const contentDiv = section.querySelector('.section-content');
-                        customProperties.forEach(property => {
-                            const value = currentTheme[property];
-                            const item = createThemeItem(property, value, 'custom');
-                            contentDiv.appendChild(item);
-                        });
-                        
-                        container.appendChild(section);
+                        // Add custom properties section if any exist
+                        try {
+                            const customProperties = Object.keys(currentTheme).filter(prop => 
+                                !Object.values(themeCategories).flat().includes(prop)
+                            );
+                            
+                            if (customProperties.length > 0) {
+                                const section = document.createElement('div');
+                                section.className = 'theme-section';
+                                section.innerHTML = \`
+                                    <div class="section-header" onclick="toggleSection('Custom')">
+                                        <span class="section-toggle">▼</span>
+                                        <span class="section-title">Custom Properties</span>
+                                        <span class="section-count">(\${customProperties.length})</span>
+                                    </div>
+                                    <div class="section-content" id="section-custom">
+                                    </div>
+                                \`;
+                                
+                                const contentDiv = section.querySelector('.section-content');
+                                if (contentDiv) {
+                                    customProperties.forEach(property => {
+                                        try {
+                                            const value = currentTheme[property];
+                                            const item = createThemeItem(property, value, 'custom');
+                                            if (item) {
+                                                contentDiv.appendChild(item);
+                                            }
+                                        } catch (error) {
+                                            console.error('Error creating custom theme item:', property, error);
+                                        }
+                                    });
+                                }
+                                
+                                container.appendChild(section);
+                            }
+                        } catch (error) {
+                            console.error('Error processing custom properties:', error);
+                        }
+                    } catch (error) {
+                        console.error('Error rendering theme properties:', error);
                     }
                 }
                 
@@ -596,77 +700,128 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 }
                 
                 function updateColor(property, value) {
-                    currentTheme[property] = value;
-                    vscode.postMessage({
-                        type: 'colorChange',
-                        property: property,
-                        value: value
-                    });
+                    try {
+                        if (!property || typeof property !== 'string') {
+                            console.error('Invalid property:', property);
+                            return;
+                        }
+                        
+                        currentTheme[property] = value;
+                        vscode.postMessage({
+                            type: 'colorChange',
+                            property: property,
+                            value: value
+                        });
+                    } catch (error) {
+                        console.error('Error updating color:', error);
+                    }
                 }
                 
                 function resetProperty(property) {
-                    vscode.postMessage({
-                        type: 'resetProperty',
-                        property: property
-                    });
+                    try {
+                        if (!property || typeof property !== 'string') {
+                            console.error('Invalid property:', property);
+                            return;
+                        }
+                        
+                        vscode.postMessage({
+                            type: 'resetProperty',
+                            property: property
+                        });
+                    } catch (error) {
+                        console.error('Error resetting property:', error);
+                    }
                 }
                 
                 function loadTheme() {
-                    vscode.postMessage({ type: 'loadTheme' });
+                    try {
+                        vscode.postMessage({ type: 'loadTheme' });
+                    } catch (error) {
+                        console.error('Error loading theme:', error);
+                    }
                 }
                 
                 function createNew() {
-                    vscode.postMessage({ type: 'createNew' });
+                    try {
+                        vscode.postMessage({ type: 'createNew' });
+                    } catch (error) {
+                        console.error('Error creating new theme:', error);
+                    }
                 }
                 
                 function exportCSS() {
-                    vscode.postMessage({ type: 'exportCSS' });
+                    try {
+                        vscode.postMessage({ type: 'exportCSS' });
+                    } catch (error) {
+                        console.error('Error exporting CSS:', error);
+                    }
                 }
                 
                 function exportJSON() {
-                    vscode.postMessage({ type: 'exportJSON' });
+                    try {
+                        vscode.postMessage({ type: 'exportJSON' });
+                    } catch (error) {
+                        console.error('Error exporting JSON:', error);
+                    }
                 }
                 
                 function exportVSIX() {
-                    vscode.postMessage({ type: 'exportVSIX' });
+                    try {
+                        vscode.postMessage({ type: 'exportVSIX' });
+                    } catch (error) {
+                        console.error('Error exporting VSIX:', error);
+                    }
                 }
                 
                 function filterProperties(searchTerm) {
-                    const sections = document.querySelectorAll('.theme-section');
-                    
-                    sections.forEach(section => {
-                        const items = section.querySelectorAll('.theme-item');
-                        let visibleItems = 0;
+                    try {
+                        const sections = document.querySelectorAll('.theme-section');
                         
-                        items.forEach(item => {
-                            const property = item.dataset.property;
-                            const category = item.dataset.category;
-                            const isVisible = property.includes(searchTerm.toLowerCase()) || 
-                                             category.includes(searchTerm.toLowerCase());
-                            item.classList.toggle('hidden', !isVisible);
-                            if (isVisible) visibleItems++;
+                        sections.forEach(section => {
+                            const items = section.querySelectorAll('.theme-item');
+                            let visibleItems = 0;
+                            
+                            items.forEach(item => {
+                                const property = item.dataset.property;
+                                const category = item.dataset.category;
+                                const isVisible = property && property.includes(searchTerm.toLowerCase()) || 
+                                                 category && category.includes(searchTerm.toLowerCase());
+                                item.classList.toggle('hidden', !isVisible);
+                                if (isVisible) visibleItems++;
+                            });
+                            
+                            // Show/hide entire section based on visible items
+                            section.style.display = visibleItems > 0 ? 'block' : 'none';
+                            
+                            // Auto-expand sections with search results
+                            if (searchTerm && visibleItems > 0) {
+                                const content = section.querySelector('.section-content');
+                                const toggle = section.querySelector('.section-toggle');
+                                if (content && toggle) {
+                                    content.classList.remove('collapsed');
+                                    toggle.classList.remove('collapsed');
+                                }
+                            }
                         });
-                        
-                        // Show/hide entire section based on visible items
-                        section.style.display = visibleItems > 0 ? 'block' : 'none';
-                        
-                        // Auto-expand sections with search results
-                        if (searchTerm && visibleItems > 0) {
-                            const content = section.querySelector('.section-content');
-                            const toggle = section.querySelector('.section-toggle');
-                            content.classList.remove('collapsed');
-                            toggle.classList.remove('collapsed');
-                        }
-                    });
+                    } catch (error) {
+                        console.error('Error filtering properties:', error);
+                    }
                 }
                 
                 function toggleSection(category) {
-                    const sectionId = 'section-' + category.toLowerCase().replace(' ', '-');
-                    const content = document.getElementById(sectionId);
-                    const toggle = content.parentElement.querySelector('.section-toggle');
-                    
-                    content.classList.toggle('collapsed');
-                    toggle.classList.toggle('collapsed');
+                    try {
+                        const sectionId = 'section-' + category.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+                        const content = document.getElementById(sectionId);
+                        if (content) {
+                            const toggle = content.parentElement.querySelector('.section-toggle');
+                            if (toggle) {
+                                content.classList.toggle('collapsed');
+                                toggle.classList.toggle('collapsed');
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error toggling section:', error);
+                    }
                 }
                 
                 // Listen for messages from the extension
