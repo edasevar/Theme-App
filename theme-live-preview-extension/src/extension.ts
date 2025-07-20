@@ -376,6 +376,87 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    // Command to export as JSON
+    const exportJSONCommand = vscode.commands.registerCommand('themeLivePreview.exportJSON', async () => {
+        if (!previewPanel || !previewPanel.getCurrentCSS()) {
+            vscode.window.showWarningMessage('No theme loaded to export');
+            return;
+        }
+
+        const themeName = await vscode.window.showInputBox({
+            prompt: 'Enter theme name',
+            value: previewPanel.getCurrentThemeName(),
+            validateInput: (value) => {
+                if (!value.trim()) {
+                    return 'Theme name cannot be empty';
+                }
+                return null;
+            }
+        });
+
+        if (!themeName) return;
+
+        const saveUri = await vscode.window.showSaveDialog({
+            filters: {
+                'JSON Theme Files': ['json']
+            },
+            defaultUri: vscode.Uri.file(`${themeName.replace(/[^a-z0-9]/gi, '-')}-theme.json`)
+        });
+
+        if (saveUri) {
+            try {
+                await previewPanel.exportAsJSON(previewPanel.getCurrentCSS(), themeName, saveUri.fsPath);
+                vscode.window.showInformationMessage(`JSON theme exported to: ${saveUri.fsPath}`);
+            } catch (error) {
+                vscode.window.showErrorMessage(`Failed to export JSON: ${error}`);
+            }
+        }
+    });
+
+    // Command to export as VSIX
+    const exportVSIXCommand = vscode.commands.registerCommand('themeLivePreview.exportVSIX', async () => {
+        if (!previewPanel || !previewPanel.getCurrentCSS()) {
+            vscode.window.showWarningMessage('No theme loaded to export');
+            return;
+        }
+
+        const themeName = await vscode.window.showInputBox({
+            prompt: 'Enter theme name for VSIX package',
+            value: previewPanel.getCurrentThemeName(),
+            validateInput: (value) => {
+                if (!value.trim()) {
+                    return 'Theme name cannot be empty';
+                }
+                return null;
+            }
+        });
+
+        if (!themeName) return;
+
+        const saveUri = await vscode.window.showSaveDialog({
+            filters: {
+                'VSIX Extension Files': ['vsix']
+            },
+            defaultUri: vscode.Uri.file(`${themeName.replace(/[^a-z0-9]/gi, '-')}-theme.vsix`)
+        });
+
+        if (saveUri) {
+            try {
+                await previewPanel.exportAsVSIX(previewPanel.getCurrentCSS(), themeName, saveUri.fsPath);
+                vscode.window.showInformationMessage(
+                    `VSIX package exported to: ${saveUri.fsPath}`,
+                    'Install Theme'
+                ).then(selection => {
+                    if (selection === 'Install Theme') {
+                        vscode.commands.executeCommand('workbench.extensions.installExtension', saveUri);
+                    }
+                });
+            } catch (error) {
+                vscode.window.showErrorMessage(`Failed to export VSIX: ${error}`);
+            }
+        }
+    });
+
     context.subscriptions.push(
         openPreviewCommand, 
         loadThemeCommand, 
@@ -384,7 +465,9 @@ export function activate(context: vscode.ExtensionContext) {
         navigateToItemCommand,
         showStartupOptionsCommand,
         enterCSSCommand,
-        createNewThemeCommand
+        createNewThemeCommand,
+        exportJSONCommand,
+        exportVSIXCommand
     );
 }
 

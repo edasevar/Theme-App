@@ -13,7 +13,9 @@ A powerful VS Code extension that provides **live preview** and **real-time edit
 - 🎯 **Color Palette Extraction**: Visual color palette with hex codes and swatches
 - 🌈 **Advanced Color Picker**: Interactive color picker with VS Code integration
 - 📤 **CSS Export**: Export customized themes as clean, formatted CSS files
-- 🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
+- � **JSON Theme Export**: Export themes as VS Code JSON theme files
+- 📦 **VSIX Package Export**: Create installable VS Code extension packages
+- �🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
 - 🎯 **Theme Navigation**: Navigate directly to theme items in VS Code settings
 - 🔗 **VS Code Integration**: Apply colors directly to your current VS Code theme
 - 🚀 **Smart Startup Options**: Choose your workflow - load .vsix, enter CSS, or create new themes
@@ -134,10 +136,37 @@ Choose from professional templates:
 
 ### 📤 Exporting Your Work
 
+Choose from multiple export formats to suit your needs:
+
+#### 💾 Export as CSS
+
 1. Load and customize a theme to your liking
-2. Run **"Export CSS"** from Command Palette
+2. Click **"📤 Export ▼"** and select **"💾 Export CSS"**
 3. Choose the destination folder
 4. Get a clean, formatted CSS file ready for web use
+
+#### 📄 Export as JSON Theme
+
+1. Customize your theme in the preview panel
+2. Click **"📤 Export ▼"** and select **"📄 Export JSON Theme"**
+3. Enter a theme name when prompted
+4. Save the `.json` file to your desired location
+5. The JSON file can be loaded back into VS Code or shared with others
+
+#### 📦 Export as VSIX Package
+
+1. Create or customize your theme
+2. Click **"📤 Export ▼"** and select **"📦 Export VSIX Package"**
+3. Enter a theme name for the package
+4. Choose where to save the `.vsix` file
+5. Install the theme directly into VS Code or share it on the marketplace
+
+**Benefits of VSIX Export:**
+
+- Creates a complete VS Code extension package
+- Can be installed via `code --install-extension theme.vsix`
+- Includes proper theme metadata and manifest
+- Ready for distribution or marketplace publishing
 
 ## 🎯 Supported File Formats
 
@@ -224,11 +253,11 @@ npm run watch
 
 # Package the extension
 vsce package
-```
+```bash
 
 ### Project Structure
 
-```
+```text
 theme-live-preview-extension/
 ├── src/
 │   ├── extension.ts          # Main extension entry point
@@ -268,16 +297,19 @@ code --install-extension theme-live-preview-0.0.1.vsix
 ### Common Issues
 
 **Extension not loading:**
+
 - Ensure VS Code version is 1.60.0+
 - Reload VS Code window (`Ctrl+Shift+P` → "Reload Window")
 - Check if extension is enabled in Extensions panel
 
 **Theme not loading:**
+
 - Verify file format (`.json` or `.vsix`)
 - Check file permissions
 - Try loading a different theme file
 
 **CSS export issues:**
+
 - Ensure you have write permissions to target folder
 - Check available disk space
 - Try exporting to a different location

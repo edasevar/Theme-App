@@ -68,6 +68,15 @@ class PreviewPanel {
                 case 'showStartupOptions':
                     vscode.commands.executeCommand('themeLivePreview.showStartupOptions');
                     break;
+                case 'exportCSS':
+                    vscode.commands.executeCommand('themeLivePreview.exportCSS');
+                    break;
+                case 'exportJSON':
+                    vscode.commands.executeCommand('themeLivePreview.exportJSON');
+                    break;
+                case 'exportVSIX':
+                    vscode.commands.executeCommand('themeLivePreview.exportVSIX');
+                    break;
             }
         }, null, this._disposables);
     }
@@ -88,6 +97,15 @@ class PreviewPanel {
     }
     getCurrentCSS() {
         return this._currentCSS;
+    }
+    getCurrentThemeName() {
+        return this._currentThemeName;
+    }
+    async exportAsJSON(css, themeName, savePath) {
+        await this.themeExtractor.exportAsJSON(css, themeName, savePath);
+    }
+    async exportAsVSIX(css, themeName, savePath) {
+        await this.themeExtractor.exportAsVSIX(css, themeName, savePath);
     }
     openColorPicker(currentColor) {
         this._panel.webview.postMessage({
@@ -404,6 +422,52 @@ class PreviewPanel {
             color: var(--vscode-editor-foreground, #d4d4d4);
         }
 
+        .export-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .export-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--vscode-dropdown-background, #3c3c3c);
+            border: 1px solid var(--vscode-dropdown-border, #454545);
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            min-width: 180px;
+        }
+
+        .export-menu.show {
+            display: block;
+        }
+
+        .export-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 8px 12px;
+            background: transparent;
+            border: none;
+            color: var(--vscode-dropdown-foreground, #cccccc);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .export-menu button:hover {
+            background: var(--vscode-list-hoverBackground, #2a2d2e);
+        }
+
+        .export-menu button:first-child {
+            border-radius: 3px 3px 0 0;
+        }
+
+        .export-menu button:last-child {
+            border-radius: 0 0 3px 3px;
+        }
+
         .toolbar {
             display: flex;
             gap: 10px;
@@ -428,7 +492,14 @@ class PreviewPanel {
             <button onclick="showStartupOptions()">🚀 Getting Started</button>
             <button onclick="loadSampleTheme()">Load Sample Theme</button>
             <button onclick="resetToDefault()">Reset</button>
-            <button onclick="exportCSS()">Export CSS</button>
+            <div class="export-dropdown">
+                <button onclick="toggleExportMenu()" id="exportBtn">📤 Export ▼</button>
+                <div class="export-menu" id="exportMenu">
+                    <button onclick="exportCSS()">💾 Export CSS</button>
+                    <button onclick="exportJSON()">📄 Export JSON Theme</button>
+                    <button onclick="exportVSIX()">📦 Export VSIX Package</button>
+                </div>
+            </div>
             <button onclick="openAdvancedColorPicker()">🎨 Color Picker</button>
             <span class="live-indicator">LIVE</span>
         </div>
@@ -611,6 +682,33 @@ class PreviewPanel {
             });
         }
 
+        function toggleExportMenu() {
+            const menu = document.getElementById('exportMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Close export menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const exportDropdown = event.target.closest('.export-dropdown');
+            if (!exportDropdown) {
+                document.getElementById('exportMenu').classList.remove('show');
+            }
+        });
+
+        function exportJSON() {
+            vscode.postMessage({
+                command: 'exportJSON'
+            });
+            document.getElementById('exportMenu').classList.remove('show');
+        }
+
+        function exportVSIX() {
+            vscode.postMessage({
+                command: 'exportVSIX'
+            });
+            document.getElementById('exportMenu').classList.remove('show');
+        }
+
         function applyCSS(css) {
             // Remove existing theme styles
             const existingStyle = document.getElementById('themeStyles');
@@ -786,9 +884,9 @@ class PreviewPanel {
 
         function exportCSS() {
             vscode.postMessage({
-                command: 'alert',
-                text: 'Use Command Palette: "Theme Preview: Export CSS" to save'
+                command: 'exportCSS'
             });
+            document.getElementById('exportMenu').classList.remove('show');
         }
 
         function formatCSS() {

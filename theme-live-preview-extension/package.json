@@ -61,6 +61,16 @@
         "command": "themeLivePreview.showStartupOptions",
         "title": "Show Startup Options",
         "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.exportJSON",
+        "title": "Export as JSON Theme",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.exportVSIX",
+        "title": "Export as VSIX Package",
+        "category": "Theme Preview"
       }
     ],
     "menus": {
@@ -88,6 +98,12 @@
         },
         {
           "command": "themeLivePreview.showStartupOptions"
+        },
+        {
+          "command": "themeLivePreview.exportJSON"
+        },
+        {
+          "command": "themeLivePreview.exportVSIX"
         }
       ],
       "explorer/context": [
