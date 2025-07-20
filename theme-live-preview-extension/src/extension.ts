@@ -3,12 +3,28 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ThemeExtractor } from './themeExtractor';
 import { PreviewPanel } from './previewPanel';
+import { SidebarProvider } from './sidebarProvider';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
 
     const themeExtractor = new ThemeExtractor();
     let previewPanel: PreviewPanel | undefined;
+
+    // Register the sidebar provider
+    const sidebarProvider = new SidebarProvider(context.extensionUri);
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(SidebarProvider.viewType, sidebarProvider)
+    );
+
+    // Command to update preview from sidebar
+    const updatePreviewCommand = vscode.commands.registerCommand('themeLivePreview.updatePreview', (theme: any) => {
+        if (previewPanel) {
+            // Convert theme object to CSS string
+            const cssString = themeExtractor.convertThemeToCSS(theme);
+            previewPanel.updateTheme(cssString, 'Sidebar Theme');
+        }
+    });
 
     // Command to open the live preview panel
     const openPreviewCommand = vscode.commands.registerCommand('themeLivePreview.openPreview', async () => {
@@ -467,7 +483,8 @@ export function activate(context: vscode.ExtensionContext) {
         enterCSSCommand,
         createNewThemeCommand,
         exportJSONCommand,
-        exportVSIXCommand
+        exportVSIXCommand,
+        updatePreviewCommand
     );
 }
 

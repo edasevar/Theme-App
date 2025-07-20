@@ -354,4 +354,40 @@ export class ThemeExtractor {
     getCurrentThemeName(): string {
         return this.themeName;
     }
+
+    // Convert theme object to CSS string
+    convertThemeToCSS(theme: any): string {
+        const cssRules: string[] = [];
+        
+        // Add CSS variables for each theme property
+        const rootVars: string[] = [];
+        Object.keys(theme).forEach(key => {
+            const cssVar = `--vscode-${key.replace(/\./g, '-')}`;
+            rootVars.push(`  ${cssVar}: ${theme[key]};`);
+        });
+        
+        if (rootVars.length > 0) {
+            cssRules.push(':root {');
+            cssRules.push(...rootVars);
+            cssRules.push('}');
+        }
+        
+        // Add basic styling
+        cssRules.push('', 'body {');
+        if (theme['editor.background']) {
+            cssRules.push(`  background-color: ${theme['editor.background']};`);
+        }
+        if (theme['editor.foreground']) {
+            cssRules.push(`  color: ${theme['editor.foreground']};`);
+        }
+        cssRules.push('}');
+        
+        return cssRules.join('\n');
+    }
+
+    // Export theme as CSS
+    async exportAsCSS(theme: any, savePath: string): Promise<void> {
+        const cssContent = this.convertThemeToCSS(theme);
+        fs.writeFileSync(savePath, cssContent, 'utf8');
+    }
 }

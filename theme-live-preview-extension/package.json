@@ -21,6 +21,25 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "themePreview",
+          "title": "Theme Preview",
+          "icon": "$(paintcan)"
+        }
+      ]
+    },
+    "views": {
+      "themePreview": [
+        {
+          "id": "themeEditor",
+          "name": "Theme Editor",
+          "type": "webview",
+          "icon": "$(edit)"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "themeLivePreview.openPreview",

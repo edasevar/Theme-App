@@ -56,6 +56,30 @@ code --install-extension theme-live-preview-0.0.1.vsix
 
 ## 📖 Usage Guide
 
+### 🎛️ Using the Sidebar Interface (New!)
+
+The extension now provides a **unified sidebar interface** for all theme editing needs:
+
+1. **Open the Theme Preview sidebar**:
+   - Click the 🎨 paintcan icon in the Activity Bar (left sidebar)
+   - Or use Command Palette: `Ctrl+Shift+P` → "Open Theme Live Preview"
+
+2. **Theme Editor Panel Features**:
+   - **📁 Load**: Import existing `.json` or `.vsix` theme files
+   - **✨ New**: Create a new theme from scratch
+   - **💾 CSS | 📄 JSON | 📦 VSIX**: Export in your preferred format
+   - **🔍 Search**: Quickly find theme properties by name or category
+
+3. **Editing Theme Properties**:
+   - Properties are organized by category (Editor, Activity Bar, Side Bar, etc.)
+   - Use color pickers or type hex values directly
+   - Click **✕** to reset individual properties to default
+   - Changes are reflected instantly in the preview
+
+4. **Real-time Preview**:
+   - Changes in the sidebar automatically update any open preview panel
+   - Use both interfaces simultaneously for maximum productivity
+
 ### Opening the Live Preview
 
 1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)

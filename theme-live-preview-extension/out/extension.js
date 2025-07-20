@@ -28,10 +28,22 @@ const vscode = __importStar(require("vscode"));
 const path = __importStar(require("path"));
 const themeExtractor_1 = require("./themeExtractor");
 const previewPanel_1 = require("./previewPanel");
+const sidebarProvider_1 = require("./sidebarProvider");
 function activate(context) {
     console.log('Theme Live Preview extension is now active!');
     const themeExtractor = new themeExtractor_1.ThemeExtractor();
     let previewPanel;
+    // Register the sidebar provider
+    const sidebarProvider = new sidebarProvider_1.SidebarProvider(context.extensionUri);
+    context.subscriptions.push(vscode.window.registerWebviewViewProvider(sidebarProvider_1.SidebarProvider.viewType, sidebarProvider));
+    // Command to update preview from sidebar
+    const updatePreviewCommand = vscode.commands.registerCommand('themeLivePreview.updatePreview', (theme) => {
+        if (previewPanel) {
+            // Convert theme object to CSS string
+            const cssString = themeExtractor.convertThemeToCSS(theme);
+            previewPanel.updateTheme(cssString, 'Sidebar Theme');
+        }
+    });
     // Command to open the live preview panel
     const openPreviewCommand = vscode.commands.registerCommand('themeLivePreview.openPreview', async () => {
         if (previewPanel) {
@@ -444,7 +456,7 @@ function activate(context) {
             }
         }
     });
-    context.subscriptions.push(openPreviewCommand, loadThemeCommand, exportCSSCommand, openColorPickerCommand, navigateToItemCommand, showStartupOptionsCommand, enterCSSCommand, createNewThemeCommand, exportJSONCommand, exportVSIXCommand);
+    context.subscriptions.push(openPreviewCommand, loadThemeCommand, exportCSSCommand, openColorPickerCommand, navigateToItemCommand, showStartupOptionsCommand, enterCSSCommand, createNewThemeCommand, exportJSONCommand, exportVSIXCommand, updatePreviewCommand);
 }
 exports.activate = activate;
 function deactivate() {
