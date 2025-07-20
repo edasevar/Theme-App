@@ -46,6 +46,21 @@
         "command": "themeLivePreview.navigateToItem",
         "title": "Navigate to Theme Item",
         "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.enterCSS",
+        "title": "Enter CSS Directly",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.createNewTheme",
+        "title": "Create New Theme",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.showStartupOptions",
+        "title": "Show Startup Options",
+        "category": "Theme Preview"
       }
     ],
     "menus": {
@@ -64,6 +79,15 @@
         },
         {
           "command": "themeLivePreview.navigateToItem"
+        },
+        {
+          "command": "themeLivePreview.enterCSS"
+        },
+        {
+          "command": "themeLivePreview.createNewTheme"
+        },
+        {
+          "command": "themeLivePreview.showStartupOptions"
         }
       ],
       "explorer/context": [

@@ -16,6 +16,8 @@ A powerful VS Code extension that provides **live preview** and **real-time edit
 - 🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
 - 🎯 **Theme Navigation**: Navigate directly to theme items in VS Code settings
 - 🔗 **VS Code Integration**: Apply colors directly to your current VS Code theme
+- 🚀 **Smart Startup Options**: Choose your workflow - load .vsix, enter CSS, or create new themes
+- 📚 **Theme Templates**: Start with pre-built templates for dark, light, and high-contrast themes
 - ⚡ **Performance Optimized**: Fast loading and responsive UI
 - 🌈 **Multi-format Support**: Works with JSON themes and VSIX packages
 
@@ -56,7 +58,37 @@ code --install-extension theme-live-preview-0.0.1.vsix
 
 1. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
 2. Search and run **"Open Theme Live Preview"**
-3. A side panel will open with the live preview interface
+3. Choose from the startup options that appear:
+   - **📦 Load .vsix Theme File**: Browse and load existing themes
+   - **📝 Enter CSS Directly**: Paste or type CSS code directly
+   - **🎨 Create New Theme**: Start with a template
+   - **🔧 Open Empty Preview**: Start with an empty workspace
+
+### 🚀 Startup Options
+
+When you first open the Theme Live Preview, you'll see a beautiful startup screen with four options:
+
+#### 📦 Load .vsix Theme File
+- Browse and select `.vsix` or `.json` theme files
+- Perfect for customizing existing marketplace themes
+- Automatically extracts and converts themes to CSS
+
+#### 📝 Enter CSS Directly  
+- Paste existing CSS code or write from scratch
+- Includes a starter template with common VS Code variables
+- Ideal for developers who prefer working directly with CSS
+
+#### 🎨 Create New Theme
+Choose from professional templates:
+- **🌙 Dark Theme Template**: Modern dark theme with GitHub-inspired colors
+- **☀️ Light Theme Template**: Clean light theme with professional styling  
+- **🎨 High Contrast Template**: Accessibility-focused high contrast theme
+- **🌈 Custom Blank Template**: Minimal structure for complete customization
+
+#### 🔧 Open Empty Preview
+- Start with a blank workspace
+- Load themes later using the toolbar buttons
+- Perfect for exploring the interface first
 
 ### Loading a Theme
 
@@ -156,6 +188,9 @@ graph TD
 | **Export CSS** | `themeLivePreview.exportCSS` | Export current theme as CSS file |
 | **Open Color Picker** | `themeLivePreview.openColorPicker` | Open advanced color picker for theme editing |
 | **Navigate to Theme Item** | `themeLivePreview.navigateToItem` | Navigate to specific theme items in VS Code |
+| **Enter CSS Directly** | `themeLivePreview.enterCSS` | **NEW**: Open CSS input dialog to paste/type CSS |
+| **Create New Theme** | `themeLivePreview.createNewTheme` | **NEW**: Create theme from templates |
+| **Show Startup Options** | `themeLivePreview.showStartupOptions` | **NEW**: Display startup options dialog |
 
 ### Keyboard Shortcuts
 

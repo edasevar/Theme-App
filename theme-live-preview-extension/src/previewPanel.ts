@@ -44,6 +44,18 @@ export class PreviewPanel {
                     case 'applyColorToVSCode':
                         this.applyColorToVSCode(message.property, message.color);
                         break;
+                    case 'loadTheme':
+                        vscode.commands.executeCommand('themeLivePreview.loadTheme');
+                        break;
+                    case 'enterCSS':
+                        vscode.commands.executeCommand('themeLivePreview.enterCSS');
+                        break;
+                    case 'createNewTheme':
+                        vscode.commands.executeCommand('themeLivePreview.createNewTheme');
+                        break;
+                    case 'showStartupOptions':
+                        vscode.commands.executeCommand('themeLivePreview.showStartupOptions');
+                        break;
                 }
             },
             null,
@@ -322,9 +334,80 @@ export class PreviewPanel {
             border-color: var(--vscode-focusBorder, #007acc);
         }
 
-        .theme-item.active {
-            background: var(--vscode-editor-selectionBackground, #264f78);
+        .startup-panel {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--vscode-editor-background, #1e1e1e);
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .startup-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--vscode-editor-foreground, #d4d4d4);
+        }
+
+        .startup-subtitle {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: var(--vscode-descriptionForeground, #cccccc);
+            opacity: 0.8;
+        }
+
+        .startup-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .startup-option {
+            padding: 20px;
+            background: var(--vscode-editor-lineHighlightBackground, #2a2a2a);
+            border: 2px solid var(--vscode-input-border, #3e3e3e);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .startup-option:hover {
             border-color: var(--vscode-focusBorder, #007acc);
+            background: var(--vscode-list-hoverBackground, #2a2d2e);
+            transform: translateY(-2px);
+        }
+
+        .startup-option-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .startup-option-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--vscode-editor-foreground, #d4d4d4);
+        }
+
+        .startup-option-desc {
+            font-size: 13px;
+            color: var(--vscode-descriptionForeground, #cccccc);
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .quick-actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--vscode-panel-border, #3e3e3e);
+        }
+
+        .quick-actions h4 {
+            margin-bottom: 15px;
+            color: var(--vscode-editor-foreground, #d4d4d4);
         }
 
         .toolbar {
@@ -348,6 +431,7 @@ export class PreviewPanel {
     <div class="header">
         <div class="theme-name" id="themeName">Theme Live Preview</div>
         <div class="controls">
+            <button onclick="showStartupOptions()">🚀 Getting Started</button>
             <button onclick="loadSampleTheme()">Load Sample Theme</button>
             <button onclick="resetToDefault()">Reset</button>
             <button onclick="exportCSS()">Export CSS</button>
@@ -369,7 +453,38 @@ export class PreviewPanel {
         <div class="preview-panel">
             <div class="panel-title">Live Preview</div>
             <div class="preview-area" id="previewArea">
-                <div class="code-sample">
+                <div class="startup-panel" id="startupPanel">
+                    <div class="startup-title">🎨 Welcome to Theme Live Preview</div>
+                    <div class="startup-subtitle">Choose how you'd like to get started with theme editing</div>
+                    
+                    <div class="startup-options">
+                        <div class="startup-option" onclick="startupAction('loadVsix')">
+                            <span class="startup-option-icon">📦</span>
+                            <div class="startup-option-title">Load .vsix Theme File</div>
+                            <div class="startup-option-desc">Load an existing theme from a .vsix package or JSON file</div>
+                        </div>
+                        
+                        <div class="startup-option" onclick="startupAction('enterCSS')">
+                            <span class="startup-option-icon">📝</span>
+                            <div class="startup-option-title">Enter CSS Directly</div>
+                            <div class="startup-option-desc">Paste or type CSS directly into the editor</div>
+                        </div>
+                        
+                        <div class="startup-option" onclick="startupAction('createNew')">
+                            <span class="startup-option-icon">🎨</span>
+                            <div class="startup-option-title">Create New Theme</div>
+                            <div class="startup-option-desc">Start with a template and customize colors</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h4>Quick Actions</h4>
+                        <button onclick="loadSampleTheme()" style="margin-right: 10px;">🔥 Load Sample Theme</button>
+                        <button onclick="startupAction('enterCSS')">✏️ Enter CSS</button>
+                    </div>
+                </div>
+
+                <div class="code-sample" id="codePreview" style="display: none;">
 <span class="comment">// Sample code with syntax highlighting</span>
 <span class="keyword">function</span> <span class="function">calculateTotal</span>(<span class="variable">items</span>) {
     <span class="keyword">let</span> <span class="variable">total</span> = <span class="number">0</span>;
@@ -391,7 +506,7 @@ export class PreviewPanel {
 <span class="keyword">console</span>.<span class="function">log</span>(<span class="string">"Total: $"</span> + <span class="variable">result</span>);
                 </div>
 
-                <div id="colorPalette" style="margin-top: 20px;">
+                <div id="colorPalette" style="margin-top: 20px; display: none;">
                     <h3>Color Palette</h3>
                     <div id="colorList">
                         <div class="color-info">
@@ -455,6 +570,11 @@ export class PreviewPanel {
             document.getElementById('themeName').textContent = themeName;
             document.getElementById('cssEditor').value = css;
             
+            // Hide startup panel and show code preview
+            document.getElementById('startupPanel').style.display = 'none';
+            document.getElementById('codePreview').style.display = 'block';
+            document.getElementById('colorPalette').style.display = 'block';
+            
             // Apply CSS to preview
             applyCSS(css);
             
@@ -463,6 +583,38 @@ export class PreviewPanel {
             
             // Auto-save state
             vscode.setState({ css, themeName });
+        }
+
+        function showStartupPanel() {
+            document.getElementById('startupPanel').style.display = 'block';
+            document.getElementById('codePreview').style.display = 'none';
+            document.getElementById('colorPalette').style.display = 'none';
+        }
+
+        function startupAction(action) {
+            switch (action) {
+                case 'loadVsix':
+                    vscode.postMessage({
+                        command: 'loadTheme'
+                    });
+                    break;
+                case 'enterCSS':
+                    vscode.postMessage({
+                        command: 'enterCSS'
+                    });
+                    break;
+                case 'createNew':
+                    vscode.postMessage({
+                        command: 'createNewTheme'
+                    });
+                    break;
+            }
+        }
+
+        function showStartupOptions() {
+            vscode.postMessage({
+                command: 'showStartupOptions'
+            });
         }
 
         function applyCSS(css) {
