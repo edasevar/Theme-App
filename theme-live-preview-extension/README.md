@@ -3,19 +3,37 @@
 A powerful VS Code extension that provides **live preview** and **real-time editing** of VS Code themes with advanced CSS conversion capabilities. Transform any VS Code theme into customizable CSS for web projects or theme development.
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.60.0+-blue)](https://code.visualstudio.com/)
-[![Version](https://img.shields.io/badge/version-0.0.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/version-0.1.0-orange)](package.json)
+[![Stability](https://img.shields.io/badge/stability-stable-green)](package.json)
 
 ## ✨ Features
+
+### 🎛️ **Unified Sidebar Interface**
+
+- **All-in-one theme editor** accessible from VS Code's sidebar
+- **Categorized theme properties** organized by Editor, Activity Bar, Side Bar, Status Bar, etc.
+- **Live color pickers** for every theme element with instant preview
+- **Search functionality** to quickly find specific properties or categories
+- **Reset buttons** to restore individual properties to default values
+- **Real-time synchronization** with live preview panel
+
+### 🎨 **Advanced Theme Editing**
 
 - 🎨 **Live Theme Preview**: Real-time preview of VS Code themes with instant feedback
 - 📝 **CSS Editor**: Edit theme CSS with live updates and syntax highlighting
 - 🔄 **Smart Theme Loading**: Load themes from `.json` and `.vsix` files seamlessly
 - 🎯 **Color Palette Extraction**: Visual color palette with hex codes and swatches
 - 🌈 **Advanced Color Picker**: Interactive color picker with VS Code integration
+
+### 📤 **Multi-Format Export**
+
 - 📤 **CSS Export**: Export customized themes as clean, formatted CSS files
-- � **JSON Theme Export**: Export themes as VS Code JSON theme files
+- 📄 **JSON Theme Export**: Export themes as VS Code JSON theme files
 - 📦 **VSIX Package Export**: Create installable VS Code extension packages
-- �🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
+
+### 🚀 **Enhanced Workflow**
+
+- 🔧 **Advanced CSS Tools**: Format, minify, and optimize CSS output
 - 🎯 **Theme Navigation**: Navigate directly to theme items in VS Code settings
 - 🔗 **VS Code Integration**: Apply colors directly to your current VS Code theme
 - 🚀 **Smart Startup Options**: Choose your workflow - load .vsix, enter CSS, or create new themes
@@ -23,20 +41,31 @@ A powerful VS Code extension that provides **live preview** and **real-time edit
 - ⚡ **Performance Optimized**: Fast loading and responsive UI
 - 🌈 **Multi-format Support**: Works with JSON themes and VSIX packages
 
+### 🧠 **Comprehensive Theme Categories**
+
+- **🧠 Semantic Tokens**: Modern VS Code semantic highlighting
+- **🏷️ Token Colors**: Traditional TextMate syntax highlighting
+- **🎨 UI Colors**: Complete VS Code interface theming including git decorations
+- **💻 Terminal Colors**: Full ANSI color palette support
+- **🔍 Search & Find**: Search result highlighting and editor integration
+- **⚠️ Errors & Warnings**: Notification and diagnostic colors
+
 ## 🚀 Quick Start
 
 ### Installation
 
-**Option 1: From VSIX Package (Recommended)**
+#### Option 1: From VSIX Package (Recommended)
+
 ```bash
 # Package the extension
 vsce package
 
 # Install the generated VSIX file
-code --install-extension theme-live-preview-0.0.1.vsix
+code --install-extension theme-live-preview-0.1.0.vsix
 ```
 
-**Option 2: Development Installation**
+#### Option 2: Development Installation
+
 ```bash
 # Clone and install dependencies
 npm install
@@ -46,10 +75,11 @@ npm run compile
 
 # Package and install
 vsce package
-code --install-extension theme-live-preview-0.0.1.vsix
+code --install-extension theme-live-preview-0.1.0.vsix
 ```
 
-**Option 3: Development Mode**
+#### Option 3: Development Mode
+
 1. Open the extension folder in VS Code
 2. Press `F5` to launch Extension Development Host
 3. Test the extension in the new window
@@ -70,15 +100,39 @@ The extension now provides a **unified sidebar interface** for all theme editing
    - **💾 CSS | 📄 JSON | 📦 VSIX**: Export in your preferred format
    - **🔍 Search**: Quickly find theme properties by name or category
 
-3. **Editing Theme Properties**:
-   - Properties are organized by category (Editor, Activity Bar, Side Bar, etc.)
-   - Use color pickers or type hex values directly
-   - Click **✕** to reset individual properties to default
-   - Changes are reflected instantly in the preview
+3. **Organized Theme Categories**:
+   - **🎨 Editor**: Background, foreground, selections, line numbers
+   - **📂 Activity Bar**: Background, foreground, badges, borders  
+   - **📋 Side Bar**: Background, titles, sections, borders
+   - **📊 Status Bar**: Background, foreground, debugging states
+   - **🏷️ Title Bar**: Active/inactive states, borders
+   - **📑 Tabs**: Active/inactive backgrounds, borders, hover states
+   - **📝 Lists & Trees**: Selections, hover states, tree guides
+   - **⌨️ Input Controls**: Backgrounds, borders, validation states
+   - **🔘 Buttons**: Primary/secondary styles, hover states
+   - **📋 Dropdowns**: Backgrounds, borders, list backgrounds
+   - **💻 Terminal**: Full ANSI color palette (16 colors)
+   - **🔍 Search & Find**: Match backgrounds, borders, highlights
+   - **⚠️ Errors & Warnings**: Error, warning, info colors
+   - **🎯 Focus & Borders**: Focus borders, widget shadows
+   - **📋 Panels**: Panel backgrounds, borders, titles
+   - **🧠 Semantic Tokens**: Modern semantic highlighting
+   - **🏷️ Token Colors**: Traditional TextMate syntax highlighting  
+   - **🎨 UI Colors**: Welcome page, git decorations, walkthroughs
 
-4. **Real-time Preview**:
+4. **Editing Theme Properties**:
+   - **Collapsible Sections**: Expand/collapse categories independently
+   - **Property Counts**: See how many properties are configured vs. total
+   - **Color Pickers**: Visual color selection for standard color properties
+   - **Text Inputs**: Direct input for semantic tokens and complex values
+   - **Reset Buttons**: Click **✕** to reset individual properties to default
+   - **Search & Filter**: Find properties across all categories instantly
+   - **Auto-Expansion**: Sections with existing properties automatically expand
+
+5. **Real-time Preview**:
    - Changes in the sidebar automatically update any open preview panel
    - Use both interfaces simultaneously for maximum productivity
+   - Instant validation and error checking
 
 ### Opening the Live Preview
 
@@ -95,23 +149,28 @@ The extension now provides a **unified sidebar interface** for all theme editing
 When you first open the Theme Live Preview, you'll see a beautiful startup screen with four options:
 
 #### 📦 Load .vsix Theme File
+
 - Browse and select `.vsix` or `.json` theme files
 - Perfect for customizing existing marketplace themes
 - Automatically extracts and converts themes to CSS
 
 #### 📝 Enter CSS Directly  
+
 - Paste existing CSS code or write from scratch
 - Includes a starter template with common VS Code variables
 - Ideal for developers who prefer working directly with CSS
 
 #### 🎨 Create New Theme
+
 Choose from professional templates:
+
 - **🌙 Dark Theme Template**: Modern dark theme with GitHub-inspired colors
 - **☀️ Light Theme Template**: Clean light theme with professional styling  
 - **🎨 High Contrast Template**: Accessibility-focused high contrast theme
 - **🌈 Custom Blank Template**: Minimal structure for complete customization
 
 #### 🔧 Open Empty Preview
+
 - Start with a blank workspace
 - Load themes later using the toolbar buttons
 - Perfect for exploring the interface first
@@ -194,9 +253,9 @@ Choose from multiple export formats to suit your needs:
 
 ## 🎯 Supported File Formats
 
-| Format | Description | Use Case |
-|--------|-------------|----------|
-| **`.json`** | Direct VS Code theme files | Custom themes, downloaded themes |
+| Format      | Description                | Use Case                           |
+| ----------- | -------------------------- | ---------------------------------- |
+| **`.json`** | Direct VS Code theme files | Custom themes, downloaded themes   |
 | **`.vsix`** | VS Code extension packages | Marketplace themes, bundled themes |
 
 ## 💡 Example Workflow
@@ -234,16 +293,16 @@ graph TD
 
 ## ⚙️ Available Commands
 
-| Command | ID | Description |
-|---------|----|-----------  |
-| **Open Theme Live Preview** | `themeLivePreview.openPreview` | Opens the main preview panel |
-| **Load Theme File** | `themeLivePreview.loadTheme` | Load a theme from `.json` or `.vsix` file |
-| **Export CSS** | `themeLivePreview.exportCSS` | Export current theme as CSS file |
-| **Open Color Picker** | `themeLivePreview.openColorPicker` | Open advanced color picker for theme editing |
-| **Navigate to Theme Item** | `themeLivePreview.navigateToItem` | Navigate to specific theme items in VS Code |
-| **Enter CSS Directly** | `themeLivePreview.enterCSS` | **NEW**: Open CSS input dialog to paste/type CSS |
-| **Create New Theme** | `themeLivePreview.createNewTheme` | **NEW**: Create theme from templates |
-| **Show Startup Options** | `themeLivePreview.showStartupOptions` | **NEW**: Display startup options dialog |
+| Command                     | ID                                    | Description                                      |
+| --------------------------- | ------------------------------------- | ------------------------------------------------ |
+| **Open Theme Live Preview** | `themeLivePreview.openPreview`        | Opens the main preview panel                     |
+| **Load Theme File**         | `themeLivePreview.loadTheme`          | Load a theme from `.json` or `.vsix` file        |
+| **Export CSS**              | `themeLivePreview.exportCSS`          | Export current theme as CSS file                 |
+| **Open Color Picker**       | `themeLivePreview.openColorPicker`    | Open advanced color picker for theme editing     |
+| **Navigate to Theme Item**  | `themeLivePreview.navigateToItem`     | Navigate to specific theme items in VS Code      |
+| **Enter CSS Directly**      | `themeLivePreview.enterCSS`           | **NEW**: Open CSS input dialog to paste/type CSS |
+| **Create New Theme**        | `themeLivePreview.createNewTheme`     | **NEW**: Create theme from templates             |
+| **Show Startup Options**    | `themeLivePreview.showStartupOptions` | **NEW**: Display startup options dialog          |
 
 ### Keyboard Shortcuts
 
@@ -305,7 +364,7 @@ npm test
 vsce package
 
 # Install locally for testing
-code --install-extension theme-live-preview-0.0.1.vsix
+code --install-extension theme-live-preview-0.1.0.vsix
 ```
 
 ## 📋 System Requirements
@@ -346,20 +405,21 @@ code --install-extension theme-live-preview-0.0.1.vsix
 
 ## 📝 Release Notes
 
-### Version 0.0.1 (Current)
+### Version 0.1.0 (Current)
 
-**🎉 Current Release Features:**
+**🎉 Latest Release Features:**
 
-- ✅ Basic theme loading and CSS conversion
-- ✅ Live preview with syntax highlighting  
-- ✅ CSS export functionality
-- ✅ Support for JSON and VSIX theme files
-- ✅ Real-time CSS editing capabilities
-- ✅ Color palette extraction with interactive controls
-- ✅ CSS formatting and minification tools
-- ✅ **NEW**: Advanced color picker with VS Code integration
-- ✅ **NEW**: Navigation to theme items in VS Code settings
-- ✅ **NEW**: Direct color application to current VS Code theme
+- ✅ **Unified Sidebar Interface**: All-in-one theme editor in VS Code sidebar
+- ✅ **Comprehensive Theme Categories**: 15+ organized categories including semantic tokens
+- ✅ **Advanced Error Handling**: Professional-grade error handling and validation
+- ✅ **Multi-format Export**: CSS, JSON, and VSIX export with validation
+- ✅ **Enhanced User Experience**: Improved feedback, warnings, and success messages
+- ✅ **Robust File Operations**: Safe file handling with comprehensive error checking
+- ✅ **Live Theme Preview**: Real-time preview with syntax highlighting
+- ✅ **Advanced Color Picker**: Interactive color picker with VS Code integration
+- ✅ **Theme Navigation**: Navigate to theme items in VS Code settings
+- ✅ **Smart Startup Options**: Choose your workflow with beautiful startup screen
+- ✅ **Performance Optimized**: Fast loading and responsive UI
 
 **🔮 Planned Features:**
 
