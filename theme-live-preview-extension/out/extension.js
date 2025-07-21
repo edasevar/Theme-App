@@ -79,7 +79,7 @@ function activate(context) {
         }, 1500);
     }
     // Register the sidebar provider
-    const sidebarProvider = new sidebarProvider_1.SidebarProvider(context.extensionUri);
+    const sidebarProvider = new sidebarProvider_1.SidebarProvider(context.extensionUri, context);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider(sidebarProvider_1.SidebarProvider.viewType, sidebarProvider));
     // Command to open sidebar
     const openSidebarCommand = vscode.commands.registerCommand('themeLivePreview.openSidebar', () => {
@@ -428,8 +428,44 @@ function activate(context) {
             vscode.window.showErrorMessage(`Failed to load installed theme: ${error}`);
         }
     });
+    // Command to manually open value editor (for testing)
+    const openValueEditorCommand = vscode.commands.registerCommand('themeLivePreview.openValueEditor', async () => {
+        const { ValueEditorProvider } = await Promise.resolve().then(() => __importStar(require('./valueEditorProvider')));
+        const result = await ValueEditorProvider.showValueEditor(context, {
+            property: 'editor.background',
+            currentValue: '#1e1e1e',
+            originalValue: '#ffffff',
+            description: 'Background color of the editor',
+            onValueChange: (value) => {
+                console.log('Live preview value:', value);
+            },
+            onApply: (value) => {
+                vscode.window.showInformationMessage(`Applied value: ${value}`);
+            },
+            onCancel: () => {
+                vscode.window.showInformationMessage('Edit cancelled');
+            }
+        });
+    });
+    // Command to show element examples and navigation
+    const showElementExamplesCommand = vscode.commands.registerCommand('themeLivePreview.showElementExamples', async () => {
+        const { NavigationProvider } = await Promise.resolve().then(() => __importStar(require('./navigationProvider')));
+        // Show quick pick to select a property
+        const properties = [
+            'editor.background', 'editor.foreground', 'activityBar.background', 'activityBar.foreground',
+            'sideBar.background', 'sideBar.foreground', 'statusBar.background', 'statusBar.foreground',
+            'tab.activeBackground', 'tab.activeForeground', 'list.activeSelectionBackground'
+        ];
+        const selectedProperty = await vscode.window.showQuickPick(properties, {
+            placeHolder: 'Select a theme property to explore',
+            canPickMany: false
+        });
+        if (selectedProperty) {
+            await NavigationProvider.showElementExamples(context, selectedProperty);
+        }
+    });
     // Add all commands to subscriptions
-    context.subscriptions.push(showStartupMenuCommand, editCurrentThemeCommand, importVSIXCommand, importJSONCommand, importCSSCommand, createNewThemeCommand, selectInstalledThemeCommand, openSidebarCommand, openPreviewCommand, loadThemeCommand, exportCSSCommand, createVSIXCommand, exportThemeCommand);
+    context.subscriptions.push(showStartupMenuCommand, editCurrentThemeCommand, importVSIXCommand, importJSONCommand, importCSSCommand, createNewThemeCommand, selectInstalledThemeCommand, openSidebarCommand, openPreviewCommand, loadThemeCommand, exportCSSCommand, createVSIXCommand, exportThemeCommand, openValueEditorCommand, showElementExamplesCommand);
     // Create TreeView for the sidebar
     const provider = new ThemeTreeDataProvider(context);
     vscode.window.createTreeView('themeLivePreview', { treeDataProvider: provider });

@@ -1,6 +1,81 @@
 # 🎨 Theme Live Preview Extension
 
-A powerful VS Code extension that provides **live preview** and **real-time editing** of VS Code themes with advanced CSS conversion capabilities. Transform any VS Code theme into customizable CSS for web projects or theme development.
+A powerful VS Code extension that provides **live previ  - Or manually open with: `Ctrl+Shift+P` → "Theme Live Preview: Show Startup Menu"
+
+## ✏️ Value Editor
+
+The **Value Editor** provides a powerful pop-up interface for editing individual theme properties with enhanced features:
+
+### 🔍 Key Features
+
+- **Live Preview**: Changes are applied instantly as you type
+- **Value Comparison**: Side-by-side comparison of current vs original values  
+- **Smart Suggestions**: Context-aware color suggestions based on property type
+- **Visual Color Picker**: Interactive color picker with preview
+- **Reset Options**: Easily reset to original values
+- **Property Descriptions**: Helpful descriptions for each theme property
+
+### 🚀 How to Use
+
+1. **From Sidebar**: Click the ✏️ edit button next to any theme property
+2. **From Command Palette**: `Ctrl+Shift+P` → "Theme Live Preview: Open Value Editor"
+3. **Automatic**: Opens when you need detailed editing for complex properties
+
+### 🎨 Editor Interface
+
+- **Value Input**: Type values directly with real-time validation
+- **Color Preview**: Live color preview for background/foreground properties
+- **Suggestions Grid**: Click any suggested color to apply instantly
+- **Comparison Panel**: See your changes vs original values
+- **Action Buttons**:
+  - **Apply**: Save changes and close editor
+  - **Cancel**: Discard changes and close
+  - **Reset to Original**: Restore the original value
+
+## 🧭 Element Navigation & Examples
+
+The **Element Navigation** feature helps you understand exactly what each theme property controls in VS Code:
+
+### 🔍 Key Features
+
+- **Visual Examples**: See real examples of what each property affects
+- **Location Guide**: Know exactly where to find each element in VS Code
+- **Code Samples**: View sample code showing the property's visual impact
+- **Live Navigation**: Jump directly to the UI element in VS Code
+- **Related Properties**: Discover properties that work together
+- **Color Testing**: Test colors directly on the actual elements
+
+### 🚀 How to Use
+
+1. **From Sidebar**: Click the 🧭 navigation button next to any theme property
+2. **From Value Editor**: Click "🧭 Show Examples" in the value editor
+3. **From Command Palette**: `Ctrl+Shift+P` → "Theme Live Preview: Show Element Examples"
+
+### 🎨 Examples Interface
+
+- **Property Description**: Clear explanation of what the property controls
+- **Visual Location**: Highlighted description of where to find the element
+- **Code Examples**: Sample code demonstrating the property's effect
+- **Live Color Testing**: Test different colors directly on the element
+- **Related Properties**: Quick access to related theme properties
+- **Navigation Actions**:
+  - **Show in VS Code**: Navigate to the actual element
+  - **Open in Settings**: Jump to VS Code settings for the property
+  - **Copy Property**: Copy the property name to clipboard
+
+### 📍 Supported Elements
+
+The navigation system includes detailed information for:
+- **Editor Elements**: Background, foreground, selection, line highlighting
+- **Activity Bar**: Icons, background, active borders
+- **Sidebar**: File explorer, search panels, backgrounds
+- **Status Bar**: Bottom bar with git info, line numbers
+- **Tabs**: Active/inactive tab styling
+- **Input Fields**: Search boxes, command palette
+- **Lists**: File lists, search results, hover effects
+- **Buttons**: Primary and secondary button styling
+
+## 📖 Usage Guide* and **real-time editing** of VS Code themes with advanced CSS conversion capabilities. Transform any VS Code theme into customizable CSS for web projects or theme development.
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.60.0+-blue)](https://code.visualstudio.com/)
 [![Version](https://img.shields.io/badge/version-0.0.1-orange)](package.json)
@@ -13,6 +88,18 @@ A powerful VS Code extension that provides **live preview** and **real-time edit
   - Choose from installed themes
   - Import JSON/JSONC, VSIX, or CSS files
   - Generate random themes or AI-guided themes
+- ✏️ **Advanced Value Editor**: Edit theme properties in a dedicated pop-up window
+  - **Live Preview**: See changes in real-time as you type
+  - **Value Comparison**: Compare current vs original values side-by-side
+  - **Color Suggestions**: Smart color suggestions based on property type
+  - **Visual Color Picker**: Built-in color picker for easy color selection
+  - **Undo/Reset**: Reset to original values or cancel changes
+- 🧭 **Element Navigation & Examples**: Understand what each theme property controls
+  - **Visual Examples**: See exactly what each property affects in VS Code
+  - **Navigation**: Jump directly to the UI element in VS Code
+  - **Code Examples**: View sample code showing the property's effect
+  - **Related Properties**: Discover properties that work together
+  - **Live Testing**: Test colors directly on the actual UI elements
 - 🎨 **Live Theme Preview**: Real-time preview of VS Code themes with instant feedback
 - 📝 **CSS Editor**: Edit theme CSS with live updates and syntax highlighting
 - 🔄 **Smart Theme Loading**: Load themes from `.json` and `.vsix` files seamlessly
@@ -105,8 +192,16 @@ The extension provides a **unified sidebar interface** for all theme editing nee
 3. **Editing Theme Properties**:
    - Properties are organized by category (Editor, Activity Bar, Side Bar, etc.)
    - Use color pickers or type hex values directly
+   - Click **🧭** to see examples and navigate to the element in VS Code
+   - Click **✏️** to open the advanced value editor with live preview
    - Click **✕** to reset individual properties to default
    - Changes are reflected instantly in the preview
+
+4. **Understanding Elements**:
+   - Use the 🧭 navigation button to see what each property controls
+   - View visual examples and code samples
+   - Test colors directly on the actual UI elements
+   - Discover related properties that work together
 
 4. **Real-time Preview**:
    - Changes in the sidebar automatically update any open preview panel

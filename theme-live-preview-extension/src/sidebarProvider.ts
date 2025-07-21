@@ -1,14 +1,18 @@
 import * as vscode from 'vscode';
 import { ThemeExtractor } from './themeExtractor';
+import { ValueEditorProvider } from './valueEditorProvider';
+import { NavigationProvider } from './navigationProvider';
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
     public static readonly viewType = 'themeEditor';
     private _view?: vscode.WebviewView;
     private _currentTheme: any = {};
     private themeExtractor: ThemeExtractor;
+    private _context: vscode.ExtensionContext;
 
-    constructor(private readonly _extensionUri: vscode.Uri) {
+    constructor(private readonly _extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
         this.themeExtractor = new ThemeExtractor();
+        this._context = context;
     }
 
     public resolveWebviewView(
@@ -30,6 +34,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 case 'colorChange': {
                     this._currentTheme[data.property] = data.value;
                     this._updatePreview();
+                    break;
+                }
+                case 'editValue': {
+                    await this._openValueEditor(data.property, data.currentValue);
+                    break;
+                }
+                case 'showExamples': {
+                    await NavigationProvider.showElementExamples(this._context, data.property);
                     break;
                 }
                 case 'loadTheme': {
@@ -201,6 +213,67 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         vscode.window.showInformationMessage('New theme created!');
     }
 
+    private async _openValueEditor(property: string, currentValue: string) {
+        const originalValue = this._getOriginalValue(property);
+        const description = this._getPropertyDescription(property);
+
+        const result = await ValueEditorProvider.showValueEditor(this._context, {
+            property,
+            currentValue,
+            originalValue,
+            description,
+            onValueChange: (value: string) => {
+                // Live preview - update the theme immediately
+                this._currentTheme[property] = value;
+                this._updatePreview();
+            },
+            onApply: (value: string) => {
+                // Apply the final value
+                this._currentTheme[property] = value;
+                this._updatePreview();
+                this._refreshSidebar();
+                vscode.window.showInformationMessage(`Updated ${property} to ${value}`);
+            },
+            onCancel: () => {
+                // Restore original value if user cancels
+                if (originalValue !== undefined) {
+                    this._currentTheme[property] = originalValue;
+                    this._updatePreview();
+                }
+            }
+        });
+    }
+
+    private _getOriginalValue(property: string): string | undefined {
+        // You can store original values when theme is first loaded
+        // For now, return the current default value
+        const defaults: { [key: string]: string } = {
+            'editor.background': '#1e1e1e',
+            'editor.foreground': '#d4d4d4',
+            'activityBar.background': '#2d2d30',
+            'activityBar.foreground': '#ffffff',
+            'sideBar.background': '#252526',
+            'sideBar.foreground': '#cccccc',
+            'statusBar.background': '#007acc',
+            'statusBar.foreground': '#ffffff'
+        };
+        return defaults[property];
+    }
+
+    private _getPropertyDescription(property: string): string {
+        const descriptions: { [key: string]: string } = {
+            'editor.background': 'Background color of the editor',
+            'editor.foreground': 'Default foreground color for text in the editor',
+            'activityBar.background': 'Background color of the activity bar',
+            'activityBar.foreground': 'Foreground color of the activity bar icons',
+            'sideBar.background': 'Background color of the sidebar',
+            'sideBar.foreground': 'Foreground color of the sidebar text',
+            'statusBar.background': 'Background color of the status bar',
+            'statusBar.foreground': 'Foreground color of the status bar text'
+        };
+        return descriptions[property] || `Theme property: ${property}`;
+    }
+
     private _getHtmlForWebview(webview: vscode.Webview) {
         return `<!DOCTYPE html>
         <html lang="en">
@@ -326,6 +399,34 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 .reset-btn:hover {
                     opacity: 0.8;
                 }
+
+                .edit-btn {
+                    background: var(--vscode-button-background);
+                    color: var(--vscode-button-foreground);
+                    border: none;
+                    padding: 2px 6px;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    font-size: 10px;
+                }
+                
+                .edit-btn:hover {
+                    background: var(--vscode-button-hoverBackground);
+                }
+
+                .nav-btn {
+                    background: var(--vscode-textLink-foreground);
+                    color: var(--vscode-editor-background);
+                    border: none;
+                    padding: 2px 6px;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    font-size: 10px;
+                }
+                
+                .nav-btn:hover {
+                    opacity: 0.8;
+                }
                 
                 .section-title {
                     font-size: 13px;
@@ -443,7 +544,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                                 <div class="theme-item-label">\${property}</div>
                                 <div class="theme-item-name">\${displayName}</div>
                             </div>
-                            <button class="reset-btn" onclick="resetProperty('\${property}')" title="Reset to default">✕</button>
+                            <div style="display: flex; gap: 4px;">
+                                <button class="nav-btn" onclick="showExamples('\${property}')" title="Show examples and navigate">🧭</button>
+                                <button class="edit-btn" onclick="editValue('\${property}', '\${value}')" title="Edit in popup">✏️</button>
+                                <button class="reset-btn" onclick="resetProperty('\${property}')" title="Reset to default">✕</button>
+                            </div>
                         </div>
                         <div class="color-input-container">
                             <input type="color" class="color-input" value="\${value || '#000000'}" 
@@ -463,6 +568,21 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                         type: 'colorChange',
                         property: property,
                         value: value
+                    });
+                }
+
+                function editValue(property, currentValue) {
+                    vscode.postMessage({
+                        type: 'editValue',
+                        property: property,
+                        currentValue: currentValue
+                    });
+                }
+
+                function showExamples(property) {
+                    vscode.postMessage({
+                        type: 'showExamples',
+                        property: property
                     });
                 }
                 
