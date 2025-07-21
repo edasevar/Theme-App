@@ -3,14 +3,27 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ThemeExtractor } from './themeExtractor';
 import { PreviewPanel } from './previewPanel';
+import { ThemeSidebarProvider } from './sidebarProvider';
 
 const EnhancedVSCodeThemeExtractor = require('../enhanced_theme_extractor');
 
-export function activate (context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
 
     const themeExtractor = new ThemeExtractor();
     let previewPanel: PreviewPanel | undefined;
+
+    // Register the sidebar provider
+    const sidebarProvider = new ThemeSidebarProvider(context);
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(ThemeSidebarProvider.viewType, sidebarProvider)
+    );
+
+    // Command to open sidebar
+    const openSidebarCommand = vscode.commands.registerCommand('themeLivePreview.openSidebar', () => {
+        vscode.commands.executeCommand('workbench.view.explorer');
+        vscode.commands.executeCommand('themeLivePreview.focus');
+    });
 
     // Command to open the live preview panel
     const openPreviewCommand = vscode.commands.registerCommand('themeLivePreview.openPreview', () => {
@@ -216,6 +229,7 @@ export function activate (context: vscode.ExtensionContext) {
 
     // Add all commands to subscriptions
     context.subscriptions.push(
+        openSidebarCommand,
         openPreviewCommand,
         loadThemeCommand,
         exportCSSCommand,
@@ -235,10 +249,11 @@ class ThemeTreeDataProvider implements vscode.TreeDataProvider<ThemeTreeItem> {
         return element;
     }
 
-    getChildren (element?: ThemeTreeItem): Thenable<ThemeTreeItem[]> {
+    getChildren(element?: ThemeTreeItem): Thenable<ThemeTreeItem[]> {
         if (!element) {
             return Promise.resolve([
-                new ThemeTreeItem('🎨 Open Theme Editor', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.openPreview'),
+                new ThemeTreeItem('🎨 Open Theme Editor Sidebar', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.openSidebar'),
+                new ThemeTreeItem('🖥️ Open Theme Preview Panel', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.openPreview'),
                 new ThemeTreeItem('📂 Load Theme File', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.loadTheme'),
                 new ThemeTreeItem('💾 Export CSS', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.exportCSS'),
                 new ThemeTreeItem('📦 Create VSIX', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.createVSIX'),

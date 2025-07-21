@@ -8,44 +8,108 @@ const AdmZip = require('adm-zip');
  * Supports .json theme files and .vsix extension packages
  */
 class EnhancedVSCodeThemeExtractor {
-	constructor() {
-		this.cssOutput = [];
-		this.themeData = null;
-	}
+    constructor() {
+        this.cssOutput = [];
+        this.themeData = null;
+        this.elementsTemplate = null;
+    }
 
-	/**
-	 * Main method to extract theme data and generate outputs
-	 * @param {string} filePath - Path to theme file (.json or .vsix)
-	 * @param {object} options - Options for output generation
-	 */
-	async extractTheme(filePath, options = {}) {
-		try {
-			const ext = path.extname(filePath).toLowerCase();
+    /**
+     * Load elements template for complete theme support
+     * @param {string} elementsPath - Path to ELEMENTS.jsonc file
+     */
+    async loadElements(elementsPath) {
+        try {
+            if (fs.existsSync(elementsPath)) {
+                let content = fs.readFileSync(elementsPath, 'utf8');
+                
+                // Remove JSONC comments more thoroughly
+                content = content.replace(/\/\/.*$/gm, '');
+                content = content.replace(/\/\*[\s\S]*?\*\//g, '');
+                content = content.replace(/,(\s*[}\]])/g, '$1');
+                content = content.replace(/"\$schema":[^,\n]+(,?)/g, '');
+                
+                this.elementsTemplate = JSON.parse(content);
+                console.log('✅ Elements template loaded successfully');
+                return this.elementsTemplate;
+            }
+        } catch (error) {
+            console.warn('⚠️ Could not load elements template:', error.message);
+        }
+        return null;
+    }
 
-			if (ext === '.json' || ext === '.jsonc') {
-				await this.extractFromJSON(filePath);
-			} else if (ext === '.vsix') {
-				await this.extractFromVSIX(filePath);
-			} else {
-				throw new Error('Unsupported file format. Please provide .json, .jsonc, or .vsix files.');
-			}
+    /**
+     * Merge theme with elements template for comprehensive coverage
+     * @param {object} theme - Theme data to merge
+     */
+    mergeWithElements(theme) {
+        if (!this.elementsTemplate) {
+            return theme;
+        }
 
-			const outputs = {};
+        const merged = { ...this.elementsTemplate, ...theme };
+        
+        // Merge colors while preserving existing theme colors
+        if (this.elementsTemplate.colors && theme.colors) {
+            merged.colors = { ...this.elementsTemplate.colors, ...theme.colors };
+        }
 
-			if (options.generateCSS !== false) {
-				outputs.css = this.generateCSS();
-			}
+        // Merge semantic tokens
+        if (this.elementsTemplate.semanticTokenColors && theme.semanticTokenColors) {
+            merged.semanticTokenColors = { ...this.elementsTemplate.semanticTokenColors, ...theme.semanticTokenColors };
+        }
 
-			if (options.generateVSIX !== false) {
-				outputs.vsixData = this.generateVSIXData();
-			}
+        // Merge token colors arrays
+        if (this.elementsTemplate.tokenColors && theme.tokenColors) {
+            merged.tokenColors = [...(this.elementsTemplate.tokenColors || []), ...(theme.tokenColors || [])];
+        }
 
-			return outputs;
-		} catch (error) {
-			console.error('Error extracting theme:', error.message);
-			return null;
-		}
-	}
+        return merged;
+    }
+
+    /**
+     * Main method to extract theme data and generate outputs
+     * @param {string} filePath - Path to theme file (.json or .vsix)
+     * @param {object} options - Options for output generation
+     */
+    async extractTheme(filePath, options = {}) {
+        try {
+            // Auto-load elements template if available
+            const elementsPath = path.join(__dirname, 'ELEMENTS.jsonc');
+            await this.loadElements(elementsPath);
+
+            const ext = path.extname(filePath).toLowerCase();
+
+            if (ext === '.json' || ext === '.jsonc') {
+                await this.extractFromJSON(filePath);
+            } else if (ext === '.vsix') {
+                await this.extractFromVSIX(filePath);
+            } else {
+                throw new Error('Unsupported file format. Please provide .json, .jsonc, or .vsix files.');
+            }
+
+            // Merge with elements template for comprehensive coverage
+            if (this.elementsTemplate && this.themeData) {
+                this.themeData = this.mergeWithElements(this.themeData);
+            }
+
+            const outputs = {};
+
+            if (options.generateCSS !== false) {
+                outputs.css = this.generateCSS();
+            }
+
+            if (options.generateVSIX !== false) {
+                outputs.vsixData = this.generateVSIXData();
+            }
+
+            return outputs;
+        } catch (error) {
+            console.error('Error extracting theme:', error.message);
+            return null;
+        }
+    }
 
 	/**
 	 * Extract theme data from JSON/JSONC file
@@ -336,52 +400,77 @@ module.exports = EnhancedVSCodeThemeExtractor;
 
 // CLI usage
 if (require.main === module) {
-	const extractor = new EnhancedVSCodeThemeExtractor();
-	const inputFile = process.argv[2];
-	const outputDir = process.argv[3] || './output';
+    const extractor = new EnhancedVSCodeThemeExtractor();
+    const inputFile = process.argv[2];
+    const outputDir = process.argv[3] || './output';
 
-	if (!inputFile) {
-		console.log('Usage: node enhanced_theme_extractor.js <theme-file> [output-dir]');
-		console.log('Supported formats: .json, .jsonc, .vsix');
-		process.exit(1);
-	}
+    if (!inputFile) {
+        console.log('Enhanced VS Code Theme Extractor with Complete Element Support');
+        console.log('Usage: node enhanced_theme_extractor.js <theme-file> [output-dir]');
+        console.log('Supported formats: .json, .jsonc, .vsix');
+        console.log('');
+        console.log('Features:');
+        console.log('  ✅ Complete element coverage from ELEMENTS.jsonc');
+        console.log('  ✅ CSS custom properties generation');
+        console.log('  ✅ VSIX package creation');
+        console.log('  ✅ Semantic token processing');
+        console.log('  ✅ TextMate token rules');
+        process.exit(1);
+    }
 
-	if (!fs.existsSync(inputFile)) {
-		console.error('Error: Input file does not exist');
-		process.exit(1);
-	}
+    if (!fs.existsSync(inputFile)) {
+        console.error('❌ Error: Input file does not exist');
+        process.exit(1);
+    }
 
-	if (!fs.existsSync(outputDir)) {
-		fs.mkdirSync(outputDir, { recursive: true });
-	}
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+    }
 
-	extractor.extractTheme(inputFile, { generateCSS: true, generateVSIX: true })
-		.then(async (result) => {
-			if (!result) {
-				console.error('Failed to extract theme');
-				process.exit(1);
-			}
+    console.log('🎨 Enhanced VS Code Theme Extractor');
+    console.log('=====================================');
 
-			const baseName = path.basename(inputFile, path.extname(inputFile));
+    extractor.extractTheme(inputFile, { generateCSS: true, generateVSIX: true })
+        .then(async (result) => {
+            if (!result) {
+                console.error('❌ Failed to extract theme');
+                process.exit(1);
+            }
 
-			// Write CSS file
-			if (result.css) {
-				const cssPath = path.join(outputDir, `${baseName}.css`);
-				fs.writeFileSync(cssPath, result.css);
-				console.log(`✅ CSS exported to: ${cssPath}`);
-			}
+            const baseName = path.basename(inputFile, path.extname(inputFile));
 
-			// Create VSIX file
-			if (result.vsixData) {
-				const vsixPath = path.join(outputDir, `${baseName}.vsix`);
-				await extractor.createVSIX(vsixPath, result.vsixData);
-				console.log(`✅ VSIX created: ${vsixPath}`);
-			}
+            // Write CSS file
+            if (result.css) {
+                const cssPath = path.join(outputDir, `${baseName}.css`);
+                fs.writeFileSync(cssPath, result.css);
+                console.log(`✅ CSS exported to: ${cssPath}`);
+            }
 
-			console.log('\\n🎉 Theme extraction completed successfully!');
-		})
-		.catch(error => {
-			console.error('Error:', error.message);
-			process.exit(1);
-		});
+            // Create VSIX file
+            if (result.vsixData) {
+                const vsixPath = path.join(outputDir, `${baseName}.vsix`);
+                await extractor.createVSIX(vsixPath, result.vsixData);
+                console.log(`✅ VSIX created: ${vsixPath}`);
+            }
+
+            // Show theme statistics
+            if (extractor.themeData) {
+                console.log('\n📊 Theme Statistics:');
+                console.log(`   Theme Name: ${extractor.themeData.name || 'Unknown'}`);
+                console.log(`   Theme Type: ${extractor.themeData.type || 'Unknown'}`);
+                console.log(`   Colors: ${Object.keys(extractor.themeData.colors || {}).length} properties`);
+                console.log(`   Token Rules: ${(extractor.themeData.tokenColors || []).length} rules`);
+                console.log(`   Semantic Tokens: ${Object.keys(extractor.themeData.semanticTokenColors || {}).length} scopes`);
+                
+                if (extractor.elementsTemplate) {
+                    console.log('   🎯 Enhanced with complete element coverage');
+                }
+            }
+
+            console.log('\n🎉 Theme extraction completed successfully!');
+        })
+        .catch(error => {
+            console.error('❌ Error:', error.message);
+            process.exit(1);
+        });
 }

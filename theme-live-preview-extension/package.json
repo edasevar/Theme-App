@@ -22,6 +22,11 @@
         "category": "Theme Preview"
       },
       {
+        "command": "themeLivePreview.openSidebar",
+        "title": "Open Theme Editor Sidebar",
+        "category": "Theme Preview"
+      },
+      {
         "command": "themeLivePreview.loadTheme",
         "title": "Load Theme File",
         "category": "Theme Preview"
@@ -74,15 +79,6 @@
           "id": "themeLivePreview",
           "name": "Theme Editor",
           "when": "true"
-        }
-      ]
-    },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "themeEditor",
-          "title": "Theme Editor",
-          "icon": "$(color-mode)"
         }
       ]
     }

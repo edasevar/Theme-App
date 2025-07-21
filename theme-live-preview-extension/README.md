@@ -48,10 +48,12 @@ code --install-extension theme-live-preview-0.0.1.vsix
 
 ### Extension Features
 - 🎨 **Live Theme Preview**: Real-time preview of theme changes
-- 📝 **Theme Editor**: Edit themes with comprehensive UI controls
+- 📝 **Comprehensive Theme Editor**: Edit themes with ALL VS Code elements (238+ properties)
 - 🔄 **Theme Loading**: Load themes from multiple file formats
 - 📤 **Export Options**: CSS, VSIX, and JSON export capabilities
-- 🛠️ **Enhanced Extractor**: Advanced theme processing and conversion
+- 🛠️ **Enhanced Extractor**: Advanced theme processing with complete element coverage
+- 🎛️ **Sidebar Integration**: Comprehensive theme editor right in VS Code sidebar
+- 🔍 **Search & Filter**: Quickly find theme properties with search functionality
 
 ## 📁 File Structure
 
@@ -75,24 +77,47 @@ code --install-extension theme-live-preview-0.0.1.vsix
 ### Using the Theme Editor Extension
 
 #### Opening the Theme Editor
-- **Command Palette**: `Ctrl+Shift+P` → "Open Theme Live Preview"
-- **Sidebar**: Click the Theme Editor icon in the activity bar
-- **Explorer**: Right-click theme files → "Load Theme File"
+- **Sidebar Editor**: `Ctrl+Shift+P` → "Open Theme Editor Sidebar" 
+- **Panel Preview**: `Ctrl+Shift+P` → "Open Theme Live Preview"
+- **Explorer Integration**: Theme Editor panel in the Explorer sidebar
+- **Context Menu**: Right-click theme files → "Load Theme File"
 
-#### Editing Themes
-1. Load an existing theme (JSON, JSONC, or VSIX)
-2. Use the comprehensive sidebar editor with 15+ categories:
-   - Editor Core, Syntax Highlighting, UI Colors
-   - Activity Bar, Sidebar, Status Bar, Terminal
-   - Lists, Inputs, Buttons, Charts, Extensions
-3. See changes in real-time preview
-4. Export in multiple formats
+#### Comprehensive Theme Editing
+1. **Load any theme** (JSON, JSONC, or VSIX)
+2. **Edit ALL VS Code elements** using the comprehensive sidebar with 15+ categories:
+   - **Editor Core**: Background, foreground, selections, highlights (29 properties)
+   - **Editor Widgets**: Suggestions, hover, hints, error indicators (14 properties)
+   - **Editor Gutter**: Line numbers, git diff, folding controls (13 properties)
+   - **Editor Groups & Tabs**: Tab styling, group borders, pinned tabs (15 properties)
+   - **Activity Bar**: Background, badges, error/warning indicators (11 properties)
+   - **Sidebar**: Background, sections, drop zones (8 properties)
+   - **Status Bar**: Background, debugging, remote items (12 properties)
+   - **Title Bar**: Active/inactive states, borders (5 properties)
+   - **Panel**: Background, borders, input styling (7 properties)
+   - **Terminal**: Background, ANSI colors, cursor (23 properties)
+   - **Lists**: Selection, hover, focus, highlights (12 properties)
+   - **Inputs & Buttons**: Form controls, dropdowns, badges (19 properties)
+   - **Peek View**: Code preview windows, results (11 properties)
+   - **Merge Conflicts**: Git merge visualization (7 properties)
+   - **Notifications**: Toast messages, icons (7 properties)
+   - **Settings**: Configuration UI styling (3 properties)
+   - **Git Decorations**: File status indicators (7 properties)
+   - **Text & Links**: General text styling (3 properties)
+   - **Debug**: Debugging toolbar and controls (10 properties)
+   - **Charts**: Data visualization colors (8 properties)
+   - **Extensions**: Extension UI elements (5 properties)
+   - **Welcome Page**: Start screen styling (5 properties)
+3. **Real-time preview** with live color updates
+4. **Search & filter** properties instantly
+5. **Export in multiple formats** (JSON, CSS, VSIX)
 
-#### Creating Theme Packages
-1. Edit your theme using the extension
-2. Use "Create VSIX Package" to generate installable extension
-3. Use "Export CSS" for web project integration
-4. Use "Export Complete Theme" for multiple output formats
+#### Advanced Features
+- **Complete Element Coverage**: All 238+ VS Code theme properties included
+- **Template Integration**: Automatic merging with ELEMENTS.jsonc template
+- **Color Picker Integration**: Visual color selection with hex input
+- **Categorized Organization**: Properties grouped by UI component
+- **Search Functionality**: Quickly find specific theme properties
+- **One-Click Export**: Generate themes for distribution or web use
 
 ## 🛠️ Enhanced Theme Extractor
 
