@@ -40,50 +40,38 @@ class SidebarProvider {
         };
         webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
         webviewView.webview.onDidReceiveMessage(async (data) => {
-            try {
-                switch (data.type) {
-                    case 'colorChange': {
-                        if (data.property && typeof data.value === 'string') {
-                            this._currentTheme[data.property] = data.value;
-                            this._updatePreview();
-                        }
-                        break;
-                    }
-                    case 'loadTheme': {
-                        await this._loadTheme();
-                        break;
-                    }
-                    case 'exportCSS': {
-                        await this._exportCSS();
-                        break;
-                    }
-                    case 'exportJSON': {
-                        await this._exportJSON();
-                        break;
-                    }
-                    case 'exportVSIX': {
-                        await this._exportVSIX();
-                        break;
-                    }
-                    case 'createNew': {
-                        this._createNewTheme();
-                        break;
-                    }
-                    case 'resetProperty': {
-                        if (data.property && this._currentTheme[data.property]) {
-                            delete this._currentTheme[data.property];
-                            this._updatePreview();
-                            this._refreshSidebar();
-                        }
-                        break;
-                    }
-                    default:
-                        console.warn('Unknown message type:', data.type);
+            switch (data.type) {
+                case 'colorChange': {
+                    this._currentTheme[data.property] = data.value;
+                    this._updatePreview();
+                    break;
                 }
-            }
-            catch (error) {
-                console.error('Error handling webview message:', error);
-                vscode.window.showErrorMessage(`Error: ${error instanceof Error ? error.message : String(error)}`);
+                case 'loadTheme': {
+                    await this._loadTheme();
+                    break;
+                }
+                case 'exportCSS': {
+                    await this._exportCSS();
+                    break;
+                }
+                case 'exportJSON': {
+                    await this._exportJSON();
+                    break;
+                }
+                case 'exportVSIX': {
+                    await this._exportVSIX();
+                    break;
+                }
+                case 'createNew': {
+                    this._createNewTheme();
+                    break;
+                }
+                case 'resetProperty': {
+                    delete this._currentTheme[data.property];
+                    this._updatePreview();
+                    this._refreshSidebar();
+                    break;
+                }
             }
         });
         // Load default theme elements
@@ -91,53 +79,29 @@ class SidebarProvider {
     }
     _loadDefaultTheme() {
         this._currentTheme = {
-            // Editor basics
             'editor.background': '#1e1e1e',
             'editor.foreground': '#d4d4d4',
-            'editor.selectionBackground': '#264f78',
-            'editor.lineHighlightBackground': '#2a2d2e',
-            // Activity Bar
             'activityBar.background': '#2d2d30',
             'activityBar.foreground': '#ffffff',
-            'activityBarBadge.background': '#007acc',
-            'activityBarBadge.foreground': '#ffffff',
-            // Side Bar
             'sideBar.background': '#252526',
             'sideBar.foreground': '#cccccc',
-            'sideBarTitle.foreground': '#bbbbbb',
-            // Status Bar
             'statusBar.background': '#007acc',
             'statusBar.foreground': '#ffffff',
-            // Title Bar
             'titleBar.activeBackground': '#3c3c3c',
             'titleBar.activeForeground': '#cccccc',
-            // Buttons & Controls
             'button.background': '#0e639c',
             'button.foreground': '#ffffff',
             'input.background': '#3c3c3c',
             'input.foreground': '#cccccc',
             'dropdown.background': '#3c3c3c',
             'dropdown.foreground': '#cccccc',
-            // Lists
             'list.activeSelectionBackground': '#094771',
             'list.activeSelectionForeground': '#ffffff',
             'list.hoverBackground': '#2a2d2e',
-            // Tabs
             'tab.activeBackground': '#1e1e1e',
             'tab.activeForeground': '#ffffff',
             'tab.inactiveBackground': '#2d2d30',
-            'tab.inactiveForeground': '#969696',
-            // Terminal basic colors
-            'terminal.background': '#1e1e1e',
-            'terminal.foreground': '#d4d4d4',
-            'terminal.ansiBlack': '#000000',
-            'terminal.ansiRed': '#cd3131',
-            'terminal.ansiGreen': '#0dbc79',
-            'terminal.ansiYellow': '#e5e510',
-            'terminal.ansiBlue': '#2472c8',
-            'terminal.ansiMagenta': '#bc3fbc',
-            'terminal.ansiCyan': '#11a8cd',
-            'terminal.ansiWhite': '#e5e5e5'
+            'tab.inactiveForeground': '#969696'
         };
         this._refreshSidebar();
     }
@@ -154,140 +118,90 @@ class SidebarProvider {
         vscode.commands.executeCommand('themeLivePreview.updatePreview', this._currentTheme);
     }
     async _loadTheme() {
-        try {
-            const options = {
-                canSelectFiles: true,
-                canSelectFolders: false,
-                canSelectMany: false,
-                filters: {
-                    'Theme Files': ['json', 'vsix']
-                }
-            };
-            const fileUri = await vscode.window.showOpenDialog(options);
-            if (fileUri && fileUri[0]) {
-                const filePath = fileUri[0].fsPath;
-                console.log('Loading theme from:', filePath);
-                const theme = await this.themeExtractor.extractTheme(filePath);
-                const themeData = this.themeExtractor.getCurrentThemeData() || {};
-                // Validate theme data
-                if (typeof themeData === 'object' && themeData !== null) {
-                    this._currentTheme = { ...this._currentTheme, ...themeData };
-                    this._refreshSidebar();
-                    this._updatePreview();
-                    vscode.window.showInformationMessage('Theme loaded successfully!');
-                }
-                else {
-                    throw new Error('Invalid theme data format');
-                }
+        const options = {
+            canSelectFiles: true,
+            canSelectFolders: false,
+            canSelectMany: false,
+            filters: {
+                'Theme Files': ['json', 'vsix']
             }
-        }
-        catch (error) {
-            console.error('Failed to load theme:', error);
-            vscode.window.showErrorMessage(`Failed to load theme: ${error instanceof Error ? error.message : String(error)}`);
+        };
+        const fileUri = await vscode.window.showOpenDialog(options);
+        if (fileUri && fileUri[0]) {
+            try {
+                const theme = await this.themeExtractor.extractTheme(fileUri[0].fsPath);
+                const themeData = this.themeExtractor.getCurrentThemeData() || {};
+                this._currentTheme = { ...this._currentTheme, ...themeData };
+                this._refreshSidebar();
+                this._updatePreview();
+                vscode.window.showInformationMessage('Theme loaded successfully!');
+            }
+            catch (error) {
+                vscode.window.showErrorMessage(`Failed to load theme: ${error}`);
+            }
         }
     }
     async _exportCSS() {
-        try {
-            if (Object.keys(this._currentTheme).length === 0) {
-                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
-                return;
-            }
-            const saveUri = await vscode.window.showSaveDialog({
-                filters: { 'CSS Files': ['css'] },
-                defaultUri: vscode.Uri.file('theme.css')
-            });
-            if (saveUri) {
+        const saveUri = await vscode.window.showSaveDialog({
+            filters: { 'CSS Files': ['css'] },
+            defaultUri: vscode.Uri.file('theme.css')
+        });
+        if (saveUri) {
+            try {
                 await this.themeExtractor.exportAsCSS(this._currentTheme, saveUri.fsPath);
-                vscode.window.showInformationMessage(`CSS exported successfully to ${saveUri.fsPath}!`);
+                vscode.window.showInformationMessage('CSS exported successfully!');
             }
-        }
-        catch (error) {
-            console.error('Failed to export CSS:', error);
-            vscode.window.showErrorMessage(`Failed to export CSS: ${error instanceof Error ? error.message : String(error)}`);
+            catch (error) {
+                vscode.window.showErrorMessage(`Failed to export CSS: ${error}`);
+            }
         }
     }
     async _exportJSON() {
-        try {
-            if (Object.keys(this._currentTheme).length === 0) {
-                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
-                return;
-            }
-            const themeName = await vscode.window.showInputBox({
-                prompt: 'Enter theme name',
-                placeHolder: 'My Custom Theme',
-                validateInput: (value) => {
-                    if (!value || value.trim().length === 0) {
-                        return 'Theme name cannot be empty';
-                    }
-                    if (value.length > 50) {
-                        return 'Theme name too long (max 50 characters)';
-                    }
-                    return null;
-                }
+        const themeName = await vscode.window.showInputBox({
+            prompt: 'Enter theme name',
+            placeHolder: 'My Custom Theme'
+        });
+        if (themeName) {
+            const saveUri = await vscode.window.showSaveDialog({
+                filters: { 'JSON Files': ['json'] },
+                defaultUri: vscode.Uri.file(`${themeName.toLowerCase().replace(/\s+/g, '-')}-theme.json`)
             });
-            if (themeName) {
-                const sanitizedName = themeName.toLowerCase().replace(/[^a-z0-9-_\s]/g, '').replace(/\s+/g, '-');
-                const saveUri = await vscode.window.showSaveDialog({
-                    filters: { 'JSON Files': ['json'] },
-                    defaultUri: vscode.Uri.file(`${sanitizedName}-theme.json`)
-                });
-                if (saveUri) {
+            if (saveUri) {
+                try {
                     await this.themeExtractor.exportAsJSON(this._currentTheme, themeName, saveUri.fsPath);
-                    vscode.window.showInformationMessage(`JSON theme exported successfully to ${saveUri.fsPath}!`);
+                    vscode.window.showInformationMessage('JSON theme exported successfully!');
+                }
+                catch (error) {
+                    vscode.window.showErrorMessage(`Failed to export JSON: ${error}`);
                 }
             }
-        }
-        catch (error) {
-            console.error('Failed to export JSON:', error);
-            vscode.window.showErrorMessage(`Failed to export JSON: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
     async _exportVSIX() {
-        try {
-            if (Object.keys(this._currentTheme).length === 0) {
-                vscode.window.showWarningMessage('No theme properties to export. Please load or create a theme first.');
-                return;
-            }
-            const themeName = await vscode.window.showInputBox({
-                prompt: 'Enter theme name for VSIX package',
-                placeHolder: 'My Custom Theme',
-                validateInput: (value) => {
-                    if (!value || value.trim().length === 0) {
-                        return 'Theme name cannot be empty';
-                    }
-                    if (value.length > 50) {
-                        return 'Theme name too long (max 50 characters)';
-                    }
-                    return null;
-                }
+        const themeName = await vscode.window.showInputBox({
+            prompt: 'Enter theme name for VSIX package',
+            placeHolder: 'My Custom Theme'
+        });
+        if (themeName) {
+            const saveUri = await vscode.window.showSaveDialog({
+                filters: { 'VSIX Files': ['vsix'] },
+                defaultUri: vscode.Uri.file(`${themeName.toLowerCase().replace(/\s+/g, '-')}-theme.vsix`)
             });
-            if (themeName) {
-                const sanitizedName = themeName.toLowerCase().replace(/[^a-z0-9-_\s]/g, '').replace(/\s+/g, '-');
-                const saveUri = await vscode.window.showSaveDialog({
-                    filters: { 'VSIX Files': ['vsix'] },
-                    defaultUri: vscode.Uri.file(`${sanitizedName}-theme.vsix`)
-                });
-                if (saveUri) {
+            if (saveUri) {
+                try {
                     await this.themeExtractor.exportAsVSIX(this._currentTheme, themeName, saveUri.fsPath);
-                    vscode.window.showInformationMessage(`VSIX package exported successfully to ${saveUri.fsPath}!`);
+                    vscode.window.showInformationMessage('VSIX package exported successfully!');
+                }
+                catch (error) {
+                    vscode.window.showErrorMessage(`Failed to export VSIX: ${error}`);
                 }
             }
-        }
-        catch (error) {
-            console.error('Failed to export VSIX:', error);
-            vscode.window.showErrorMessage(`Failed to export VSIX: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
     _createNewTheme() {
-        try {
-            this._currentTheme = {};
-            this._loadDefaultTheme();
-            vscode.window.showInformationMessage('New theme created with default colors!');
-        }
-        catch (error) {
-            console.error('Failed to create new theme:', error);
-            vscode.window.showErrorMessage(`Failed to create new theme: ${error instanceof Error ? error.message : String(error)}`);
-        }
+        this._currentTheme = {};
+        this._loadDefaultTheme();
+        vscode.window.showInformationMessage('New theme created!');
     }
     _getHtmlForWebview(webview) {
         return `<!DOCTYPE html>
@@ -350,16 +264,11 @@ class SidebarProvider {
                 }
                 
                 .theme-item {
-                    margin-bottom: 6px;
-                    padding: 6px;
+                    margin-bottom: 8px;
+                    padding: 8px;
                     background: var(--vscode-input-background);
-                    border-radius: 3px;
+                    border-radius: 4px;
                     border: 1px solid var(--vscode-widget-border);
-                    transition: background-color 0.2s;
-                }
-                
-                .theme-item:hover {
-                    background: var(--vscode-list-hoverBackground);
                 }
                 
                 .theme-item-header {
@@ -440,69 +349,6 @@ class SidebarProvider {
                     font-size: 12px;
                 }
                 
-                .theme-section {
-                    margin-bottom: 5px;
-                    border: 1px solid var(--vscode-widget-border);
-                    border-radius: 4px;
-                    overflow: hidden;
-                }
-                
-                .section-header {
-                    display: flex;
-                    align-items: center;
-                    padding: 8px 10px;
-                    background: var(--vscode-sideBar-background);
-                    cursor: pointer;
-                    user-select: none;
-                    transition: background-color 0.2s;
-                }
-                
-                .section-header:hover {
-                    background: var(--vscode-list-hoverBackground);
-                }
-                
-                .section-toggle {
-                    margin-right: 8px;
-                    font-size: 10px;
-                    transition: transform 0.2s;
-                    color: var(--vscode-foreground);
-                }
-                
-                .section-toggle.collapsed {
-                    transform: rotate(-90deg);
-                }
-                
-                .section-title {
-                    flex: 1;
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: var(--vscode-editor-foreground);
-                }
-                
-                .section-count {
-                    font-size: 11px;
-                    color: var(--vscode-descriptionForeground);
-                    background: var(--vscode-badge-background);
-                    color: var(--vscode-badge-foreground);
-                    padding: 2px 6px;
-                    border-radius: 10px;
-                    font-weight: normal;
-                }
-                
-                .section-content {
-                    padding: 5px;
-                    background: var(--vscode-editor-background);
-                    max-height: 500px;
-                    overflow-y: auto;
-                    transition: max-height 0.3s ease-out;
-                }
-                
-                .section-content.collapsed {
-                    max-height: 0;
-                    padding: 0 5px;
-                    overflow: hidden;
-                }
-                
                 .hidden {
                     display: none;
                 }
@@ -529,24 +375,17 @@ class SidebarProvider {
                 let currentTheme = {};
                 
                 const themeCategories = {
-                    '🎨 Editor': ['editor.background', 'editor.foreground', 'editor.lineHighlightBackground', 'editor.selectionBackground', 'editor.inactiveSelectionBackground', 'editorCursor.foreground', 'editorLineNumber.foreground', 'editorLineNumber.activeForeground', 'editorIndentGuide.background', 'editorWhitespace.foreground'],
-                    '📂 Activity Bar': ['activityBar.background', 'activityBar.foreground', 'activityBar.activeBorder', 'activityBar.inactiveForeground', 'activityBarBadge.background', 'activityBarBadge.foreground', 'activityBar.activeFocusBorder'],
-                    '📋 Side Bar': ['sideBar.background', 'sideBar.foreground', 'sideBar.border', 'sideBarTitle.foreground', 'sideBarSectionHeader.background', 'sideBarSectionHeader.foreground', 'sideBarSectionHeader.border'],
-                    '📊 Status Bar': ['statusBar.background', 'statusBar.foreground', 'statusBar.border', 'statusBarItem.hoverBackground', 'statusBarItem.activeBackground', 'statusBar.debuggingBackground', 'statusBar.noFolderBackground'],
-                    '🏷️ Title Bar': ['titleBar.activeBackground', 'titleBar.activeForeground', 'titleBar.inactiveBackground', 'titleBar.inactiveForeground', 'titleBar.border'],
-                    '📑 Tabs': ['tab.activeBackground', 'tab.activeForeground', 'tab.inactiveBackground', 'tab.inactiveForeground', 'tab.border', 'tab.activeBorder', 'editorGroupHeader.tabsBackground', 'tab.hoverBackground', 'tab.activeBorderTop'],
-                    '📝 Lists & Trees': ['list.activeSelectionBackground', 'list.activeSelectionForeground', 'list.inactiveSelectionBackground', 'list.inactiveSelectionForeground', 'list.hoverBackground', 'list.hoverForeground', 'list.focusBackground', 'tree.indentGuidesStroke'],
-                    '⌨️ Input Controls': ['input.background', 'input.foreground', 'input.border', 'input.placeholderForeground', 'inputOption.activeBackground', 'inputOption.activeForeground', 'inputValidation.errorBackground', 'inputValidation.errorBorder'],
-                    '🔘 Buttons': ['button.background', 'button.foreground', 'button.hoverBackground', 'button.secondaryBackground', 'button.secondaryForeground', 'button.secondaryHoverBackground'],
-                    '📋 Dropdowns': ['dropdown.background', 'dropdown.foreground', 'dropdown.border', 'dropdown.listBackground'],
-                    '💻 Terminal': ['terminal.background', 'terminal.foreground', 'terminal.ansiBlack', 'terminal.ansiRed', 'terminal.ansiGreen', 'terminal.ansiYellow', 'terminal.ansiBlue', 'terminal.ansiMagenta', 'terminal.ansiCyan', 'terminal.ansiWhite', 'terminal.ansiBrightBlack', 'terminal.ansiBrightRed', 'terminal.ansiBrightGreen', 'terminal.ansiBrightYellow', 'terminal.ansiBrightBlue', 'terminal.ansiBrightMagenta', 'terminal.ansiBrightCyan', 'terminal.ansiBrightWhite'],
-                    '🔍 Search & Find': ['searchEditor.findMatchBackground', 'searchEditor.findMatchBorder', 'search.findMatchBackground', 'search.findMatchHighlightBackground', 'searchEditor.textInputBorder'],
-                    '⚠️ Errors & Warnings': ['errorForeground', 'warningForeground', 'infoForeground', 'notificationsErrorIcon.foreground', 'notificationsWarningIcon.foreground', 'notificationsInfoIcon.foreground'],
-                    '🎯 Focus & Borders': ['focusBorder', 'foreground', 'widget.shadow', 'selection.background', 'descriptionForeground', 'errorForeground'],
-                    '📋 Panels': ['panel.background', 'panel.border', 'panelTitle.activeBorder', 'panelTitle.activeForeground', 'panelTitle.inactiveForeground'],
-                    '🧠 Semantic Tokens': ['editor.semanticTokenColorCustomizations.enabled', 'editor.semanticHighlighting.enabled', 'semanticTokenColors.namespace', 'semanticTokenColors.class', 'semanticTokenColors.enum', 'semanticTokenColors.interface', 'semanticTokenColors.struct', 'semanticTokenColors.typeParameter', 'semanticTokenColors.type', 'semanticTokenColors.parameter', 'semanticTokenColors.variable', 'semanticTokenColors.property', 'semanticTokenColors.enumMember', 'semanticTokenColors.event', 'semanticTokenColors.function', 'semanticTokenColors.method', 'semanticTokenColors.macro', 'semanticTokenColors.keyword', 'semanticTokenColors.modifier', 'semanticTokenColors.comment', 'semanticTokenColors.string', 'semanticTokenColors.number', 'semanticTokenColors.regexp', 'semanticTokenColors.operator'],
-                    '🏷️ Token Colors': ['tokenColors.comments', 'tokenColors.strings', 'tokenColors.keywords', 'tokenColors.numbers', 'tokenColors.types', 'tokenColors.functions', 'tokenColors.variables', 'tokenColors.constants', 'tokenColors.operators', 'tokenColors.punctuation', 'tokenColors.storage', 'tokenColors.support', 'tokenColors.entity', 'tokenColors.invalid', 'tokenColors.meta', 'tokenColors.markup'],
-                    '🎨 UI Colors': ['welcomePage.background', 'welcomePage.buttonBackground', 'welcomePage.buttonHoverBackground', 'walkThrough.embeddedEditorBackground', 'gitDecoration.addedResourceForeground', 'gitDecoration.modifiedResourceForeground', 'gitDecoration.deletedResourceForeground', 'gitDecoration.untrackedResourceForeground', 'gitDecoration.ignoredResourceForeground', 'gitDecoration.conflictingResourceForeground', 'gitDecoration.submoduleResourceForeground']
+                    'Editor': ['editor.background', 'editor.foreground', 'editor.lineHighlightBackground', 'editor.selectionBackground', 'editor.inactiveSelectionBackground', 'editorCursor.foreground', 'editorLineNumber.foreground', 'editorLineNumber.activeForeground'],
+                    'Activity Bar': ['activityBar.background', 'activityBar.foreground', 'activityBar.activeBorder', 'activityBar.inactiveForeground', 'activityBarBadge.background', 'activityBarBadge.foreground'],
+                    'Side Bar': ['sideBar.background', 'sideBar.foreground', 'sideBar.border', 'sideBarTitle.foreground', 'sideBarSectionHeader.background', 'sideBarSectionHeader.foreground'],
+                    'Status Bar': ['statusBar.background', 'statusBar.foreground', 'statusBar.border', 'statusBarItem.hoverBackground', 'statusBarItem.activeBackground'],
+                    'Title Bar': ['titleBar.activeBackground', 'titleBar.activeForeground', 'titleBar.inactiveBackground', 'titleBar.inactiveForeground', 'titleBar.border'],
+                    'Tabs': ['tab.activeBackground', 'tab.activeForeground', 'tab.inactiveBackground', 'tab.inactiveForeground', 'tab.border', 'tab.activeBorder', 'editorGroupHeader.tabsBackground'],
+                    'Lists': ['list.activeSelectionBackground', 'list.activeSelectionForeground', 'list.inactiveSelectionBackground', 'list.inactiveSelectionForeground', 'list.hoverBackground', 'list.hoverForeground'],
+                    'Inputs': ['input.background', 'input.foreground', 'input.border', 'input.placeholderForeground', 'inputOption.activeBackground', 'inputOption.activeForeground'],
+                    'Buttons': ['button.background', 'button.foreground', 'button.hoverBackground', 'button.secondaryBackground', 'button.secondaryForeground', 'button.secondaryHoverBackground'],
+                    'Dropdowns': ['dropdown.background', 'dropdown.foreground', 'dropdown.border', 'dropdown.listBackground'],
+                    'Terminal': ['terminal.background', 'terminal.foreground', 'terminal.ansiBlack', 'terminal.ansiRed', 'terminal.ansiGreen', 'terminal.ansiYellow', 'terminal.ansiBlue', 'terminal.ansiMagenta', 'terminal.ansiCyan', 'terminal.ansiWhite']
                 };
                 
                 function updateTheme(theme) {
@@ -555,102 +394,38 @@ class SidebarProvider {
                 }
                 
                 function renderThemeProperties() {
-                    try {
-                        const container = document.getElementById('theme-properties');
-                        if (!container) {
-                            console.error('Theme properties container not found');
-                            return;
-                        }
+                    const container = document.getElementById('theme-properties');
+                    container.innerHTML = '';
+                    
+                    Object.keys(themeCategories).forEach(category => {
+                        const section = document.createElement('div');
+                        section.innerHTML = \`<div class="section-title">\${category}</div>\`;
                         
-                        container.innerHTML = '';
-                        
-                        Object.keys(themeCategories).forEach(category => {
-                            try {
-                                const section = document.createElement('div');
-                                section.className = 'theme-section';
-                                
-                                const categoryProperties = themeCategories[category];
-                                if (!Array.isArray(categoryProperties)) {
-                                    console.warn('Invalid category properties for:', category);
-                                    return;
-                                }
-                                
-                                const hasProperties = categoryProperties.some(prop => currentTheme[prop]);
-                                const isCollapsed = !hasProperties; // Expand sections with existing properties
-                                
-                                const categoryId = category.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-                                section.innerHTML = \`
-                                    <div class="section-header" onclick="toggleSection('\${category}')">
-                                        <span class="section-toggle \${isCollapsed ? 'collapsed' : ''}">▼</span>
-                                        <span class="section-title">\${category}</span>
-                                        <span class="section-count">(\${categoryProperties.filter(prop => currentTheme[prop]).length}/\${categoryProperties.length})</span>
-                                    </div>
-                                    <div class="section-content \${isCollapsed ? 'collapsed' : ''}" id="section-\${categoryId}">
-                                    </div>
-                                \`;
-                                
-                                const contentDiv = section.querySelector('.section-content');
-                                if (contentDiv) {
-                                    categoryProperties.forEach(property => {
-                                        try {
-                                            const value = currentTheme[property] || '';
-                                            const item = createThemeItem(property, value, categoryId);
-                                            if (item) {
-                                                contentDiv.appendChild(item);
-                                            }
-                                        } catch (error) {
-                                            console.error('Error creating theme item for property:', property, error);
-                                        }
-                                    });
-                                }
-                                
-                                container.appendChild(section);
-                            } catch (error) {
-                                console.error('Error processing category:', category, error);
-                            }
+                        themeCategories[category].forEach(property => {
+                            const value = currentTheme[property] || '';
+                            const item = createThemeItem(property, value, category.toLowerCase().replace(' ', '-'));
+                            section.appendChild(item);
                         });
                         
-                        // Add custom properties section if any exist
-                        try {
-                            const customProperties = Object.keys(currentTheme).filter(prop => 
-                                !Object.values(themeCategories).flat().includes(prop)
-                            );
-                            
-                            if (customProperties.length > 0) {
-                                const section = document.createElement('div');
-                                section.className = 'theme-section';
-                                section.innerHTML = \`
-                                    <div class="section-header" onclick="toggleSection('Custom')">
-                                        <span class="section-toggle">▼</span>
-                                        <span class="section-title">Custom Properties</span>
-                                        <span class="section-count">(\${customProperties.length})</span>
-                                    </div>
-                                    <div class="section-content" id="section-custom">
-                                    </div>
-                                \`;
-                                
-                                const contentDiv = section.querySelector('.section-content');
-                                if (contentDiv) {
-                                    customProperties.forEach(property => {
-                                        try {
-                                            const value = currentTheme[property];
-                                            const item = createThemeItem(property, value, 'custom');
-                                            if (item) {
-                                                contentDiv.appendChild(item);
-                                            }
-                                        } catch (error) {
-                                            console.error('Error creating custom theme item:', property, error);
-                                        }
-                                    });
-                                }
-                                
-                                container.appendChild(section);
-                            }
-                        } catch (error) {
-                            console.error('Error processing custom properties:', error);
-                        }
-                    } catch (error) {
-                        console.error('Error rendering theme properties:', error);
+                        container.appendChild(section);
+                    });
+                    
+                    // Add custom properties
+                    const customProperties = Object.keys(currentTheme).filter(prop => 
+                        !Object.values(themeCategories).flat().includes(prop)
+                    );
+                    
+                    if (customProperties.length > 0) {
+                        const section = document.createElement('div');
+                        section.innerHTML = '<div class="section-title">Custom Properties</div>';
+                        
+                        customProperties.forEach(property => {
+                            const value = currentTheme[property];
+                            const item = createThemeItem(property, value, 'custom');
+                            section.appendChild(item);
+                        });
+                        
+                        container.appendChild(section);
                     }
                 }
                 
@@ -664,11 +439,6 @@ class SidebarProvider {
                         part.charAt(0).toUpperCase() + part.slice(1)
                     ).join(' ');
                     
-                    // Special handling for semantic tokens and token colors
-                    const isSemanticOrToken = property.includes('semanticTokenColors') || property.includes('tokenColors');
-                    const inputType = isSemanticOrToken ? 'text' : 'color';
-                    const defaultValue = isSemanticOrToken ? '' : '#000000';
-                    
                     item.innerHTML = \`
                         <div class="theme-item-header">
                             <div>
@@ -678,13 +448,11 @@ class SidebarProvider {
                             <button class="reset-btn" onclick="resetProperty('\${property}')" title="Reset to default">✕</button>
                         </div>
                         <div class="color-input-container">
-                            \${inputType === 'color' ? 
-                                \`<input type="color" class="color-input" value="\${value || defaultValue}" 
-                                        onchange="updateColor('\${property}', this.value)">\` : 
-                                ''}
+                            <input type="color" class="color-input" value="\${value || '#000000'}" 
+                                   onchange="updateColor('\${property}', this.value)">
                             <input type="text" class="color-text" value="\${value}" 
                                    onchange="updateColor('\${property}', this.value)"
-                                   placeholder="\${isSemanticOrToken ? 'Enter token scope or color...' : 'Enter color value...'}">
+                                   placeholder="Enter color value...">
                         </div>
                     \`;
                     
@@ -692,128 +460,59 @@ class SidebarProvider {
                 }
                 
                 function updateColor(property, value) {
-                    try {
-                        if (!property || typeof property !== 'string') {
-                            console.error('Invalid property:', property);
-                            return;
-                        }
-                        
-                        currentTheme[property] = value;
-                        vscode.postMessage({
-                            type: 'colorChange',
-                            property: property,
-                            value: value
-                        });
-                    } catch (error) {
-                        console.error('Error updating color:', error);
-                    }
+                    currentTheme[property] = value;
+                    vscode.postMessage({
+                        type: 'colorChange',
+                        property: property,
+                        value: value
+                    });
                 }
                 
                 function resetProperty(property) {
-                    try {
-                        if (!property || typeof property !== 'string') {
-                            console.error('Invalid property:', property);
-                            return;
-                        }
-                        
-                        vscode.postMessage({
-                            type: 'resetProperty',
-                            property: property
-                        });
-                    } catch (error) {
-                        console.error('Error resetting property:', error);
-                    }
+                    vscode.postMessage({
+                        type: 'resetProperty',
+                        property: property
+                    });
                 }
                 
                 function loadTheme() {
-                    try {
-                        vscode.postMessage({ type: 'loadTheme' });
-                    } catch (error) {
-                        console.error('Error loading theme:', error);
-                    }
+                    vscode.postMessage({ type: 'loadTheme' });
                 }
                 
                 function createNew() {
-                    try {
-                        vscode.postMessage({ type: 'createNew' });
-                    } catch (error) {
-                        console.error('Error creating new theme:', error);
-                    }
+                    vscode.postMessage({ type: 'createNew' });
                 }
                 
                 function exportCSS() {
-                    try {
-                        vscode.postMessage({ type: 'exportCSS' });
-                    } catch (error) {
-                        console.error('Error exporting CSS:', error);
-                    }
+                    vscode.postMessage({ type: 'exportCSS' });
                 }
                 
                 function exportJSON() {
-                    try {
-                        vscode.postMessage({ type: 'exportJSON' });
-                    } catch (error) {
-                        console.error('Error exporting JSON:', error);
-                    }
+                    vscode.postMessage({ type: 'exportJSON' });
                 }
                 
                 function exportVSIX() {
-                    try {
-                        vscode.postMessage({ type: 'exportVSIX' });
-                    } catch (error) {
-                        console.error('Error exporting VSIX:', error);
-                    }
+                    vscode.postMessage({ type: 'exportVSIX' });
                 }
                 
                 function filterProperties(searchTerm) {
-                    try {
-                        const sections = document.querySelectorAll('.theme-section');
-                        
-                        sections.forEach(section => {
-                            const items = section.querySelectorAll('.theme-item');
-                            let visibleItems = 0;
-                            
-                            items.forEach(item => {
-                                const property = item.dataset.property;
-                                const category = item.dataset.category;
-                                const isVisible = property && property.includes(searchTerm.toLowerCase()) || 
-                                                 category && category.includes(searchTerm.toLowerCase());
-                                item.classList.toggle('hidden', !isVisible);
-                                if (isVisible) visibleItems++;
-                            });
-                            
-                            // Show/hide entire section based on visible items
-                            section.style.display = visibleItems > 0 ? 'block' : 'none';
-                            
-                            // Auto-expand sections with search results
-                            if (searchTerm && visibleItems > 0) {
-                                const content = section.querySelector('.section-content');
-                                const toggle = section.querySelector('.section-toggle');
-                                if (content && toggle) {
-                                    content.classList.remove('collapsed');
-                                    toggle.classList.remove('collapsed');
-                                }
-                            }
-                        });
-                    } catch (error) {
-                        console.error('Error filtering properties:', error);
-                    }
-                }
-                
-                function toggleSection(category) {
-                    try {
-                        const sectionId = 'section-' + category.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-                        const content = document.getElementById(sectionId);
-                        if (content) {
-                            const toggle = content.parentElement.querySelector('.section-toggle');
-                            if (toggle) {
-                                content.classList.toggle('collapsed');
-                                toggle.classList.toggle('collapsed');
-                            }
-                        }
-                    } catch (error) {
-                        console.error('Error toggling section:', error);
-                    }
+                    const items = document.querySelectorAll('.theme-item');
+                    const sections = document.querySelectorAll('.section-title');
+                    
+                    items.forEach(item => {
+                        const property = item.dataset.property;
+                        const category = item.dataset.category;
+                        const isVisible = property.includes(searchTerm.toLowerCase()) || 
+                                         category.includes(searchTerm.toLowerCase());
+                        item.classList.toggle('hidden', !isVisible);
+                    });
+                    
+                    // Hide empty sections
+                    sections.forEach(section => {
+                        const sectionDiv = section.parentElement;
+                        const visibleItems = sectionDiv.querySelectorAll('.theme-item:not(.hidden)');
+                        sectionDiv.style.display = visibleItems.length > 0 ? 'block' : 'none';
+                    });
                 }
                 
                 // Listen for messages from the extension

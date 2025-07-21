@@ -1,316 +1,316 @@
 {
 	"$schema": "vscode://schemas/color-theme",
-	"type": "dark",
-	"name": "Rave1 Dark Theme",
+	"type": "",
+	"name": "",
 	// =================================================
 	// WORKBENCH UI COLORS
 	// =================================================
 	"colors": {
 		// --- Editor Core ---
-		"editor.background": "#ffffff", // Main editor workspace background
-		"editor.foreground": "#ffffff", // Default text color for all content
-		"editor.lineHighlightBackground": "#ffffff", // Current line highlight color
-		"editor.lineHighlightBorder": "#ffffff", // Border around current line
-		"editor.selectionBackground": "#ffffff00", // Selected text background
-		"editor.selectionHighlightBackground": "#ffffff00", // Other instances of selected text
-		"editor.inactiveSelectionBackground": "#ffffff00", // Selection when editor loses focus
-		"editor.wordHighlightBackground": "#ffffff00", // Highlight matching words
-		"editor.wordHighlightStrongBackground": "#ffffff00", // Strong word match highlight
-		"editor.wordHighlightTextBackground": "#ffffff00", // Text-based word highlighting
-		"editor.rangeHighlightBackground": "#ffffff00", // Range selection transparency
-		"editor.hoverHighlightBackground": "#ffffff00", // Hover effect background
-		"editor.findMatchBackground": "#ffffff", // Search result highlight
-		"editor.findMatchHighlightBackground": "#ffffff00", // Other search matches
-		"editor.findRangeHighlightBackground": "#ffffff00", // Search range background
-		"editor.foldBackground": "#ffffff00", // Code folding background
-		"editorCursor.foreground": "#ffffff", // Text cursor color
-		"editorLink.activeForeground": "#ffffff", // Clickable link color
-		"editorWhitespace.foreground": "#ffffff", // Whitespace character color
-		"editorIndentGuide.background1": "#ffffff", // Indentation guide lines
-		"editorIndentGuide.activeBackground1": "#ffffff", // Active indent guide
-		"editorRuler.foreground": "#ffffff", // Column ruler color
-		"editorBracketMatch.background": "#ffffff", // Matching bracket highlight
-		"editorBracketMatch.border": "#ffffff", // Matching bracket border
-		"editorBracketHighlight.foreground1": "#ffffff", // Bracket pair color 1
-		"editorBracketHighlight.foreground2": "#ffffff", // Bracket pair color 2
-		"editorBracketHighlight.foreground3": "#ffffff", // Bracket pair color 3
-		"editorOverviewRuler.border": "#ffffff", // Overview ruler border
+		"editor.background": "#ffffff",
+		"editor.foreground": "#ffffff",
+		"editor.lineHighlightBackground": "#ffffff",
+		"editor.lineHighlightBorder": "#ffffff",
+		"editor.selectionBackground": "#ffffff",
+		"editor.selectionHighlightBackground": "#ffffff",
+		"editor.inactiveSelectionBackground": "#ffffff",
+		"editor.wordHighlightBackground": "#ffffff",
+		"editor.wordHighlightStrongBackground": "#ffffff",
+		"editor.wordHighlightTextBackground": "#ffffff",
+		"editor.rangeHighlightBackground": "#ffffff",
+		"editor.hoverHighlightBackground": "#ffffff",
+		"editor.findMatchBackground": "#ffffff",
+		"editor.findMatchHighlightBackground": "#ffffff",
+		"editor.findRangeHighlightBackground": "#ffffff",
+		"editor.foldBackground": "#ffffff",
+		"editorCursor.foreground": "#ffffff",
+		"editorLink.activeForeground": "#ffffff",
+		"editorWhitespace.foreground": "#ffffff",
+		"editorIndentGuide.background1": "#ffffff",
+		"editorIndentGuide.activeBackground1": "#ffffff",
+		"editorRuler.foreground": "#ffffff",
+		"editorBracketMatch.background": "#ffffff",
+		"editorBracketMatch.border": "#ffffff",
+		"editorBracketHighlight.foreground1": "#ffffff",
+		"editorBracketHighlight.foreground2": "#ffffff",
+		"editorBracketHighlight.foreground3": "#ffffff",
+		"editorOverviewRuler.border": "#ffffff",
 		// --- Editor Widgets & Popups ---
-		"editorWidget.background": "#ffffff", // Background for floating widgets like parameter hints and quick info
-		"editorWidget.border": "#ffffff", // Border color around editor widgets and floating panels
-		"editorSuggestWidget.background": "#ffffff", // Background of autocomplete suggestion dropdown
-		"editorSuggestWidget.border": "#ffffff", // Border around the suggestion widget dropdown
-		"editorSuggestWidget.foreground": "#ffffff", // Text color for items in suggestion dropdown
-		"editorSuggestWidget.highlightForeground": "#ffffff", // Color for highlighted matching text in suggestions
-		"editorSuggestWidget.selectedBackground": "#ffffff00", // Background of currently selected suggestion item
-		"editorHoverWidget.background": "#ffffff", // Background of hover tooltip that shows on symbol hover
-		"editorHoverWidget.border": "#ffffff", // Border around hover tooltip widgets
-		"editorGhostText.foreground": "#ffffff", // Color for ghost text suggestions like Copilot inline completions
-		"editorHint.foreground": "#ffffff", // Color for hint decorations in editor
-		"editorInfo.foreground": "#ffffff", // Color for informational squiggly underlines
-		"editorWarning.foreground": "#ffffff", // Color for warning squiggly underlines
-		"editorError.foreground": "#ffffff", // Color for error squiggly underlines and problem indicators
+		"editorWidget.background": "#ffffff",
+		"editorWidget.border": "#ffffff",
+		"editorSuggestWidget.background": "#ffffff",
+		"editorSuggestWidget.border": "#ffffff",
+		"editorSuggestWidget.foreground": "#ffffff",
+		"editorSuggestWidget.highlightForeground": "#ffffff",
+		"editorSuggestWidget.selectedBackground": "#ffffff",
+		"editorHoverWidget.background": "#ffffff",
+		"editorHoverWidget.border": "#ffffff",
+		"editorGhostText.foreground": "#ffffff",
+		"editorHint.foreground": "#ffffff",
+		"editorInfo.foreground": "#ffffff",
+		"editorWarning.foreground": "#ffffff",
+		"editorError.foreground": "#ffffff",
 		// --- Editor Gutter ---
-		"editorGutter.background": "#ffffff", // Background of the line number area and gutter margin
-		"editorGutter.addedBackground": "#ffffff", // Background color for added lines in git diff gutter
-		"editorGutter.modifiedBackground": "#ffffff", // Background color for modified lines in git diff gutter
-		"editorGutter.deletedBackground": "#ffffff", // Background color indicating deleted lines in git diff
-		"editorGutter.foldingControlForeground": "#ffffff", // Color of expand/collapse arrows for code folding
-		"editorLineNumber.foreground": "#ffffff", // Color of line numbers in the gutter
-		"editorLineNumber.activeForeground": "#ffffff", // Color of line number for the currently active line
+		"editorGutter.background": "#000000",
+		"editorGutter.addedBackground": "#f904cc",
+		"editorGutter.modifiedBackground": "#f904cc",
+		"editorGutter.deletedBackground": "#da0000",
+		"editorGutter.foldingControlForeground": "#c5c5c5",
+		"editorLineNumber.foreground": "#929292",
+		"editorLineNumber.activeForeground": "#f6fcfc",
 		// --- Editor Inlay Hints ---
-		"editorInlayHint.background": "#ffffff", // Background color for inlay hints like parameter names and type annotations
-		"editorInlayHint.foreground": "#ffffff", // Text color for general inlay hint content
-		"editorInlayHint.typeBackground": "#ffffff", // Background specifically for type inlay hints
-		"editorInlayHint.typeForeground": "#ffffff", // Text color specifically for type inlay hints
-		"editorInlayHint.parameterBackground": "#ffffff", // Background for parameter name inlay hints
-		"editorInlayHint.parameterForeground": "#ffffff", // Text color for parameter name inlay hints
+		"editorInlayHint.background": "#6d6d6d",
+		"editorInlayHint.foreground": "#fffeff",
+		"editorInlayHint.typeBackground": "#6d6d6d",
+		"editorInlayHint.typeForeground": "#f6fcfc",
+		"editorInlayHint.parameterBackground": "#6d6d6d",
+		"editorInlayHint.parameterForeground": "#fffeff",
 		// --- Editor Groups & Tabs ---
-		"editorGroup.border": "#ffffff", // Border between split editor groups and panels
-		"editorGroup.dropBackground": "#ffffff", // Background when dragging files over editor group for drop operation
-		"editorGroupHeader.tabsBackground": "#ffffff", // Background of the tab bar area above editors
-		"editorGroupHeader.noTabsBackground": "#ffffff", // Background of editor group header when tabs are disabled
-		"tab.activeBackground": "#ffffff", // Background color of the currently active editor tab
-		"tab.activeForeground": "#ffffff", // Text color of the currently active editor tab
-		"tab.activeModifiedBorder": "#ffffff", // Border color indicating unsaved changes in active tab
-		"tab.inactiveBackground": "#ffffff", // Background color of inactive editor tabs
-		"tab.inactiveForeground": "#ffffff", // Text color of inactive editor tabs
-		"tab.inactiveModifiedBorder": "#ffffff", // Border indicating unsaved changes in inactive tabs
-		"tab.border": "#ffffff", // Border color around individual tabs
-		"tab.hoverBackground": "#ffffff", // Background color when hovering over tabs
-		"tab.unfocusedActiveModifiedBorder": "#ffffff", // Modified indicator for active tab when editor group is unfocused
-		"tab.unfocusedHoverBackground": "#ffffff", // Hover background for tabs in unfocused editor groups
-		"tab.unfocusedInactiveModifiedBorder": "#ffffff", // Modified indicator for inactive tabs in unfocused groups
-		"tab.lastPinnedBorder": "#ffffff", // Border separating pinned tabs from regular tabs
+		"editorGroup.border": "#6d6d6d",
+		"editorGroup.dropBackground": "#53595d80",
+		"editorGroupHeader.tabsBackground": "#000000",
+		"editorGroupHeader.noTabsBackground": "#000000",
+		"tab.activeBackground": "#000000",
+		"tab.activeForeground": "#f6fcfc",
+		"tab.activeModifiedBorder": "#0013ea",
+		"tab.inactiveBackground": "#242424",
+		"tab.inactiveForeground": "#fffeff",
+		"tab.inactiveModifiedBorder": "#e4f403",
+		"tab.border": "#6d6d6d",
+		"tab.hoverBackground": "#6d6d6d",
+		"tab.unfocusedActiveModifiedBorder": "#0013ea",
+		"tab.unfocusedHoverBackground": "#6d6d6d",
+		"tab.unfocusedInactiveModifiedBorder": "#e4f403",
+		"tab.lastPinnedBorder": "#585858",
 		// --- Activity Bar ---
-		"activityBar.background": "#ffffff", // Background of the vertical icon bar on the far left
-		"activityBar.foreground": "#ffffff", // Color of icons in the activity bar
-		"activityBar.inactiveForeground": "#ffffff", // Color of inactive icons in activity bar
-		"activityBar.activeBorder": "#ffffff", // Border color around the currently active activity bar item
-		"activityBar.border": "#ffffff", // Right border of the activity bar separating it from sidebar
-		"activityBarBadge.background": "#ffffff", // Background of notification badges on activity bar icons
-		"activityBarBadge.foreground": "#ffffff", // Text color of notification badges on activity bar icons
-		"activityBar.dropBorder": "#ffffff", // Border shown when dragging items over activity bar
-		"activityErrorBadge.background": "#ffffff", // Background for error notification badges
-		"activityErrorBadge.foreground": "#ffffff", // Text color for error notification badges
-		"activityWarningBadge.background": "#ffffff", // Background for warning notification badges
-		"activityWarningBadge.foreground": "#ffffff", // Text color for warning notification badges
+		"activityBar.background": "#000000",
+		"activityBar.foreground": "#f6fcfc",
+		"activityBar.inactiveForeground": "#fffeff",
+		"activityBar.activeBorder": "#f6fcfc",
+		"activityBar.border": "#6d6d6d",
+		"activityBarBadge.background": "#e4f403",
+		"activityBarBadge.foreground": "#000000",
+		"activityBar.dropBorder": "#f6fcfc",
+		"activityErrorBadge.background": "#f14c4c",
+		"activityErrorBadge.foreground": "#000000",
+		"activityWarningBadge.background": "#cca700",
+		"activityWarningBadge.foreground": "#000000",
 		// --- Side Bar ---
-		"sideBar.background": "#ffffff", // Background of the sidebar containing file explorer and other views
-		"sideBar.foreground": "#ffffff", // Default text color for sidebar content
-		"sideBar.border": "#ffffff", // Border separating sidebar from editor area
-		"sideBarTitle.foreground": "#ffffff", // Text color of sidebar section titles like "EXPLORER"
-		"sideBarSectionHeader.background": "#ffffff", // Background of section headers in sidebar
-		"sideBarSectionHeader.foreground": "#ffffff", // Text color of section headers in sidebar
-		"sideBarSectionHeader.border": "#ffffff", // Border color of section headers in sidebar
-		"sideBar.dropBackground": "#ffffff", // Background shown when dropping files into sidebar
+		"sideBar.background": "#000000",
+		"sideBar.foreground": "#f6fcfc",
+		"sideBar.border": "#6d6d6d",
+		"sideBarTitle.foreground": "#f6fcfc",
+		"sideBarSectionHeader.background": "#242424",
+		"sideBarSectionHeader.foreground": "#f6fcfc",
+		"sideBarSectionHeader.border": "#6d6d6d",
+		"sideBar.dropBackground": "#53595d80",
 		// --- Status Bar ---
-		"statusBar.background": "#ffffff", // Background of the status bar at the bottom of the window
-		"statusBar.foreground": "#ffffff", // Text color of status bar items
-		"statusBar.border": "#ffffff", // Top border of the status bar
-		"statusBar.debuggingBackground": "#ffffff", // Status bar background when debugging
-		"statusBar.debuggingForeground": "#ffffff", // Status bar text color when debugging
-		"statusBar.noFolderBackground": "#ffffff", // Status bar background when no folder is open
-		"statusBar.noFolderForeground": "#ffffff", // Status bar text color when no folder is open
-		"statusBarItem.activeBackground": "#ffffff", // Background of clicked status bar items
-		"statusBarItem.hoverBackground": "#ffffff", // Background when hovering over status bar items
-		"statusBarItem.remoteBackground": "#ffffff", // Background for remote status indicators
-		"statusBarItem.remoteForeground": "#ffffff", // Text color for remote status indicators
-		"statusBarItem.errorBackground": "#ffffff", // Background for error status items
-		"statusBarItem.errorForeground": "#ffffff", // Text color for error status items
+		"statusBar.background": "#000000",
+		"statusBar.foreground": "#f6fcfc",
+		"statusBar.border": "#6d6d6d",
+		"statusBar.debuggingBackground": "#da0000",
+		"statusBar.debuggingForeground": "#f6fcfc",
+		"statusBar.noFolderBackground": "#929292",
+		"statusBar.noFolderForeground": "#b6b6b6",
+		"statusBarItem.activeBackground": "#ffffff2e",
+		"statusBarItem.hoverBackground": "#ffffff1f",
+		"statusBarItem.remoteBackground": "#e4f403",
+		"statusBarItem.remoteForeground": "#000000",
+		"statusBarItem.errorBackground": "#c72e0f",
+		"statusBarItem.errorForeground": "#ffffff",
 		// --- Title Bar ---
-		"titleBar.activeBackground": "#ffffff", // Background of the title bar when window is focused
-		"titleBar.activeForeground": "#ffffff", // Text color of title bar when window is focused
-		"titleBar.inactiveBackground": "#ffffff", // Background of title bar when window is unfocused
-		"titleBar.inactiveForeground": "#ffffff", // Text color of title bar when window is unfocused
-		"titleBar.border": "#ffffff", // Border color separating title bar from content
+		"titleBar.activeBackground": "#000000",
+		"titleBar.activeForeground": "#f6fcfc",
+		"titleBar.inactiveBackground": "#242424",
+		"titleBar.inactiveForeground": "#fffeff",
+		"titleBar.border": "#6d6d6d",
 		// --- Panel ---
-		"panel.background": "#ffffff", // Background of bottom panel containing terminal and output
-		"panel.border": "#ffffff", // Border color around the bottom panel
-		"panel.dropBorder": "#ffffff", // Border shown when dropping items over panel
-		"panelTitle.activeBorder": "#ffffff", // Bottom border of active panel tab
-		"panelTitle.activeForeground": "#ffffff", // Text color of active panel tab
-		"panelTitle.inactiveForeground": "#ffffff", // Text color of inactive panel tabs
-		"panelInput.border": "#ffffff", // Border color of input fields in panels
+		"panel.background": "#000000",
+		"panel.border": "#6d6d6d",
+		"panel.dropBorder": "#f6fcfc",
+		"panelTitle.activeBorder": "#929292",
+		"panelTitle.activeForeground": "#f6fcfc",
+		"panelTitle.inactiveForeground": "#fffeff",
+		"panelInput.border": "#6d6d6d",
 		// --- Terminal ---
-		"terminal.background": "#ffffff", // Background of terminal panels
-		"terminal.foreground": "#ffffff", // Default text color in terminal
-		"terminal.border": "#ffffff", // Border color around terminal panels
-		"terminalCursor.background": "#ffffff", // Background color of terminal cursor
-		"terminalCursor.foreground": "#ffffff", // Color of terminal cursor when it's a block
-		"terminal.ansiBlack": "#ffffff", // Terminal ANSI black color for command output
-		"terminal.ansiBlue": "#ffffff", // Terminal ANSI blue color for command output
-		"terminal.ansiCyan": "#ffffff", // Terminal ANSI cyan color for command output
-		"terminal.ansiGreen": "#ffffff", // Terminal ANSI green color for command output
-		"terminal.ansiMagenta": "#ffffff", // Terminal ANSI magenta color for command output
-		"terminal.ansiRed": "#ffffff", // Terminal ANSI red color for command output
-		"terminal.ansiWhite": "#ffffff", // Terminal ANSI white color for command output
-		"terminal.ansiYellow": "#ffffff", // Terminal ANSI yellow color for command output
-		"terminal.ansiBrightBlack": "#ffffff", // Terminal bright black color for command output
-		"terminal.ansiBrightBlue": "#ffffff", // Terminal bright blue color for command output
-		"terminal.ansiBrightCyan": "#ffffff", // Terminal bright cyan color for command output
-		"terminal.ansiBrightGreen": "#ffffff", // Terminal bright green color for command output
-		"terminal.ansiBrightMagenta": "#ffffff", // Terminal bright magenta color for command output
-		"terminal.ansiBrightRed": "#ffffff", // Terminal bright red color for command output
-		"terminal.ansiBrightWhite": "#ffffff", // Terminal bright white color for command output
-		"terminal.ansiBrightYellow": "#ffffff", // Terminal bright yellow color for command output
-		"terminal.selectionBackground": "#ffffff00", // Background color of selected text in terminal
+		"terminal.background": "#000000",
+		"terminal.foreground": "#f6fcfc",
+		"terminal.border": "#6d6d6d",
+		"terminalCursor.background": "#000000",
+		"terminalCursor.foreground": "#f6fcfc",
+		"terminal.ansiBlack": "#000000",
+		"terminal.ansiBlue": "#e4f403",
+		"terminal.ansiCyan": "#f904cc",
+		"terminal.ansiGreen": "#f904cc",
+		"terminal.ansiMagenta": "#f904cc",
+		"terminal.ansiRed": "#da0000",
+		"terminal.ansiWhite": "#e5e5e5",
+		"terminal.ansiYellow": "#0013ea",
+		"terminal.ansiBrightBlack": "#666666",
+		"terminal.ansiBrightBlue": "#3b8eea",
+		"terminal.ansiBrightCyan": "#29b8db",
+		"terminal.ansiBrightGreen": "#23d18b",
+		"terminal.ansiBrightMagenta": "#d670d6",
+		"terminal.ansiBrightRed": "#f14c4c",
+		"terminal.ansiBrightWhite": "#e5e5e5",
+		"terminal.ansiBrightYellow": "#f5f543",
+		"terminal.selectionBackground": "#92929288",
 		// --- Lists & Trees ---
-		"list.activeSelectionBackground": "#ffffff", // Background of selected items in active lists
-		"list.activeSelectionForeground": "#ffffff", // Text color of selected items in active lists
-		"list.inactiveSelectionBackground": "#ffffff", // Background of selected items in unfocused lists
-		"list.inactiveSelectionForeground": "#ffffff", // Text color of selected items in unfocused lists
-		"list.hoverBackground": "#ffffff", // Background when hovering over list items
-		"list.hoverForeground": "#ffffff", // Text color when hovering over list items
-		"list.focusOutline": "#ffffff", // Outline color of focused list items
-		"list.inactiveFocusOutline": "#ffffff", // Outline color of focused items in unfocused lists
-		"list.errorForeground": "#ffffff", // Text color for error items in lists
-		"list.warningForeground": "#ffffff", // Text color for warning items in lists
-		"list.filterMatchBackground": "#ffffff00", // Background of text that matches search filter
-		"list.highlightForeground": "#ffffff", // Color of highlighted text in lists
+		"list.activeSelectionBackground": "#929292",
+		"list.activeSelectionForeground": "#f6fcfc",
+		"list.inactiveSelectionBackground": "#6d6d6d",
+		"list.inactiveSelectionForeground": "#f6fcfc",
+		"list.hoverBackground": "#6d6d6d",
+		"list.hoverForeground": "#f6fcfc",
+		"list.focusOutline": "#0013ea",
+		"list.inactiveFocusOutline": "#6d6d6d",
+		"list.errorForeground": "#f88070",
+		"list.warningForeground": "#cca700",
+		"list.filterMatchBackground": "#0013ea33",
+		"list.highlightForeground": "#2aaaff",
 		// --- Input Controls ---
-		"input.background": "#ffffff", // Background of text input fields
-		"input.foreground": "#ffffff", // Text color in input fields
-		"input.border": "#ffffff", // Border color of input fields
-		"input.placeholderForeground": "#ffffff", // Color of placeholder text in input fields
-		"inputOption.activeBackground": "#ffffff", // Background of active input options like checkboxes
-		"inputOption.activeBorder": "#ffffff", // Border of active input options
-		"inputOption.activeForeground": "#ffffff", // Text color of active input options
-		"inputOption.hoverBackground": "#ffffff", // Background when hovering over input options
+		"input.background": "#242424",
+		"input.foreground": "#f6fcfc",
+		"input.border": "#6d6d6d",
+		"input.placeholderForeground": "#fffeff",
+		"inputOption.activeBackground": "#494949",
+		"inputOption.activeBorder": "#6d6d6d",
+		"inputOption.activeForeground": "#f6fcfc",
+		"inputOption.hoverBackground": "#5a5d5e80",
 		// --- Buttons & Badges ---
-		"button.background": "#ffffff", // Background color of primary action buttons
-		"button.foreground": "#ffffff", // Text color of primary action buttons
-		"button.hoverBackground": "#ffffff", // Background when hovering over buttons
-		"button.secondaryBackground": "#ffffff", // Background of secondary action buttons
-		"button.secondaryForeground": "#ffffff", // Text color of secondary action buttons
-		"button.secondaryHoverBackground": "#ffffff", // Background when hovering over secondary buttons
-		"badge.background": "#ffffff", // Background of notification badges and counters
-		"badge.foreground": "#ffffff", // Text color of notification badges and counters
+		"button.background": "#e4f403",
+		"button.foreground": "#000000",
+		"button.hoverBackground": "#effc2c",
+		"button.secondaryBackground": "#3a3d41",
+		"button.secondaryForeground": "#ffffff",
+		"button.secondaryHoverBackground": "#45494e",
+		"badge.background": "#e4f403",
+		"badge.foreground": "#000000",
 		// --- Dropdown ---
-		"dropdown.background": "#ffffff", // Background of dropdown selection menus
-		"dropdown.foreground": "#ffffff", // Text color in dropdown menus
-		"dropdown.border": "#ffffff", // Border color around dropdown controls
-		"dropdown.listBackground": "#ffffff", // Background of dropdown option lists
+		"dropdown.background": "#242424",
+		"dropdown.foreground": "#f6fcfc",
+		"dropdown.border": "#6d6d6d",
+		"dropdown.listBackground": "#000000",
 		// --- Peek View ---
-		"peekView.border": "#ffffff", // Border around peek definition and reference panels
-		"peekViewEditor.background": "#ffffff", // Background of the editor area in peek view
-		"peekViewEditor.matchHighlightBackground": "#ffffff00", // Highlight color for matches in peek editor
-		"peekViewResult.background": "#ffffff", // Background of the results list in peek view
-		"peekViewResult.fileForeground": "#ffffff", // Color of file names in peek results
-		"peekViewResult.lineForeground": "#ffffff", // Color of line numbers in peek results
-		"peekViewResult.matchHighlightBackground": "#ffffff00", // Highlight for matching text in peek results
-		"peekViewResult.selectionBackground": "#ffffff00", // Background of selected item in peek results
-		"peekViewResult.selectionForeground": "#ffffff", // Text color of selected item in peek results
-		"peekViewTitle.background": "#ffffff", // Background of peek view title bar
-		"peekViewTitleDescription.foreground": "#ffffff", // Color of description text in peek title on magenta
-		"peekViewTitleLabel.foreground": "#ffffff", // Color of main title text in peek view on magenta
+		"peekView.border": "#6d6d6d",
+		"peekViewEditor.background": "#000000",
+		"peekViewEditor.matchHighlightBackground": "#929292",
+		"peekViewResult.background": "#242424",
+		"peekViewResult.fileForeground": "#f6fcfc",
+		"peekViewResult.lineForeground": "#fffeff",
+		"peekViewResult.matchHighlightBackground": "#929292",
+		"peekViewResult.selectionBackground": "#494949",
+		"peekViewResult.selectionForeground": "#b6b6b6",
+		"peekViewTitle.background": "#6d6d6d",
+		"peekViewTitleDescription.foreground": "#fffeff",
+		"peekViewTitleLabel.foreground": "#f6fcfc",
 		// --- Merge Conflicts ---
-		"merge.border": "#ffffff", // Border color around merge conflict sections
-		"merge.commonContentBackground": "#ffffff00", // Background for common content in merge conflicts
-		"merge.commonHeaderBackground": "#ffffff00", // Header background for common content sections
-		"merge.currentContentBackground": "#ffffff00", // Background for current branch content
-		"merge.currentHeaderBackground": "#ffffff00", // Header background for current branch
-		"merge.incomingContentBackground": "#ffffff00", // Background for incoming changes
-		"merge.incomingHeaderBackground": "#ffffff00", // Header background for incoming changes
+		"merge.border": "#6d6d6d",
+		"merge.commonContentBackground": "#92929266",
+		"merge.commonHeaderBackground": "#6d6d6d66",
+		"merge.currentContentBackground": "#f904cc44",
+		"merge.currentHeaderBackground": "#f904cc44",
+		"merge.incomingContentBackground": "#f904cc44",
+		"merge.incomingHeaderBackground": "#f904cc44",
 		// --- Notifications & Settings ---
-		"notifications.background": "#ffffff", // Background of notification popup panels
-		"notifications.border": "#ffffff", // Border color around notification panels
-		"notifications.foreground": "#ffffff", // Text color in notification messages
-		"notificationLink.foreground": "#ffffff", // Color of clickable links in notifications
-		"notificationsErrorIcon.foreground": "#ffffff", // Color of error icons in notifications
-		"notificationsInfoIcon.foreground": "#ffffff", // Color of info icons in notifications
-		"notificationsWarningIcon.foreground": "#ffffff", // Color of warning icons in notifications
-		"settings.headerForeground": "#ffffff", // Color of section headers in settings panel
-		"settings.textInputForeground": "#ffffff", // Text color in settings input fields
-		"settings.modifiedItemIndicator": "#ffffff", // Indicator color for modified settings
+		"notifications.background": "#494949",
+		"notifications.border": "#5f5f5f",
+		"notifications.foreground": "#cccccc",
+		"notificationLink.foreground": "#0013ea",
+		"notificationsErrorIcon.foreground": "#f14c4c",
+		"notificationsInfoIcon.foreground": "#3794ff",
+		"notificationsWarningIcon.foreground": "#cca700",
+		"settings.headerForeground": "#f6fcfc",
+		"settings.textInputForeground": "#f6fcfc",
+		"settings.modifiedItemIndicator": "#0c7d9d",
 		// --- Git Decorations ---
-		"gitDecoration.addedResourceForeground": "#ffffff", // Color for newly added files in explorer
-		"gitDecoration.modifiedResourceForeground": "#ffffff", // Color for modified files in explorer
-		"gitDecoration.deletedResourceForeground": "#ffffff", // Color for deleted files in explorer
-		"gitDecoration.untrackedResourceForeground": "#ffffff", // Color for untracked files in explorer
-		"gitDecoration.ignoredResourceForeground": "#ffffff", // Color for ignored files in explorer
-		"gitDecoration.conflictingResourceForeground": "#ffffff", // Color for files with merge conflicts
-		"gitDecoration.submoduleResourceForeground": "#ffffff", // Color for git submodule folders
+		"gitDecoration.addedResourceForeground": "#81b88b",
+		"gitDecoration.modifiedResourceForeground": "#e2c08d",
+		"gitDecoration.deletedResourceForeground": "#c74e39",
+		"gitDecoration.untrackedResourceForeground": "#73c991",
+		"gitDecoration.ignoredResourceForeground": "#8c8c8c",
+		"gitDecoration.conflictingResourceForeground": "#e4676b",
+		"gitDecoration.submoduleResourceForeground": "#8db9e2",
 		// --- Text Links ---
-		"textLink.foreground": "#ffffff", // Color of clickable text links throughout the interface
-		"textLink.activeForeground": "#ffffff", // Color of links when clicked or activated
-		"descriptionForeground": "#ffffff", // Color of descriptive text and help content
+		"textLink.foreground": "#0013ea",
+		"textLink.activeForeground": "#3794ff",
+		"descriptionForeground": "#ccccccb3",
 		// --- Debug ---
-		"debugToolBar.background": "#ffffff", // Background of the debug toolbar during debugging sessions
-		"debugIcon.breakpointForeground": "#ffffff", // Color of breakpoint icons in the gutter
-		"debugIcon.startForeground": "#ffffff", // Color of the start debugging button icon
-		"debugIcon.pauseForeground": "#ffffff", // Color of the pause debugging button icon
-		"debugIcon.stopForeground": "#ffffff", // Color of the stop debugging button icon
-		"debugIcon.disconnectForeground": "#ffffff", // Color of the disconnect debugging button icon
-		"debugIcon.restartForeground": "#ffffff", // Color of the restart debugging button icon
-		"debugIcon.stepOverForeground": "#ffffff", // Color of the step over debugging button icon
-		"debugIcon.stepIntoForeground": "#ffffff", // Color of the step into debugging button icon
-		"debugIcon.stepOutForeground": "#ffffff", // Color of the step out debugging button icon
-		"debugIcon.continueForeground": "#ffffff", // Color of the continue debugging button icon
+		"debugToolBar.background": "#333333",
+		"debugIcon.breakpointForeground": "#e51400",
+		"debugIcon.startForeground": "#89d185",
+		"debugIcon.pauseForeground": "#75beff",
+		"debugIcon.stopForeground": "#f48771",
+		"debugIcon.disconnectForeground": "#f48771",
+		"debugIcon.restartForeground": "#89d185",
+		"debugIcon.stepOverForeground": "#75beff",
+		"debugIcon.stepIntoForeground": "#75beff",
+		"debugIcon.stepOutForeground": "#75beff",
+		"debugIcon.continueForeground": "#75beff",
 		// --- Charts ---
-		"charts.foreground": "#ffffff", // Default text color for chart elements and labels
-		"charts.lines": "#ffffff", // Color of grid lines and chart axes
-		"charts.red": "#ffffff", // Red color option for chart data series
-		"charts.blue": "#ffffff", // Blue color option for chart data series
-		"charts.yellow": "#ffffff", // Yellow color option for chart data series
-		"charts.orange": "#ffffff", // Orange color option for chart data series
-		"charts.green": "#ffffff", // Green color option for chart data series
-		"charts.purple": "#ffffff", // Purple color option for chart data series
+		"charts.foreground": "#cccccc",
+		"charts.lines": "#cccccc80",
+		"charts.red": "#f14c4c",
+		"charts.blue": "#3794ff",
+		"charts.yellow": "#cca700",
+		"charts.orange": "#d18616",
+		"charts.green": "#89d185",
+		"charts.purple": "#b180d7",
 		// --- Extensions & Welcome Page ---
-		"extensionButton.prominentBackground": "#ffffff", // Background of prominent action buttons in extensions view
-		"extensionButton.prominentForeground": "#ffffff", // Text color of prominent action buttons in extensions view
-		"extensionButton.prominentHoverBackground": "#ffffff", // Background when hovering over prominent extension buttons
-		"extensionBadge.remoteBackground": "#ffffff", // Background of remote extension badges
-		"extensionBadge.remoteForeground": "#ffffff", // Text color of remote extension badges
-		"welcomePage.progress.background": "#ffffff", // Background of progress bars on welcome page
-		"welcomePage.progress.foreground": "#ffffff", // Foreground color of progress bars on welcome page
-		"welcomePage.tileBackground": "#ffffff", // Background of tile elements on welcome page
-		"welcomePage.tileBorder": "#ffffff", // Border color of tile elements on welcome page
-		"welcomePage.tileHoverBackground": "#ffffff" // Background when hovering over welcome page tiles
+		"extensionButton.prominentBackground": "#e4f403",
+		"extensionButton.prominentForeground": "#000000",
+		"extensionButton.prominentHoverBackground": "#effc2c",
+		"extensionBadge.remoteBackground": "#e4f403",
+		"extensionBadge.remoteForeground": "#000000",
+		"welcomePage.progress.background": "#242424",
+		"welcomePage.progress.foreground": "#0013ea",
+		"welcomePage.tileBackground": "#242424",
+		"welcomePage.tileBorder": "#ffffff1a",
+		"welcomePage.tileHoverBackground": "#2b2b2b"
 	},
 	// =================================================
 	// SEMANTIC TOKEN COLORS
 	// =================================================
 	"semanticTokenColors": {
 		// --- Types ---
-		"class": "#ffffff", // Class names like "User", "Database", "Component"
-		"interface": "#ffffff", // Interface definitions like "IUserService", "ApiResponse"
-		"enum": "#ffffff", // Enumeration types like "StatusCode", "Color"
-		"struct": "#ffffff", // Struct definitions in languages like C#, Rust
-		"type": "#ffffff", // Type aliases and custom types like "UserId", "Callback"
-		"typeParameter": "#ffffff", // Generic type parameters like "T", "K", "V"
+		"class": "#0013EA",
+		"interface": "#0013EA",
+		"enum": "#0013EA",
+		"struct": "#0013EA",
+		"type": "#0013EA",
+		"typeParameter": "#0013EA",
 		// --- Variables ---
-		"variable": "#ffffff", // Variable names like "userName", "count", "data"
-		"parameter": "#ffffff", // Function parameters like "id", "options", "callback"
-		"property": "#ffffff", // Object properties like "user.name", "config.timeout"
-		"enumMember": "#ffffff", // Enum values like "Status.Active", "Color.Red"
+		"variable": "#F6FCFC",
+		"parameter": "#F6FCFC",
+		"property": "#F6FCFC",
+		"enumMember": "#F6FCFC",
 		// --- Values and Literals ---
-		"string": "#ffffff", // String literals like "Hello World", 'path/to/file'
-		"number": "#ffffff", // Numeric values like 42, 3.14, 0xFF
-		"boolean": "#ffffff", // Boolean values: true, false
-		"regexp": "#ffffff", // Regular expressions like /pattern/gi, new RegExp()
+		"string": "#F904CC",
+		"number": "#1BBA04",
+		"boolean": "#1BBA04",
+		"regexp": "#F904CC",
 		// --- Functions ---
-		"function": "#ffffff", // Function names like "calculateTotal", "fetchData"
-		"method": "#ffffff", // Method calls like "user.getName()", "array.push()"
+		"function": "#0013EA",
+		"method": "#E4F403",
 		// --- Keywords ---
-		"keyword": "#ffffff", // Language keywords like "if", "for", "return", "class"
-		"modifier": "#ffffff", // Access modifiers like "public", "private", "static"
-		"namespace": "#ffffff", // Namespace declarations like "MyApp.Utils", "System.IO"
+		"keyword": "#DA0000",
+		"modifier": "#DA0000",
+		"namespace": "#0013EA",
 		// --- Comments ---
-		"comment": "#ffffff", // Comment text: // single line, /* block comments */
+		"comment": "#B6B6B6",
 		// --- Special Modifiers ---
 		"*.static": {
-			"fontStyle": "italic" // Static members shown in italic: static methods, fields
+			"fontStyle": "italic"
 		},
 		"*.readonly": {
-			"fontStyle": "bold" // Readonly/immutable items shown in bold: const, readonly
+			"fontStyle": "bold"
 		},
 		"*.decorator": {
-			"fontStyle": "italic", // Decorators shown in italic: @Component, @Injectable
-			"foreground": "#ffffff"
+			"fontStyle": "italic",
+			"foreground": "#0013EA"
 		},
 		"*.abstract": {
-			"fontStyle": "italic" // Abstract classes/methods shown in italic
+			"fontStyle": "italic"
 		}
 	},
 	// =================================================
@@ -320,384 +320,392 @@
 		// --- Base Text & Structure ---
 		{
 			"scope": [
-				"source", // Root scope for all source code content
-				"support.type.property-name.css" // CSS property names like "color", "margin"
+				"source",
+				"support.type.property-name.css"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"punctuation", // General punctuation marks
-				"punctuation.terminator", // Statement terminators like semicolons ;
-				"punctuation.definition.tag", // HTML/XML tag brackets < >
-				"punctuation.separator", // Separators like commas , in lists
-				"punctuation.definition.string", // String quotes " ' `
-				"punctuation.section.block" // Block delimiters like { } [ ]
+				"punctuation",
+				"punctuation.terminator",
+				"punctuation.definition.tag",
+				"punctuation.separator",
+				"punctuation.definition.string",
+				"punctuation.section.block"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F6FCFC"
 			}
 		},
 		// --- Classes & Types ---
 		{
 			"scope": [
-				"entity.name.type.class" // Class definitions: class User, class Component
+				"entity.name.type.class"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for classes
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.type.interface", // Interface definitions: interface IUser
-				"entity.name.type" // General type names
+				"entity.name.type.interface",
+				"entity.name.type"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for interfaces
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.type.struct" // Struct definitions in C#, Rust: struct Point
+				"entity.name.type.struct"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for structs
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.type.enum" // Enum definitions: enum Status, enum Color
+				"entity.name.type.enum"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for enums
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"support.type" // Built-in types like string, number, boolean
+				"support.type"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for built-in types
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"variable.type.parameter", // Parameter type annotations: (id: string)
-				"variable.parameter.type" // Parameter types in function signatures
+				"variable.type.parameter",
+				"variable.parameter.type"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#0013EA"
 			}
 		},
 		// --- Functions & Methods ---
 		{
 			"scope": [
-				"entity.name.function.method", // Method definitions: getName(), calculateTotal()
-				"meta.function.method" // Method declarations and calls
+				"entity.name.function.method",
+				"meta.function.method"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for methods
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.function", // Function names: function processData()
-				"support.function", // Built-in functions like console.log(), Math.max()
-				"meta.function-call.generic" // Generic function calls
+				"entity.name.function",
+				"support.function",
+				"meta.function-call.generic"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for functions
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"variable.function" // Function variables: const handler = () => {}
+				"variable.function"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for function variables
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.function.preprocessor", // Preprocessor functions in C/C++
-				"meta.preprocessor" // Preprocessor directives like #define, #include
+				"entity.name.function.preprocessor",
+				"meta.preprocessor"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"meta.decorator", // Decorators: @Component, @Injectable, @Override
-				"punctuation.decorator", // Decorator symbols @
-				"entity.name.function.decorator" // Decorator function names
+				"meta.preprocessor"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F904CC"
+			}
+		},
+		{
+			"scope": [
+				"meta.decorator",
+				"punctuation.decorator",
+				"entity.name.function.decorator"
+			],
+			"settings": {
+				"foreground": "#0013EA"
 			}
 		},
 		// --- Variables & Properties ---
 		{
 			"scope": [
-				"variable", // Variable names: let userName, const config
-				"meta.variable", // Variable declarations and references
-				"variable.other.object.property", // Object properties: user.name, obj.value
-				"variable.other.readwrite.alias" // Variable aliases and references
+				"variable",
+				"meta.variable",
+				"variable.other.object.property",
+				"variable.other.readwrite.alias"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Light green for variables
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"variable.other.object" // Object variable references: myObject, userdata
+				"variable.other.object"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Softer green for objects
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"variable.other.global", // Global variables: window, document, process
-				"variable.language.this" // 'this' keyword in object contexts
+				"variable.other.global",
+				"variable.language.this"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Orange for global variables
+				"foreground": "#F904CC"
 			}
 		},
 		{
 			"scope": [
-				"variable.other.local" // Local scope variables within functions/blocks
+				"variable.other.local"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Light green for local variables
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"variable.parameter", // Function parameters: function(id, name, options)
-				"meta.parameter" // Parameter definitions and usage
+				"variable.parameter",
+				"meta.parameter"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Peach for parameters
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"variable.other.property", // Property access: obj.prop, this.value
-				"meta.property" // Property definitions and references
+				"variable.other.property",
+				"meta.property"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Light blue for properties
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"variable.other.constant", // Constants: const MAX_SIZE, TIMEOUT_VALUE
-				"variable.readonly" // Readonly variables and immutable references
+				"variable.other.constant",
+				"variable.readonly"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Lime green for constants
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"meta.object-literal.key" // Object literal keys: {name: "value", id: 123}
+				"meta.object-literal.key"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F6FCFC"
 			}
 		},
 		// --- Keywords & Operators ---
 		{
 			"scope": [
-				"keyword" // Language keywords: if, else, for, while, return, class, function
+				"keyword"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Purple-blue for keywords
+				"foreground": "#DA0000"
 			}
 		},
 		{
 			"scope": [
-				"keyword.control.import", // Import statements: import, from, require
-				"keyword.control.from", // 'from' in import statements
-				"keyword.import" // Import-related keywords
+				"keyword.control.import",
+				"keyword.control.from",
+				"keywaord.import"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Hot pink for imports
+				"foreground": "#DA0000"
 			}
 		},
 		{
 			"scope": [
-				"keyword.control.exception", // Exception handling: try, catch, finally, throw
-				"keyword.control.trycatch" // Try-catch block keywords
+				"keyword.control.exception",
+				"keyword.control.trycatch"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Orange-red for exceptions
+				"foreground": "#DA0000"
 			}
 		},
 		{
 			"scope": [
-				"storage.modifier", // Access modifiers: public, private, protected, static
-				"keyword.modifier", // Modifier keywords: async, abstract, virtual
-				"storage.type" // Type storage keywords: var, let, const, function
+				"storage.modifier",
+				"keyword.modifier",
+				"storage.type"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Gray for modifiers
+				"foreground": "#DA0000"
 			}
 		},
 		{
 			"scope": [
-				"keyword.operator" // Operators: +, -, *, /, =, ==, ===, &&, ||, !
+				"keyword.operator"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Light gray for operators
+				"foreground": "#DA0000"
 			}
 		},
 		// --- Strings & Literals ---
 		{
 			"scope": [
-				"string", // String literals: "text", 'text', `template`
-				"string.other.link", // URL strings and link text
-				"markup.inline.raw.string.markdown" // Inline code strings in markdown
+				"string",
+				"string.other.link",
+				"markup.inline.raw.string.markdown"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for strings
+				"foreground": "#F904CC"
 			}
 		},
 		{
 			"scope": [
-				"constant.character.escape", // Escape sequences: \n, \t, \", \\
-				"constant.other.placeholder" // Placeholder text in templates: ${variable}
+				"constant.character.escape",
+				"constant.other.placeholder"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for escape sequences
+				"foreground": "#F6FCFC"
 			}
 		},
 		{
 			"scope": [
-				"constant.numeric" // Numbers: 42, 3.14, 0xFF, 1e5, -100
+				"constant.numeric"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for numbers
+				"foreground": "#1BBA04"
 			}
 		},
 		{
 			"scope": [
-				"constant.language.boolean", // Boolean values: true, false
-				"constant.language.json" // JSON constants: null, true, false
+				"constant.language.boolean",
+				"constant.language.json"
 			],
 			"settings": {
-				"foreground": "#ffffff" // Color for booleans
+				"foreground": "#1BBA04"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.label", // Labels in switch/goto statements: case:, default:
-				"punctuation.definition.label" // Label punctuation and separators
+				"entity.name.label",
+				"punctuation.definition.label"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F904CC"
 			}
 		},
 		// --- Comments ---
 		{
 			"scope": [
-				"comment", // All comment types: //, /* */, #, <!-- -->
-				"punctuation.definition.comment" // Comment delimiters and symbols
+				"comment",
+				"punctuation.definition.comment"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#B6B6B6"
 			}
 		},
 		{
 			"scope": [
-				"comment.documentation", // Documentation comments: /** JSDoc */, /// XML docs
-				"comment.line.documentation" // Single-line documentation comments
+				"comment.documentation",
+				"comment.line.documentation"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#B6B6B6"
 			}
 		},
 		// --- Namespaces & Modules ---
 		{
 			"scope": [
-				"entity.name.namespace", // Namespace declarations: namespace MyApp, using System
-				"storage.modifier.namespace", // Namespace keywords and modifiers
-				"markup.bold.markdown" // Bold text in markdown files
+				"entity.name.namespace",
+				"storage.modifier.namespace",
+				"markup.bold.markdown"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#0013EA"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.module", // Module names: module App, export module Utils
-				"storage.modifier.module" // Module-related keywords and modifiers
+				"entity.name.module",
+				"storage.modifier.module"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#DA0000"
 			}
 		},
 		// --- Markup & HTML ---
 		{
 			"scope": [
-				"markup.underline.link" // Underlined links in markup languages
+				"markup.underline.link"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"entity.name.tag" // HTML/XML tag names: <div>, <span>, <component>
+				"entity.name.tag"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#DA0000"
 			}
 		},
 		{
 			"scope": [
-				"support.class.component" // Component class names in frameworks like React, Vue
+				"support.class.component"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#E4F403"
 			}
 		},
 		{
 			"scope": [
-				"entity.other.attribute-name", // HTML attributes: class, id, src, href
-				"meta.attribute" // Attribute definitions and values
+				"entity.other.attribute-name",
+				"meta.attribute"
 			],
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#0013EA"
 			}
 		},
 		// --- Debug Tokens ---
 		{
-			"scope": "token.info-token", // Information messages in debug/log output
+			"scope": "token.info-token",
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#6796E6"
 			}
 		},
 		{
-			"scope": "token.warn-token", // Warning messages in debug/log output
+			"scope": "token.warn-token",
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#CD9731"
 			}
 		},
 		{
-			"scope": "token.error-token", // Error messages in debug/log output
+			"scope": "token.error-token",
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#F44747"
 			}
 		},
 		{
-			"scope": "token.debug-token", // Debug-specific messages and output
+			"scope": "token.debug-token",
 			"settings": {
-				"foreground": "#ffffff"
+				"foreground": "#B267E6"
 			}
 		}
 	]

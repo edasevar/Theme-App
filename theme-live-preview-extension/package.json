@@ -1,29 +1,50 @@
 {
   "name": "theme-live-preview",
   "displayName": "Theme Live Preview",
-  "description": "Live preview and edit VS Code themes with comprehensive controls",
-  "version": "1.0.0",
-  "publisher": "rave1",
+  "description": "Live preview VS Code themes with CSS configuration",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edasevar/Theme-App.git"
+  },
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Themes"
+    "Themes",
+    "Other"
   ],
   "activationEvents": [
-    "onView:themeLivePreview"
+    "onCommand:themeLivePreview.openPreview",
+    "onCommand:themeLivePreview.openColorPicker",
+    "onCommand:themeLivePreview.navigateToItem",
+    "onCommand:themeLivePreview.showStartupMenu"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "themePreview",
+          "title": "Theme Preview",
+          "icon": "$(paintcan)"
+        }
+      ]
+    },
+    "views": {
+      "themePreview": [
+        {
+          "id": "themeEditor",
+          "name": "Theme Editor",
+          "type": "webview",
+          "icon": "$(edit)"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "themeLivePreview.openPreview",
         "title": "Open Theme Live Preview",
-        "category": "Theme Preview"
-      },
-      {
-        "command": "themeLivePreview.openSidebar",
-        "title": "Open Theme Editor Sidebar",
         "category": "Theme Preview"
       },
       {
@@ -37,13 +58,43 @@
         "category": "Theme Preview"
       },
       {
-        "command": "themeLivePreview.createVSIX",
-        "title": "Create VSIX Package",
+        "command": "themeLivePreview.openColorPicker",
+        "title": "Open Color Picker",
         "category": "Theme Preview"
       },
       {
-        "command": "themeLivePreview.exportTheme",
-        "title": "Export Complete Theme",
+        "command": "themeLivePreview.navigateToItem",
+        "title": "Navigate to Theme Item",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.enterCSS",
+        "title": "Enter CSS Directly",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.createNewTheme",
+        "title": "Create New Theme",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.showStartupMenu",
+        "title": "Show Startup Menu",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.showStartupOptions",
+        "title": "Show Startup Options",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.exportJSON",
+        "title": "Export as JSON Theme",
+        "category": "Theme Preview"
+      },
+      {
+        "command": "themeLivePreview.exportVSIX",
+        "title": "Export as VSIX Package",
         "category": "Theme Preview"
       }
     ],
@@ -53,50 +104,65 @@
           "command": "themeLivePreview.openPreview"
         },
         {
+          "command": "themeLivePreview.showStartupMenu"
+        },
+        {
           "command": "themeLivePreview.loadTheme"
         },
         {
           "command": "themeLivePreview.exportCSS"
         },
         {
-          "command": "themeLivePreview.createVSIX"
+          "command": "themeLivePreview.openColorPicker"
         },
         {
-          "command": "themeLivePreview.exportTheme"
+          "command": "themeLivePreview.navigateToItem"
+        },
+        {
+          "command": "themeLivePreview.enterCSS"
+        },
+        {
+          "command": "themeLivePreview.createNewTheme"
+        },
+        {
+          "command": "themeLivePreview.showStartupOptions"
+        },
+        {
+          "command": "themeLivePreview.exportJSON"
+        },
+        {
+          "command": "themeLivePreview.exportVSIX"
         }
       ],
       "explorer/context": [
         {
           "command": "themeLivePreview.loadTheme",
-          "when": "resourceExtname == .json || resourceExtname == .jsonc || resourceExtname == .vsix",
+          "when": "resourceExtname == .json || resourceExtname == .vsix",
           "group": "theme"
         }
       ]
     },
-    "views": {
-      "explorer": [
-        {
-          "id": "themeLivePreview",
-          "name": "Theme Editor",
-          "when": "true"
+    "configuration": {
+      "title": "Theme Live Preview",
+      "properties": {
+        "themeLivePreview.showStartupMenuOnActivation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the startup menu when the extension is activated"
         }
-      ]
+      }
     }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "package": "vsce package",
-    "install-deps": "npm install",
-    "build": "npm run compile && npm run package"
+    "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
     "@types/node": "^16.18.126",
     "@types/vscode": "^1.60.0",
-    "typescript": "^4.9.4",
-    "vsce": "^2.15.0"
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "adm-zip": "^0.5.10"

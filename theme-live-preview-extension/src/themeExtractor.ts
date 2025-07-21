@@ -1,16 +1,19 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import AdmZip = require('adm-zip');
 
 export class ThemeExtractor {
     private cssOutput: string[] = [];
+    private themeData: any = null;
+    private themeName: string = 'Custom Theme';
 
-    async extractTheme (filePath: string): Promise<string> {
+    async extractTheme(filePath: string): Promise<string> {
         this.cssOutput = [];
-
+        
         try {
             const ext = path.extname(filePath).toLowerCase();
-
+            
             if (ext === '.json') {
                 await this.extractFromJSON(filePath);
             } else if (ext === '.vsix') {
@@ -18,38 +21,41 @@ export class ThemeExtractor {
             } else {
                 throw new Error('Unsupported file format. Please provide .json or .vsix files.');
             }
-
+            
             return this.generateCSS();
         } catch (error) {
             throw new Error(`Failed to extract theme: ${error}`);
         }
     }
 
-    private async extractFromJSON (filePath: string): Promise<void> {
+    private async extractFromJSON(filePath: string): Promise<void> {
         const content = fs.readFileSync(filePath, 'utf8');
         const theme = JSON.parse(content);
         this.processThemeData(theme);
     }
 
-    private async extractFromVSIX (filePath: string): Promise<void> {
+    private async extractFromVSIX(filePath: string): Promise<void> {
         const zip = new AdmZip(filePath);
-
+        
         // Find package.json to locate theme files
         const packageJson = zip.readAsText('extension/package.json');
         const packageData = JSON.parse(packageJson);
-
+        
         if (packageData.contributes && packageData.contributes.themes) {
             for (const themeContrib of packageData.contributes.themes) {
                 const themePath = `extension/${themeContrib.path}`;
                 const themeContent = zip.readAsText(themePath);
                 const theme = JSON.parse(themeContent);
-
+                
                 this.processThemeData(theme, themeContrib.label);
             }
         }
     }
 
-    private processThemeData (theme: any, themeName: string = 'VS Code Theme'): void {
+    private processThemeData(theme: any, themeName: string = 'VS Code Theme'): void {
+        this.themeData = theme;
+        this.themeName = themeName;
+        
         this.cssOutput.push(`/* ${themeName} */`);
         this.cssOutput.push(`/* Type: ${theme.type || 'unknown'} */`);
         this.cssOutput.push('');
@@ -58,12 +64,12 @@ export class ThemeExtractor {
         if (theme.colors) {
             this.cssOutput.push('/* EDITOR COLORS */');
             this.cssOutput.push(':root {');
-
+            
             for (const [key, value] of Object.entries(theme.colors)) {
                 const cssVar = this.convertToCSSVariable(key);
                 this.cssOutput.push(`  ${cssVar}: ${value};`);
             }
-
+            
             this.cssOutput.push('}');
             this.cssOutput.push('');
         }
@@ -71,11 +77,11 @@ export class ThemeExtractor {
         // Process token colors
         if (theme.tokenColors) {
             this.cssOutput.push('/* SYNTAX HIGHLIGHTING */');
-
+            
             theme.tokenColors.forEach((token: any, index: number) => {
                 const selector = this.generateTokenSelector(token, index);
                 const styles = this.generateTokenStyles(token);
-
+                
                 if (styles) {
                     this.cssOutput.push(`${selector} {`);
                     this.cssOutput.push(styles);
@@ -88,11 +94,11 @@ export class ThemeExtractor {
         // Process semantic highlighting
         if (theme.semanticTokenColors) {
             this.cssOutput.push('/* SEMANTIC TOKENS */');
-
+            
             for (const [key, value] of Object.entries(theme.semanticTokenColors)) {
                 const selector = `.semantic-token-${key.replace(/[^a-zA-Z0-9]/g, '-')}`;
                 this.cssOutput.push(`${selector} {`);
-
+                
                 if (typeof value === 'string') {
                     this.cssOutput.push(`  color: ${value};`);
                 } else if (typeof value === 'object' && value !== null) {
@@ -101,18 +107,18 @@ export class ThemeExtractor {
                     if (objValue.background) this.cssOutput.push(`  background-color: ${objValue.background};`);
                     if (objValue.fontStyle) this.cssOutput.push(`  font-style: ${objValue.fontStyle};`);
                 }
-
+                
                 this.cssOutput.push('}');
                 this.cssOutput.push('');
             }
         }
     }
 
-    private convertToCSSVariable (key: string): string {
+    private convertToCSSVariable(key: string): string {
         return `--vscode-${key.replace(/\./g, '-')}`;
     }
 
-    private generateTokenSelector (token: any, index: number): string {
+    private generateTokenSelector(token: any, index: number): string {
         if (token.scope) {
             if (Array.isArray(token.scope)) {
                 return token.scope.map((scope: string) => `.${scope.replace(/[^a-zA-Z0-9]/g, '-')}`).join(', ');
@@ -123,20 +129,20 @@ export class ThemeExtractor {
         return `.token-${index}`;
     }
 
-    private generateTokenStyles (token: any): string | null {
+    private generateTokenStyles(token: any): string | null {
         if (!token.settings) return null;
-
+        
         const styles: string[] = [];
         const settings = token.settings;
-
+        
         if (settings.foreground) {
             styles.push(`  color: ${settings.foreground};`);
         }
-
+        
         if (settings.background) {
             styles.push(`  background-color: ${settings.background};`);
         }
-
+        
         if (settings.fontStyle) {
             const fontStyles = settings.fontStyle.split(' ');
             fontStyles.forEach((style: string) => {
@@ -156,11 +162,232 @@ export class ThemeExtractor {
                 }
             });
         }
-
+        
         return styles.length > 0 ? styles.join('\n') : null;
     }
 
-    private generateCSS (): string {
+    private generateCSS(): string {
         return this.cssOutput.join('\n');
+    }
+
+    // Convert CSS back to VS Code theme format
+    convertCSSToTheme(css: string, themeName: string = 'Custom Theme'): any {
+        const theme: any = {
+            name: themeName,
+            type: 'dark', // Default to dark, could be detected from colors
+            colors: {},
+            tokenColors: []
+        };
+
+        // Extract CSS variables (colors)
+        const cssVarRegex = /--vscode-([^:]+):\s*([^;]+);/g;
+        let match;
+        
+        while ((match = cssVarRegex.exec(css)) !== null) {
+            const vscodeProp = match[1].replace(/-/g, '.');
+            const value = match[2].trim();
+            theme.colors[vscodeProp] = value;
+        }
+
+        // Extract token colors from CSS classes
+        const tokenRegex = /\.([^{]+)\s*{\s*([^}]+)\s*}/g;
+        let tokenMatch;
+        
+        while ((tokenMatch = tokenRegex.exec(css)) !== null) {
+            const scope = tokenMatch[1].trim();
+            const styles = tokenMatch[2].trim();
+            
+            // Skip CSS variables and semantic tokens
+            if (scope.startsWith('-') || scope.includes('semantic-token') || scope === 'root') {
+                continue;
+            }
+            
+            const tokenColor: any = {
+                scope: scope.replace(/-/g, '.'),
+                settings: {}
+            };
+            
+            // Parse styles
+            const styleRegex = /([^:]+):\s*([^;]+);?/g;
+            let styleMatch;
+            
+            while ((styleMatch = styleRegex.exec(styles)) !== null) {
+                const prop = styleMatch[1].trim();
+                const value = styleMatch[2].trim();
+                
+                switch (prop) {
+                    case 'color':
+                        tokenColor.settings.foreground = value;
+                        break;
+                    case 'background-color':
+                        tokenColor.settings.background = value;
+                        break;
+                    case 'font-weight':
+                        if (value === 'bold') {
+                            tokenColor.settings.fontStyle = tokenColor.settings.fontStyle ? 
+                                `${tokenColor.settings.fontStyle} bold` : 'bold';
+                        }
+                        break;
+                    case 'font-style':
+                        if (value === 'italic') {
+                            tokenColor.settings.fontStyle = tokenColor.settings.fontStyle ? 
+                                `${tokenColor.settings.fontStyle} italic` : 'italic';
+                        }
+                        break;
+                    case 'text-decoration':
+                        if (value === 'underline') {
+                            tokenColor.settings.fontStyle = tokenColor.settings.fontStyle ? 
+                                `${tokenColor.settings.fontStyle} underline` : 'underline';
+                        }
+                        break;
+                }
+            }
+            
+            if (Object.keys(tokenColor.settings).length > 0) {
+                theme.tokenColors.push(tokenColor);
+            }
+        }
+
+        return theme;
+    }
+
+    // Generate VS Code extension package.json for VSIX export
+    generatePackageJson(themeName: string, displayName: string): any {
+        const sanitizedName = themeName.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+        
+        return {
+            name: sanitizedName,
+            displayName: displayName,
+            description: `${displayName} - Generated by Theme Live Preview`,
+            version: "1.0.0",
+            publisher: "theme-live-preview",
+            engines: {
+                vscode: "^1.60.0"
+            },
+            categories: ["Themes"],
+            contributes: {
+                themes: [{
+                    label: displayName,
+                    uiTheme: "vs-dark", // Could be dynamic based on theme type
+                    path: "./themes/theme.json"
+                }]
+            },
+            __metadata: {
+                id: sanitizedName,
+                publisherId: "theme-live-preview",
+                publisherDisplayName: "Theme Live Preview"
+            }
+        };
+    }
+
+    // Export theme as JSON
+    async exportAsJSON(css: string, themeName: string, savePath: string): Promise<void> {
+        const theme = this.convertCSSToTheme(css, themeName);
+        const jsonContent = JSON.stringify(theme, null, 2);
+        
+        await vscode.workspace.fs.writeFile(
+            vscode.Uri.file(savePath),
+            Buffer.from(jsonContent, 'utf8')
+        );
+    }
+
+    // Export theme as VSIX package
+    async exportAsVSIX(css: string, themeName: string, savePath: string): Promise<void> {
+        const theme = this.convertCSSToTheme(css, themeName);
+        const packageJson = this.generatePackageJson(themeName, themeName);
+        
+        // Create a new ZIP file (VSIX is just a ZIP)
+        const zip = new AdmZip();
+        
+        // Add package.json
+        zip.addFile('extension/package.json', Buffer.from(JSON.stringify(packageJson, null, 2)));
+        
+        // Add theme file
+        zip.addFile('extension/themes/theme.json', Buffer.from(JSON.stringify(theme, null, 2)));
+        
+        // Add basic extension manifest
+        const manifest = {
+            "files": [
+                {
+                    "path": "extension/package.json"
+                },
+                {
+                    "path": "extension/themes/theme.json"
+                }
+            ],
+            "assets": []
+        };
+        
+        zip.addFile('[Content_Types].xml', Buffer.from(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+    <Default Extension="json" ContentType="application/json"/>
+    <Default Extension="vsixmanifest" ContentType="text/xml"/>
+</Types>`));
+        
+        const vsixManifest = `<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Language="en-US" Id="${packageJson.name}" Version="${packageJson.version}" Publisher="${packageJson.publisher}"/>
+        <DisplayName>${packageJson.displayName}</DisplayName>
+        <Description xml:space="preserve">${packageJson.description}</Description>
+        <Categories>Themes</Categories>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Code" Version="[1.60.0,)"/>
+    </Installation>
+    <Dependencies/>
+    <Assets/>
+</PackageManifest>`;
+        
+        zip.addFile('extension.vsixmanifest', Buffer.from(vsixManifest));
+        
+        // Write the VSIX file
+        zip.writeZip(savePath);
+    }
+
+    // Get current theme data for editing
+    getCurrentThemeData(): any {
+        return this.themeData;
+    }
+
+    // Get current theme name
+    getCurrentThemeName(): string {
+        return this.themeName;
+    }
+
+    // Convert theme object to CSS string
+    convertThemeToCSS(theme: any): string {
+        const cssRules: string[] = [];
+        
+        // Add CSS variables for each theme property
+        const rootVars: string[] = [];
+        Object.keys(theme).forEach(key => {
+            const cssVar = `--vscode-${key.replace(/\./g, '-')}`;
+            rootVars.push(`  ${cssVar}: ${theme[key]};`);
+        });
+        
+        if (rootVars.length > 0) {
+            cssRules.push(':root {');
+            cssRules.push(...rootVars);
+            cssRules.push('}');
+        }
+        
+        // Add basic styling
+        cssRules.push('', 'body {');
+        if (theme['editor.background']) {
+            cssRules.push(`  background-color: ${theme['editor.background']};`);
+        }
+        if (theme['editor.foreground']) {
+            cssRules.push(`  color: ${theme['editor.foreground']};`);
+        }
+        cssRules.push('}');
+        
+        return cssRules.join('\n');
+    }
+
+    // Export theme as CSS
+    async exportAsCSS(theme: any, savePath: string): Promise<void> {
+        const cssContent = this.convertThemeToCSS(theme);
+        fs.writeFileSync(savePath, cssContent, 'utf8');
     }
 }
