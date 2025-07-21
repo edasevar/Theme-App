@@ -6,7 +6,7 @@ import { PreviewPanel } from './previewPanel';
 
 const EnhancedVSCodeThemeExtractor = require('../enhanced_theme_extractor');
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate (context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
 
     const themeExtractor = new ThemeExtractor();
@@ -92,14 +92,14 @@ export function activate(context: vscode.ExtensionContext) {
     const createVSIXCommand = vscode.commands.registerCommand('themeLivePreview.createVSIX', async () => {
         // Get current theme from workspace or prompt user to select
         const themeFiles = await vscode.workspace.findFiles('**/*.{json,jsonc}', '**/node_modules/**');
-        
+
         if (themeFiles.length === 0) {
             vscode.window.showWarningMessage('No theme files found in workspace');
             return;
         }
 
         let selectedTheme: string;
-        
+
         if (themeFiles.length === 1) {
             selectedTheme = themeFiles[0].fsPath;
         } else {
@@ -120,7 +120,7 @@ export function activate(context: vscode.ExtensionContext) {
         try {
             const extractor = new EnhancedVSCodeThemeExtractor();
             const result = await extractor.extractTheme(selectedTheme, { generateCSS: false, generateVSIX: true });
-            
+
             if (result && result.vsixData) {
                 const saveLocation = await vscode.window.showSaveDialog({
                     defaultUri: vscode.Uri.file(`${result.vsixData.packageJson.name}.vsix`),
@@ -143,14 +143,14 @@ export function activate(context: vscode.ExtensionContext) {
     const exportThemeCommand = vscode.commands.registerCommand('themeLivePreview.exportTheme', async () => {
         // Get current theme from workspace or prompt user to select
         const themeFiles = await vscode.workspace.findFiles('**/*.{json,jsonc}', '**/node_modules/**');
-        
+
         if (themeFiles.length === 0) {
             vscode.window.showWarningMessage('No theme files found in workspace');
             return;
         }
 
         let selectedTheme: string;
-        
+
         if (themeFiles.length === 1) {
             selectedTheme = themeFiles[0].fsPath;
         } else {
@@ -171,7 +171,7 @@ export function activate(context: vscode.ExtensionContext) {
         try {
             const extractor = new EnhancedVSCodeThemeExtractor();
             const result = await extractor.extractTheme(selectedTheme, { generateCSS: true, generateVSIX: true });
-            
+
             if (!result) {
                 vscode.window.showErrorMessage('Failed to extract theme data');
                 return;
@@ -231,11 +231,11 @@ export function activate(context: vscode.ExtensionContext) {
 class ThemeTreeDataProvider implements vscode.TreeDataProvider<ThemeTreeItem> {
     constructor(private context: vscode.ExtensionContext) {}
 
-    getTreeItem(element: ThemeTreeItem): vscode.TreeItem {
+    getTreeItem (element: ThemeTreeItem): vscode.TreeItem {
         return element;
     }
 
-    getChildren(element?: ThemeTreeItem): Thenable<ThemeTreeItem[]> {
+    getChildren (element?: ThemeTreeItem): Thenable<ThemeTreeItem[]> {
         if (!element) {
             return Promise.resolve([
                 new ThemeTreeItem('🎨 Open Theme Editor', vscode.TreeItemCollapsibleState.None, 'themeLivePreview.openPreview'),
@@ -265,6 +265,6 @@ class ThemeTreeItem extends vscode.TreeItem {
     }
 }
 
-export function deactivate() {
+export function deactivate () {
     console.log('Theme Live Preview extension is now deactivated');
 }
