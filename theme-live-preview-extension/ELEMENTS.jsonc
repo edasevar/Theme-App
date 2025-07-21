@@ -293,6 +293,7 @@
 		"welcomePage.tileBorder": "#ffffff", // Border color of tile elements on welcome page
 		"welcomePage.tileHoverBackground": "#ffffff" // Background when hovering over welcome page tiles
 	},
+	
 	// =================================================
 	// SEMANTIC TOKEN COLORS
 	// =================================================
@@ -321,44 +322,35 @@
 	// --- Functions ---
 		"function": "#ffffff", // Function names like "calculateTotal", "fetchData"
 		"method": "#ffffff", // Method calls like "user.getName()", "array.push()"
-		
 	// --- Keywords ---
-		"keyword": "#ffffff", // Language keywords like "if", "for", "return", "class"
-		"modifier": "#ffffff", // Access modifiers like "public", "private", "static"
-		"namespace": "#ffffff", // Namespace declarations like "MyApp.Utils", "System.IO"
-		
 	// --- Comments ---
-		"comment": "#ffffff", // Comment text: // single line, /* block comments */
-		
 	// --- Special Modifiers ---
 		"*.static": {
-			"fontStyle": "italic" // Static members shown in italic: static methods, fields
+	// --- Special Modifiers ---
 		},
 		"*.readonly": {
-			"fontStyle": "bold" // Readonly/immutable items shown in bold: const, readonly
+		},
+		"*.readonly": {
+		"*.readonly": {
 		},
 		"*.decorator": {
-			"fontStyle": "italic", // Decorators shown in italic: @Component, @Injectable
-			"foreground": "#ffffff"
 		},
 		"*.abstract": {
-			"fontStyle": "italic" // Abstract classes/methods shown in italic
+		},
 		}
 	},
-	
 	// =================================================
 	// TOKEN COLORS (TEXTMATE)
 	// =================================================
-	
 	"tokenColors": [
 	// --- Base Text & Structure ---
 		{
 			"scope": [
-				"source", // Root scope for all source code content
-				"support.type.property-name.css" // CSS property names like "color", "margin"
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
@@ -386,35 +378,35 @@
 		},
 		{
 			"scope": [
-				"entity.name.type.interface", // Interface definitions: interface IUser
-				"entity.name.type" // General type names
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.type.struct" // Struct definitions in C#, Rust: struct Point
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.type.enum" // Enum definitions: enum Status, enum Color
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"support.type" // Built-in types like string, number, boolean
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
@@ -430,11 +422,11 @@
 	// --- Functions & Methods ---
 		{
 			"scope": [
-				"entity.name.function.method", // Method definitions: getName(), calculateTotal()
-				"meta.function.method" // Method declarations and calls
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
@@ -444,291 +436,285 @@
 				"meta.function-call.generic" // Generic function calls
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.function" // Function variables: const handler = () => {}
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.function.preprocessor", // Preprocessor functions in C/C++
-				"meta.preprocessor" // Preprocessor directives like #define, #include
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"meta.preprocessor" // Preprocessor macros and directives
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"meta.decorator", // Decorators: @Component, @Injectable, @Override
-				"punctuation.decorator", // Decorator symbols @
-				"entity.name.function.decorator" // Decorator function names
+		{
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Variables & Properties ---
 		{
 			"scope": [
-				"variable", // Variable names: let userName, const config
-				"meta.variable", // Variable declarations and references
-				"variable.other.object.property", // Object properties: user.name, obj.value
-				"variable.other.readwrite.alias" // Variable aliases and references
+		{
+			"scope": [
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.other.object" // Object variable references: myObject, userdata
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.other.global", // Global variables: window, document, process
-				"variable.language.this" // 'this' keyword in object contexts
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.other.local" // Local scope variables within functions/blocks
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.parameter", // Function parameters: function(id, name, options)
-				"meta.parameter" // Parameter definitions and usage
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.other.property", // Property access: obj.prop, this.value
-				"meta.property" // Property definitions and references
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"variable.other.constant", // Constants: const MAX_SIZE, TIMEOUT_VALUE
-				"variable.readonly" // Readonly variables and immutable references
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"meta.object-literal.key" // Object literal keys: {name: "value", id: 123}
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Keywords & Operators ---
 		{
 			"scope": [
-				"keyword" // Language keywords: if, else, for, while, return, class, function
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"keyword.control.import", // Import statements: import, from, require
-				"keyword.control.from", // 'from' in import statements
-				"keywaord.import" // Import-related keywords (note: typo in original)
+		{
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"keyword.control.exception", // Exception handling: try, catch, finally, throw
-				"keyword.control.trycatch" // Try-catch block keywords
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"storage.modifier", // Access modifiers: public, private, protected, static
-				"keyword.modifier", // Modifier keywords: async, abstract, virtual
-				"storage.type" // Type storage keywords: var, let, const, function
+		{
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"keyword.operator" // Operators: +, -, *, /, =, ==, ===, &&, ||, !
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Strings & Literals ---
 		{
 			"scope": [
-				"string", // String literals: "text", 'text', `template`
-				"string.other.link", // URL strings and link text
-				"markup.inline.raw.string.markdown" // Inline code strings in markdown
+		{
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"constant.character.escape", // Escape sequences: \n, \t, \", \\
-				"constant.other.placeholder" // Placeholder text in templates: ${variable}
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"constant.numeric" // Numbers: 42, 3.14, 0xFF, 1e5, -100
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"constant.language.boolean", // Boolean values: true, false
-				"constant.language.json" // JSON constants: null, true, false
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.label", // Labels in switch/goto statements: case:, default:
-				"punctuation.definition.label" // Label punctuation and separators
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Comments ---
 		{
 			"scope": [
-				"comment", // All comment types: //, /* */, #, <!-- -->
-				"punctuation.definition.comment" // Comment delimiters and symbols
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"comment.documentation", // Documentation comments: /** JSDoc */, /// XML docs
-				"comment.line.documentation" // Single-line documentation comments
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Namespaces & Modules ---
 		{
 			"scope": [
-				"entity.name.namespace", // Namespace declarations: namespace MyApp, using System
-				"storage.modifier.namespace", // Namespace keywords and modifiers
-				"markup.bold.markdown" // Bold text in markdown files
+		{
+			"scope": [
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.module", // Module names: module App, export module Utils
-				"storage.modifier.module" // Module-related keywords and modifiers
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
 	// --- Markup & HTML ---
 		{
 			"scope": [
-				"markup.underline.link" // Underlined links in markup languages
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.name.tag" // HTML/XML tag names: <div>, <span>, <component>
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"support.class.component" // Component class names in frameworks like React, Vue
+		{
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
 		{
 			"scope": [
-				"entity.other.attribute-name", // HTML attributes: class, id, src, href
-				"meta.attribute" // Attribute definitions and values
+		{
+			"scope": [
 			],
 			"settings": {
-				"foreground": "#ffffff"
+			],
 			}
 		},
-		
+			}
+		},
 	// --- Debug Tokens ---
 		{
-			"scope": "token.info-token", // Information messages in debug/log output
 			"settings": {
 				"foreground": "#ffffff"
 			}
@@ -736,7 +722,6 @@
 		{
 			"scope": "token.warn-token", // Warning messages in debug/log output
 			"settings": {
-				"foreground": "#ffffff"
 			}
 		},
 		{
