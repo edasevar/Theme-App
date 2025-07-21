@@ -9,42 +9,42 @@
 		// --- Editor Core ---
 		"editor.background": "#000000", // Main editor workspace background
 		"editor.foreground": "#f6fcfc", // Default text color for all content
-		"editor.lineHighlightBackground": "#1a1a1a", // Current line highlight color - darker for better contrast
+		"editor.lineHighlightBackground": "#1a1a1a", // Current line highlight color
 		"editor.lineHighlightBorder": "#494949", // Border around current line
-		"editor.selectionBackground": "#0013ea44", // Selected text background - more visible blue
-		"editor.selectionHighlightBackground": "#e4f40333", // Other instances of selected text - yellow tint
-		"editor.inactiveSelectionBackground": "#6d6d6d44", // Selection when editor loses focus - gray tint
-		"editor.wordHighlightBackground": "#e4f40322", // Highlight matching words - subtle yellow
-		"editor.wordHighlightStrongBackground": "#f904cc33", // Strong word match highlight - pink tint
-		"editor.wordHighlightTextBackground": "#92929233", // Text-based word highlighting - visible gray
-		"editor.rangeHighlightBackground": "#0013ea22", // Range selection transparency - blue tint
-		"editor.hoverHighlightBackground": "#49494955", // Hover effect background - more visible
-		"editor.findMatchBackground": "#00ff00", // Search result highlight - neon green for high visibility
-		"editor.findMatchHighlightBackground": "#00ff0055", // Other search matches - neon green with transparency
-		"editor.findRangeHighlightBackground": "#ff00ff33", // Search range background - neon magenta tint
-		"editor.foldBackground": "#00ffff44", // Code folding background - neon cyan tint
-		"editorCursor.foreground": "#00ffff", // Text cursor color - bright cyan
-		"editorLink.activeForeground": "#ff0099", // Clickable link color - neon pink
+		"editor.selectionBackground": "#0013ea44", // Selected text background
+		"editor.selectionHighlightBackground": "#e4f40333", // Other instances of selected text
+		"editor.inactiveSelectionBackground": "#6d6d6d44", // Selection when editor loses focus
+		"editor.wordHighlightBackground": "#e4f40322", // Highlight matching words
+		"editor.wordHighlightStrongBackground": "#f904cc33", // Strong word match highlight
+		"editor.wordHighlightTextBackground": "#92929233", // Text-based word highlighting
+		"editor.rangeHighlightBackground": "#0013ea22", // Range selection transparency
+		"editor.hoverHighlightBackground": "#49494955", // Hover effect background
+		"editor.findMatchBackground": "#00ff00", // Search result highlight
+		"editor.findMatchHighlightBackground": "#00ff0055", // Other search matches
+		"editor.findRangeHighlightBackground": "#ff00ff33", // Search range background
+		"editor.foldBackground": "#00ffff44", // Code folding background
+		"editorCursor.foreground": "#00ffff", // Text cursor color
+		"editorLink.activeForeground": "#ff0099", // Clickable link color
 		"editorWhitespace.foreground": "#494949", // Whitespace character color
 		"editorIndentGuide.background1": "#6d6d6d", // Indentation guide lines
 		"editorIndentGuide.activeBackground1": "#929292", // Active indent guide
 		"editorRuler.foreground": "#6d6d6d", // Column ruler color
 		"editorBracketMatch.background": "#494949", // Matching bracket highlight
 		"editorBracketMatch.border": "#6d6d6d", // Matching bracket border
-		"editorBracketHighlight.foreground1": "#ff0080", // Bracket pair color 1 - neon hot pink
-		"editorBracketHighlight.foreground2": "#00ff80", // Bracket pair color 2 - neon lime
-		"editorBracketHighlight.foreground3": "#8000ff", // Bracket pair color 3 - neon purple
+		"editorBracketHighlight.foreground1": "#ff0080", // Bracket pair color 1
+		"editorBracketHighlight.foreground2": "#00ff80", // Bracket pair color 2
+		"editorBracketHighlight.foreground3": "#8000ff", // Bracket pair color 3
 		"editorOverviewRuler.border": "#6d6d6d", // Overview ruler border
 		// --- Editor Widgets & Popups ---
 		"editorWidget.background": "#242424", // Background for floating widgets like parameter hints and quick info
 		"editorWidget.border": "#6d6d6d", // Border color around editor widgets and floating panels
 		"editorSuggestWidget.background": "#000000", // Background of autocomplete suggestion dropdown
-		"editorSuggestWidget.border": "#f904cc", // Border around the suggestion widget dropdown - distinctive magenta
+		"editorSuggestWidget.border": "#f904cc", // Border around the suggestion widget dropdown
 		"editorSuggestWidget.foreground": "#f6fcfc", // Text color for items in suggestion dropdown
-		"editorSuggestWidget.highlightForeground": "#e4f403", // Color for highlighted matching text in suggestions - bright yellow for visibility
-		"editorSuggestWidget.selectedBackground": "#f904cc33", // Background of currently selected suggestion item - subtle magenta tint
-		"editorHoverWidget.background": "#1a1a1a", // Background of hover tooltip that shows on symbol hover - darker for better contrast
-		"editorHoverWidget.border": "#f904cc", // Border around hover tooltip widgets - distinctive magenta
+		"editorSuggestWidget.highlightForeground": "#e4f403", // Color for highlighted matching text in suggestions
+		"editorSuggestWidget.selectedBackground": "#f904cc33", // Background of currently selected suggestion item
+		"editorHoverWidget.background": "#1a1a1a", // Background of hover tooltip that shows on symbol hover
+		"editorHoverWidget.border": "#f904cc", // Border around hover tooltip widgets
 		"editorGhostText.foreground": "#929292", // Color for ghost text suggestions like Copilot inline completions
 		"editorHint.foreground": "#e4f403", // Color for hint decorations in editor
 		"editorInfo.foreground": "#0013ea", // Color for informational squiggly underlines
@@ -52,9 +52,9 @@
 		"editorError.foreground": "#da0000", // Color for error squiggly underlines and problem indicators
 		// --- Editor Gutter ---
 		"editorGutter.background": "#000000", // Background of the line number area and gutter margin
-		"editorGutter.addedBackground": "#00cc00", // Background color for added lines in git diff gutter - consistent green
-		"editorGutter.modifiedBackground": "#ffaa00", // Background color for modified lines in git diff gutter - consistent orange
-		"editorGutter.deletedBackground": "#ff4444", // Background color indicating deleted lines in git diff - consistent red
+		"editorGutter.addedBackground": "#00cc00", // Background color for added lines in git diff gutter
+		"editorGutter.modifiedBackground": "#ffaa00", // Background color for modified lines in git diff gutter
+		"editorGutter.deletedBackground": "#ff4444", // Background color indicating deleted lines in git diff
 		"editorGutter.foldingControlForeground": "#929292", // Color of expand/collapse arrows for code folding
 		"editorLineNumber.foreground": "#929292", // Color of line numbers in the gutter
 		"editorLineNumber.activeForeground": "#f6fcfc", // Color of line number for the currently active line
@@ -70,40 +70,40 @@
 		"editorGroup.dropBackground": "#929292", // Background when dragging files over editor group for drop operation
 		"editorGroupHeader.tabsBackground": "#000000", // Background of the tab bar area above editors
 		"editorGroupHeader.noTabsBackground": "#000000", // Background of editor group header when tabs are disabled
-		"tab.activeBackground": "#001122", // Background color of the currently active editor tab - dark blue
-		"tab.activeForeground": "#00ffff", // Text color of the currently active editor tab - neon cyan
-		"tab.activeModifiedBorder": "#ff0080", // Border color indicating unsaved changes in active tab - neon hot pink
-		"tab.inactiveBackground": "#111111", // Background color of inactive editor tabs - very dark
-		"tab.inactiveForeground": "#aaaaaa", // Text color of inactive editor tabs - gray
-		"tab.inactiveModifiedBorder": "#ff8000", // Border indicating unsaved changes in inactive tabs - neon orange
-		"tab.border": "#333333", // Border color around individual tabs - dark gray
-		"tab.hoverBackground": "#2a2a44", // Background color when hovering over tabs - purple tint
-		"tab.unfocusedActiveModifiedBorder": "#ff0080", // Modified indicator for active tab when editor group is unfocused - neon pink
-		"tab.unfocusedHoverBackground": "#222244", // Hover background for tabs in unfocused editor groups - darker purple
-		"tab.unfocusedInactiveModifiedBorder": "#ff8000", // Modified indicator for inactive tabs in unfocused groups - neon orange
-		"tab.lastPinnedBorder": "#00ff80", // Border separating pinned tabs from regular tabs - neon lime
+		"tab.activeBackground": "#001122", // Background color of the currently active editor tab
+		"tab.activeForeground": "#00ffff", // Text color of the currently active editor tab
+		"tab.activeModifiedBorder": "#ff0080", // Border color indicating unsaved changes in active tab
+		"tab.inactiveBackground": "#111111", // Background color of inactive editor tabs
+		"tab.inactiveForeground": "#aaaaaa", // Text color of inactive editor tabs
+		"tab.inactiveModifiedBorder": "#ff8000", // Border indicating unsaved changes in inactive tabs
+		"tab.border": "#333333", // Border color around individual tabs
+		"tab.hoverBackground": "#2a2a44", // Background color when hovering over tabs
+		"tab.unfocusedActiveModifiedBorder": "#ff0080", // Modified indicator for active tab when editor group is unfocused
+		"tab.unfocusedHoverBackground": "#222244", // Hover background for tabs in unfocused editor groups
+		"tab.unfocusedInactiveModifiedBorder": "#ff8000", // Modified indicator for inactive tabs in unfocused groups
+		"tab.lastPinnedBorder": "#00ff80", // Border separating pinned tabs from regular tabs
 		// --- Activity Bar ---
 		"activityBar.background": "#000000", // Background of the vertical icon bar on the far left
-		"activityBar.foreground": "#00ff00", // Color of icons in the activity bar - neon green for visibility
-		"activityBar.inactiveForeground": "#666666", // Color of inactive icons in activity bar - darker for contrast
-		"activityBar.activeBorder": "#ff0080", // Border color around the currently active activity bar item - neon hot pink
+		"activityBar.foreground": "#00ff00", // Color of icons in the activity bar
+		"activityBar.inactiveForeground": "#666666", // Color of inactive icons in activity bar
+		"activityBar.activeBorder": "#ff0080", // Border color around the currently active activity bar item
 		"activityBar.border": "#333333", // Right border of the activity bar separating it from sidebar - darker
-		"activityBarBadge.background": "#ff0040", // Background of notification badges on activity bar icons - neon red
+		"activityBarBadge.background": "#ff0040", // Background of notification badges on activity bar icons
 		"activityBarBadge.foreground": "#ffffff", // Text color of notification badges on activity bar icons
-		"activityBar.dropBorder": "#00ffff", // Border shown when dragging items over activity bar - neon cyan
-		"activityErrorBadge.background": "#ff0044", // Background for error notification badges - bright red
+		"activityBar.dropBorder": "#00ffff", // Border shown when dragging items over activity bar
+		"activityErrorBadge.background": "#ff0044", // Background for error notification badges
 		"activityErrorBadge.foreground": "#ffffff", // Text color for error notification badges
-		"activityWarningBadge.background": "#ff9900", // Background for warning notification badges - bright orange
+		"activityWarningBadge.background": "#ff9900", // Background for warning notification badges
 		"activityWarningBadge.foreground": "#000000", // Text color for warning notification badges
 		// --- Side Bar ---
 		"sideBar.background": "#000000", // Background of the sidebar containing file explorer and other views
-		"sideBar.foreground": "#00ff80", // Default text color for sidebar content - neon lime green
-		"sideBar.border": "#ff0080", // Border separating sidebar from editor area - neon hot pink
-		"sideBarTitle.foreground": "#00ffff", // Text color of sidebar section titles like "EXPLORER" - neon cyan
-		"sideBarSectionHeader.background": "#1a1a2e", // Background of section headers in sidebar - dark blue tint
-		"sideBarSectionHeader.foreground": "#80ff00", // Text color of section headers in sidebar - neon lime
-		"sideBarSectionHeader.border": "#8000ff", // Border color of section headers in sidebar - neon purple
-		"sideBar.dropBackground": "#ff00ff", // Background shown when dropping files into sidebar - neon magenta
+		"sideBar.foreground": "#00ff80", // Default text color for sidebar content
+		"sideBar.border": "#ff0080", // Border separating sidebar from editor area
+		"sideBarTitle.foreground": "#00ffff", // Text color of sidebar section titles like "EXPLORER"
+		"sideBarSectionHeader.background": "#1a1a2e", // Background of section headers in sidebar
+		"sideBarSectionHeader.foreground": "#80ff00", // Text color of section headers in sidebar
+		"sideBarSectionHeader.border": "#8000ff", // Border color of section headers in sidebar
+		"sideBar.dropBackground": "#ff00ff", // Background shown when dropping files into sidebar
 		// --- Status Bar ---
 		"statusBar.background": "#000000", // Background of the status bar at the bottom of the window
 		"statusBar.foreground": "#f6fcfc", // Text color of status bar items
@@ -139,35 +139,35 @@
 		"terminalCursor.background": "#000000", // Background color of terminal cursor
 		"terminalCursor.foreground": "#f6fcfc", // Color of terminal cursor when it's a block
 		"terminal.ansiBlack": "#000000", // Terminal ANSI black color for command output
-		"terminal.ansiBlue": "#0080ff", // Terminal ANSI blue color for command output - neon blue
-		"terminal.ansiCyan": "#00ffff", // Terminal ANSI cyan color for command output - neon cyan
-		"terminal.ansiGreen": "#00ff00", // Terminal ANSI green color for command output - neon green
-		"terminal.ansiMagenta": "#ff00ff", // Terminal ANSI magenta color for command output - neon magenta
-		"terminal.ansiRed": "#ff0040", // Terminal ANSI red color for command output - neon red
+		"terminal.ansiBlue": "#0080ff", // Terminal ANSI blue color for command output
+		"terminal.ansiCyan": "#00ffff", // Terminal ANSI cyan color for command output
+		"terminal.ansiGreen": "#00ff00", // Terminal ANSI green color for command output
+		"terminal.ansiMagenta": "#ff00ff", // Terminal ANSI magenta color for command output
+		"terminal.ansiRed": "#ff0040", // Terminal ANSI red color for command output
 		"terminal.ansiWhite": "#ffffff", // Terminal ANSI white color for command output
-		"terminal.ansiYellow": "#ffff00", // Terminal ANSI yellow color for command output - neon yellow
-		"terminal.ansiBrightBlack": "#888888", // Terminal bright black color for command output - lighter gray
-		"terminal.ansiBrightBlue": "#40a0ff", // Terminal bright blue color for command output - bright neon blue
-		"terminal.ansiBrightCyan": "#40ffff", // Terminal bright cyan color for command output - bright neon cyan
-		"terminal.ansiBrightGreen": "#40ff40", // Terminal bright green color for command output - bright neon green
-		"terminal.ansiBrightMagenta": "#ff40ff", // Terminal bright magenta color for command output - bright neon magenta
-		"terminal.ansiBrightRed": "#ff4040", // Terminal bright red color for command output - bright neon red
+		"terminal.ansiYellow": "#ffff00", // Terminal ANSI yellow color for command output
+		"terminal.ansiBrightBlack": "#888888", // Terminal bright black color for command output
+		"terminal.ansiBrightBlue": "#40a0ff", // Terminal bright blue color for command output
+		"terminal.ansiBrightCyan": "#40ffff", // Terminal bright cyan color for command output
+		"terminal.ansiBrightGreen": "#40ff40", // Terminal bright green color for command output
+		"terminal.ansiBrightMagenta": "#ff40ff", // Terminal bright magenta color for command output
+		"terminal.ansiBrightRed": "#ff4040", // Terminal bright red color for command output
 		"terminal.ansiBrightWhite": "#ffffff", // Terminal bright white color for command output
-		"terminal.ansiBrightYellow": "#ffff40", // Terminal bright yellow color for command output - bright neon yellow
-		"terminal.selectionBackground": "#ff00ff88", // Background color of selected text in terminal - neon magenta tint
+		"terminal.ansiBrightYellow": "#ffff40", // Terminal bright yellow color for command output
+		"terminal.selectionBackground": "#ff00ff88", // Background color of selected text in terminal
 		// --- Lists & Trees ---
-		"list.activeSelectionBackground": "#2266cc", // Background of selected items in active lists - deeper blue
-		"list.activeSelectionForeground": "#ffffff", // Text color of selected items in active lists - white for contrast
-		"list.inactiveSelectionBackground": "#663366", // Background of selected items in unfocused lists - purple tint
-		"list.inactiveSelectionForeground": "#cccccc", // Text color of selected items in unfocused lists - light gray
-		"list.hoverBackground": "#334433", // Background when hovering over list items - dark green tint
-		"list.hoverForeground": "#ccffcc", // Text color when hovering over list items - light green
-		"list.focusOutline": "#ff0080", // Outline color of focused list items - neon hot pink for visibility
-		"list.inactiveFocusOutline": "#666666", // Outline color of focused items in unfocused lists - darker gray
-		"list.errorForeground": "#ff0040", // Text color for error items in lists - neon red
-		"list.warningForeground": "#ff8000", // Text color for warning items in lists - neon orange
-		"list.filterMatchBackground": "#ff00ff55", // Background of text that matches search filter - neon magenta highlight
-		"list.highlightForeground": "#00ff80", // Color of highlighted text in lists - neon lime
+		"list.activeSelectionBackground": "#2266cc", // Background of selected items in active lists
+		"list.activeSelectionForeground": "#ffffff", // Text color of selected items in active lists
+		"list.inactiveSelectionBackground": "#663366", // Background of selected items in unfocused lists
+		"list.inactiveSelectionForeground": "#cccccc", // Text color of selected items in unfocused lists
+		"list.hoverBackground": "#334433", // Background when hovering over list items
+		"list.hoverForeground": "#ccffcc", // Text color when hovering over list items
+		"list.focusOutline": "#ff0080", // Outline color of focused list items
+		"list.inactiveFocusOutline": "#666666", // Outline color of focused items in unfocused lists
+		"list.errorForeground": "#ff0040", // Text color for error items in lists
+		"list.warningForeground": "#ff8000", // Text color for warning items in lists
+		"list.filterMatchBackground": "#ff00ff55", // Background of text that matches search filter
+		"list.highlightForeground": "#00ff80", // Color of highlighted text in lists
 		// --- Input Controls ---
 		"input.background": "#242424", // Background of text input fields
 		"input.foreground": "#f6fcfc", // Text color in input fields
@@ -178,39 +178,39 @@
 		"inputOption.activeForeground": "#f6fcfc", // Text color of active input options
 		"inputOption.hoverBackground": "#6d6d6d", // Background when hovering over input options
 		// --- Buttons & Badges ---
-		"button.background": "#00ff00", // Background color of primary action buttons - neon green for "go" actions
-		"button.foreground": "#000000", // Text color of primary action buttons - black for contrast
-		"button.hoverBackground": "#40ff40", // Background when hovering over buttons - brighter neon green
-		"button.secondaryBackground": "#ff0080", // Background of secondary action buttons - neon hot pink for distinction
-		"button.secondaryForeground": "#ffffff", // Text color of secondary action buttons - white
-		"button.secondaryHoverBackground": "#ff40a0", // Background when hovering over secondary buttons - brighter neon pink
-		"badge.background": "#ff00ff", // Background of notification badges and counters - neon magenta
-		"badge.foreground": "#000000", // Text color of notification badges and counters - black
+		"button.background": "#00ff00", // Background color of primary action buttons
+		"button.foreground": "#000000", // Text color of primary action buttons
+		"button.hoverBackground": "#40ff40", // Background when hovering over buttons
+		"button.secondaryBackground": "#ff0080", // Background of secondary action buttons
+		"button.secondaryForeground": "#ffffff", // Text color of secondary action buttons
+		"button.secondaryHoverBackground": "#ff40a0", // Background when hovering over secondary buttons
+		"badge.background": "#ff00ff", // Background of notification badges and counters
+		"badge.foreground": "#000000", // Text color of notification badges and counters
 		// --- Dropdown ---
 		"dropdown.background": "#242424", // Background of dropdown selection menus
 		"dropdown.foreground": "#f6fcfc", // Text color in dropdown menus
 		"dropdown.border": "#6d6d6d", // Border color around dropdown controls
 		"dropdown.listBackground": "#000000", // Background of dropdown option lists
 		// --- Peek View ---
-		"peekView.border": "#f904cc", // Border around peek definition and reference panels - distinctive magenta
+		"peekView.border": "#f904cc", // Border around peek definition and reference panels
 		"peekViewEditor.background": "#000000", // Background of the editor area in peek view
-		"peekViewEditor.matchHighlightBackground": "#e4f40355", // Highlight color for matches in peek editor - subtle yellow
-		"peekViewResult.background": "#1a1a1a", // Background of the results list in peek view - darker for contrast
+		"peekViewEditor.matchHighlightBackground": "#e4f40355", // Highlight color for matches in peek editor
+		"peekViewResult.background": "#1a1a1a", // Background of the results list in peek view
 		"peekViewResult.fileForeground": "#f6fcfc", // Color of file names in peek results
-		"peekViewResult.lineForeground": "#929292", // Color of line numbers in peek results - softer gray
-		"peekViewResult.matchHighlightBackground": "#e4f40355", // Highlight for matching text in peek results - consistent yellow
+		"peekViewResult.lineForeground": "#929292", // Color of line numbers in peek results
+		"peekViewResult.matchHighlightBackground": "#e4f40355", // Highlight for matching text in peek results
 		"peekViewResult.selectionBackground": "#0013ea33", // Background of selected item in peek results - blue selection
-		"peekViewResult.selectionForeground": "#f6fcfc", // Text color of selected item in peek results - bright white
-		"peekViewTitle.background": "#f904cc", // Background of peek view title bar - magenta for consistency
-		"peekViewTitleDescription.foreground": "#000000", // Color of description text in peek title - black on magenta
-		"peekViewTitleLabel.foreground": "#000000", // Color of main title text in peek view - black on magenta
+		"peekViewResult.selectionForeground": "#f6fcfc", // Text color of selected item in peek results
+		"peekViewTitle.background": "#f904cc", // Background of peek view title bar
+		"peekViewTitleDescription.foreground": "#000000", // Color of description text in peek title on magenta
+		"peekViewTitleLabel.foreground": "#000000", // Color of main title text in peek view on magenta
 		// --- Merge Conflicts ---
-		"merge.border": "#f904cc", // Border color around merge conflict sections - distinctive magenta
-		"merge.commonContentBackground": "#92929233", // Background for common content in merge conflicts - subtle gray
+		"merge.border": "#f904cc", // Border color around merge conflict sections
+		"merge.commonContentBackground": "#92929233", // Background for common content in merge conflicts
 		"merge.commonHeaderBackground": "#92929266", // Header background for common content sections
-		"merge.currentContentBackground": "#0013ea22", // Background for current branch content - blue tint
+		"merge.currentContentBackground": "#0013ea22", // Background for current branch content
 		"merge.currentHeaderBackground": "#0013ea66", // Header background for current branch - blue
-		"merge.incomingContentBackground": "#00cc0022", // Background for incoming changes - green tint
+		"merge.incomingContentBackground": "#00cc0022", // Background for incoming changes
 		"merge.incomingHeaderBackground": "#00cc0066", // Header background for incoming changes - green
 		// --- Notifications & Settings ---
 		"notifications.background": "#494949", // Background of notification popup panels
@@ -224,13 +224,13 @@
 		"settings.textInputForeground": "#f6fcfc", // Text color in settings input fields
 		"settings.modifiedItemIndicator": "#e4f403", // Indicator color for modified settings
 		// --- Git Decorations ---
-		"gitDecoration.addedResourceForeground": "#00ff00", // Color for newly added files in explorer - neon green
-		"gitDecoration.modifiedResourceForeground": "#ff8000", // Color for modified files in explorer - neon orange
-		"gitDecoration.deletedResourceForeground": "#ff0040", // Color for deleted files in explorer - neon red
-		"gitDecoration.untrackedResourceForeground": "#00ffff", // Color for untracked files in explorer - neon cyan
-		"gitDecoration.ignoredResourceForeground": "#666666", // Color for ignored files in explorer - dark gray
-		"gitDecoration.conflictingResourceForeground": "#ff00ff", // Color for files with merge conflicts - neon magenta
-		"gitDecoration.submoduleResourceForeground": "#0080ff", // Color for git submodule folders - neon blue
+		"gitDecoration.addedResourceForeground": "#00ff00", // Color for newly added files in explorer
+		"gitDecoration.modifiedResourceForeground": "#ff8000", // Color for modified files in explorer
+		"gitDecoration.deletedResourceForeground": "#ff0040", // Color for deleted files in explorer
+		"gitDecoration.untrackedResourceForeground": "#00ffff", // Color for untracked files in explorer
+		"gitDecoration.ignoredResourceForeground": "#666666", // Color for ignored files in explorer
+		"gitDecoration.conflictingResourceForeground": "#ff00ff", // Color for files with merge conflicts
+		"gitDecoration.submoduleResourceForeground": "#0080ff", // Color for git submodule folders
 		// --- Text Links ---
 		"textLink.foreground": "#0013ea", // Color of clickable text links throughout the interface
 		"textLink.activeForeground": "#e4f403", // Color of links when clicked or activated
@@ -253,9 +253,9 @@
 		"charts.red": "#da0000", // Red color option for chart data series
 		"charts.blue": "#0013ea", // Blue color option for chart data series
 		"charts.yellow": "#e4f403", // Yellow color option for chart data series
-		"charts.orange": "#f904cc", // Orange color option for chart data series
-		"charts.green": "#f904cc", // Green color option for chart data series
-		"charts.purple": "#f904cc", // Purple color option for chart data series
+		"charts.orange": "#ff8000", // Orange color option for chart data series
+		"charts.green": "#00ff00", // Green color option for chart data series
+		"charts.purple": "#8000ff", // Purple color option for chart data series
 		// --- Extensions & Welcome Page ---
 		"extensionButton.prominentBackground": "#e4f403", // Background of prominent action buttons in extensions view
 		"extensionButton.prominentForeground": "#000000", // Text color of prominent action buttons in extensions view
@@ -273,31 +273,31 @@
 	// =================================================
 	"semanticTokenColors": {
 		// --- Types ---
-		"class": "#00ff00", // Class names like "User", "Database", "Component" - neon green
-		"interface": "#ff4000", // Interface definitions like "IUserService", "ApiResponse" - neon orange-red
-		"enum": "#0080ff", // Enumeration types like "StatusCode", "Color" - neon blue
-		"struct": "#ff8000", // Struct definitions in languages like C#, Rust - neon orange
-		"type": "#8000ff", // Type aliases and custom types like "UserId", "Callback" - neon purple
-		"typeParameter": "#888888", // Generic type parameters like "T", "K", "V" - gray
+		"class": "#00ff00", // Class names like "User", "Database", "Component"
+		"interface": "#ff4000", // Interface definitions like "IUserService", "ApiResponse"
+		"enum": "#0080ff", // Enumeration types like "StatusCode", "Color"
+		"struct": "#ff8000", // Struct definitions in languages like C#, Rust
+		"type": "#8000ff", // Type aliases and custom types like "UserId", "Callback"
+		"typeParameter": "#888888", // Generic type parameters like "T", "K", "V"
 		// --- Variables ---
-		"variable": "#00ff80", // Variable names like "userName", "count", "data" - neon lime
-		"parameter": "#ff8040", // Function parameters like "id", "options", "callback" - neon peach
-		"property": "#4080ff", // Object properties like "user.name", "config.timeout" - neon light blue
-		"enumMember": "#0080ff", // Enum values like "Status.Active", "Color.Red" - neon blue
+		"variable": "#00ff80", // Variable names like "userName", "count", "data"
+		"parameter": "#ff8040", // Function parameters like "id", "options", "callback"
+		"property": "#4080ff", // Object properties like "user.name", "config.timeout"
+		"enumMember": "#0080ff", // Enum values like "Status.Active", "Color.Red"
 		// --- Values and Literals ---
-		"string": "#ff0080", // String literals like "Hello World", 'path/to/file' - neon hot pink
-		"number": "#80ff00", // Numeric values like 42, 3.14, 0xFF - neon lime green
-		"boolean": "#00ffff", // Boolean values: true, false - neon cyan
-		"regexp": "#ff4080", // Regular expressions like /pattern/gi, new RegExp() - neon pink
+		"string": "#ff0080", // String literals like "Hello World", 'path/to/file'
+		"number": "#80ff00", // Numeric values like 42, 3.14, 0xFF
+		"boolean": "#00ffff", // Boolean values: true, false
+		"regexp": "#ff4080", // Regular expressions like /pattern/gi, new RegExp()
 		// --- Functions ---
-		"function": "#ffff00", // Function names like "calculateTotal", "fetchData" - neon yellow
-		"method": "#ff8000", // Method calls like "user.getName()", "array.push()" - neon orange
+		"function": "#ffff00", // Function names like "calculateTotal", "fetchData"
+		"method": "#ff8000", // Method calls like "user.getName()", "array.push()"
 		// --- Keywords ---
-		"keyword": "#8040ff", // Language keywords like "if", "for", "return", "class" - neon purple
-		"modifier": "#999999", // Access modifiers like "public", "private", "static" - gray
-		"namespace": "#ff0080", // Namespace declarations like "MyApp.Utils", "System.IO" - neon hot pink
+		"keyword": "#8040ff", // Language keywords like "if", "for", "return", "class"
+		"modifier": "#999999", // Access modifiers like "public", "private", "static"
+		"namespace": "#ff0080", // Namespace declarations like "MyApp.Utils", "System.IO"
 		// --- Comments ---
-		"comment": "#777777", // Comment text: // single line, /* block comments */ - lighter gray
+		"comment": "#777777", // Comment text: // single line, /* block comments */
 		// --- Special Modifiers ---
 		"*.static": {
 			"fontStyle": "italic" // Static members shown in italic: static methods, fields
@@ -346,7 +346,7 @@
 				"entity.name.type.class" // Class definitions: class User, class Component
 			],
 			"settings": {
-				"foreground": "#00ff00" // Neon green for classes
+				"foreground": "#00ff00" // Color for classes
 			}
 		},
 		{
@@ -355,7 +355,7 @@
 				"entity.name.type" // General type names
 			],
 			"settings": {
-				"foreground": "#ff4000" // Neon orange-red for interfaces
+				"foreground": "#ff4000" // Color for interfaces
 			}
 		},
 		{
@@ -363,7 +363,7 @@
 				"entity.name.type.struct" // Struct definitions in C#, Rust: struct Point
 			],
 			"settings": {
-				"foreground": "#ff8000" // Neon orange for structs
+				"foreground": "#ff8000" // Color for structs
 			}
 		},
 		{
@@ -371,7 +371,7 @@
 				"entity.name.type.enum" // Enum definitions: enum Status, enum Color
 			],
 			"settings": {
-				"foreground": "#0080ff" // Neon blue for enums
+				"foreground": "#0080ff" // Color for enums
 			}
 		},
 		{
@@ -379,7 +379,7 @@
 				"support.type" // Built-in types like string, number, boolean
 			],
 			"settings": {
-				"foreground": "#8000ff" // Neon purple for built-in types
+				"foreground": "#8000ff" // Color for built-in types
 			}
 		},
 		{
@@ -398,7 +398,7 @@
 				"meta.function.method" // Method declarations and calls
 			],
 			"settings": {
-				"foreground": "#ff8000" // Neon orange for methods
+				"foreground": "#ff8000" // Color for methods
 			}
 		},
 		{
@@ -408,7 +408,7 @@
 				"meta.function-call.generic" // Generic function calls
 			],
 			"settings": {
-				"foreground": "#ffff00" // Neon yellow for functions
+				"foreground": "#ffff00" // Color for functions
 			}
 		},
 		{
@@ -416,7 +416,7 @@
 				"variable.function" // Function variables: const handler = () => {}
 			],
 			"settings": {
-				"foreground": "#ff8040" // Neon orange-yellow for function variables
+				"foreground": "#ff8040" // Color for function variables
 			}
 		},
 		{
@@ -564,7 +564,7 @@
 				"markup.inline.raw.string.markdown" // Inline code strings in markdown
 			],
 			"settings": {
-				"foreground": "#ff0080" // Neon hot pink for strings
+				"foreground": "#ff0080" // Color for strings
 			}
 		},
 		{
@@ -573,7 +573,7 @@
 				"constant.other.placeholder" // Placeholder text in templates: ${variable}
 			],
 			"settings": {
-				"foreground": "#00ffaa" // Neon teal for escape sequences
+				"foreground": "#00ffaa" // Color for escape sequences
 			}
 		},
 		{
@@ -581,7 +581,7 @@
 				"constant.numeric" // Numbers: 42, 3.14, 0xFF, 1e5, -100
 			],
 			"settings": {
-				"foreground": "#80ff00" // Neon lime green for numbers
+				"foreground": "#80ff00" // Color for numbers
 			}
 		},
 		{
@@ -590,7 +590,7 @@
 				"constant.language.json" // JSON constants: null, true, false
 			],
 			"settings": {
-				"foreground": "#00ffff" // Neon cyan for booleans
+				"foreground": "#00ffff" // Color for booleans
 			}
 		},
 		{
