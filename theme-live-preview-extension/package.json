@@ -93,6 +93,46 @@
         "category": "Theme Preview"
       },
       {
+        "command": "themeLivePreview.showDatabaseStats",
+        "title": "Show Database Statistics",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.searchDatabase", 
+        "title": "Search Theme Database",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.browseByCategory",
+        "title": "Browse Elements by Category",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.exportDatabase",
+        "title": "Export Theme Database",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.generateSampleTheme",
+        "title": "Generate Sample Theme",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.showRandomElement",
+        "title": "Show Random Element",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.validateThemeFile",
+        "title": "Validate Theme File",
+        "category": "Theme Database"
+      },
+      {
+        "command": "themeLivePreview.showDatabaseHelp",
+        "title": "Database Help",
+        "category": "Theme Database"
+      },
+      {
         "command": "themeLivePreview.showStartupOptions",
         "title": "Show Startup Options",
         "category": "Theme Preview"
@@ -121,6 +161,30 @@
         },
         {
           "command": "themeLivePreview.showElementExamples"
+        },
+        {
+          "command": "themeLivePreview.showDatabaseStats"
+        },
+        {
+          "command": "themeLivePreview.searchDatabase"
+        },
+        {
+          "command": "themeLivePreview.browseByCategory"
+        },
+        {
+          "command": "themeLivePreview.exportDatabase"
+        },
+        {
+          "command": "themeLivePreview.generateSampleTheme"
+        },
+        {
+          "command": "themeLivePreview.showRandomElement"
+        },
+        {
+          "command": "themeLivePreview.validateThemeFile"
+        },
+        {
+          "command": "themeLivePreview.showDatabaseHelp"
         },
         {
           "command": "themeLivePreview.loadTheme"

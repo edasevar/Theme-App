@@ -32,42 +32,76 @@ The **Value Editor** provides a powerful pop-up interface for editing individual
   - **Cancel**: Discard changes and close
   - **Reset to Original**: Restore the original value
 
-## 🧭 Element Navigation & Examples
+## 🗃️ Theme Database & Navigation System
 
-The **Element Navigation** feature helps you understand exactly what each theme property controls in VS Code:
+The **Theme Database** is a comprehensive system providing detailed information about 80+ VS Code theme elements with enhanced navigation and utility features.
 
-### 🔍 Key Features
+### 🔍 Database Features
 
-- **Visual Examples**: See real examples of what each property affects
-- **Location Guide**: Know exactly where to find each element in VS Code
-- **Code Samples**: View sample code showing the property's visual impact
-- **Live Navigation**: Jump directly to the UI element in VS Code
-- **Related Properties**: Discover properties that work together
-- **Color Testing**: Test colors directly on the actual elements
+- **Complete Coverage**: 80+ theme elements across 15+ categories
+- **Smart Search**: Find elements by property name, description, location, or keywords
+- **Category Browsing**: Explore elements by UI component type
+- **Visual Examples**: Interactive examples with live color testing
+- **Related Properties**: Discover connected theme elements
+- **Export/Import**: Database export and theme validation tools
 
-### 🚀 How to Use
+### 🗂️ Database Categories
 
-1. **From Sidebar**: Click the 🧭 navigation button next to any theme property
-2. **From Value Editor**: Click "🧭 Show Examples" in the value editor
-3. **From Command Palette**: `Ctrl+Shift+P` → "Theme Live Preview: Show Element Examples"
+- **Editor Elements**: Background, foreground, selection, highlighting, cursors, line numbers
+- **Activity Bar**: Icons, backgrounds, active states, badges
+- **Side Bar**: File explorer, backgrounds, titles, section headers
+- **Status Bar**: Background, text colors, item states
+- **Title Bar**: Window title, active/inactive states
+- **Tab Elements**: Active/inactive tabs, backgrounds, borders
+- **Input Elements**: Search boxes, text fields, placeholders
+- **Button Elements**: Primary/secondary buttons, hover states
+- **List Elements**: Selection, hover, active states
+- **Panel Elements**: Terminal, output, debug console
+- **Terminal Colors**: ANSI color palette, background, foreground
+- **Notification Elements**: Background, borders, text
+- **Widget Elements**: Shadows, borders for popup elements
 
-### 🎨 Examples Interface
+### 🚀 Database Commands
 
-- **Property Description**: Clear explanation of what the property controls
-- **Visual Location**: Highlighted description of where to find the element
-- **Code Examples**: Sample code demonstrating the property's effect
-- **Live Color Testing**: Test different colors directly on the element
-- **Related Properties**: Quick access to related theme properties
+Access via Command Palette (`Ctrl+Shift+P`):
+
+**Core Navigation:**
+- **Theme Database: Search Theme Database** - Find elements by keyword
+- **Theme Database: Browse Elements by Category** - Explore by component type
+- **Theme Database: Show Random Element** - Discover elements for inspiration
+
+**Database Management:**
+- **Theme Database: Show Database Statistics** - View counts and categories
+- **Theme Database: Export Theme Database** - Save complete database as JSON
+- **Theme Database: Database Help** - Show usage information
+
+**Theme Utilities:**
+- **Theme Database: Generate Sample Theme** - Create theme from base color
+- **Theme Database: Validate Theme File** - Check theme JSON structure
+
+### 🎨 Enhanced Navigation Interface
+
+**From Sidebar**: Click the 🧭 navigation button next to any theme property
+**From Value Editor**: Click "🧭 Show Examples" in the value editor
+
+**Example Information Includes:**
+- **Clear Description**: What the element controls in VS Code
+- **Visual Location**: Exact UI location with helpful examples
+- **Code Samples**: Sample code showing the property's visual impact
+- **Live Color Testing**: Interactive color picker for immediate feedback
+- **Related Properties**: Quick access to connected theme elements
 - **Navigation Actions**:
-  - **Show in VS Code**: Navigate to the actual element
-  - **Open in Settings**: Jump to VS Code settings for the property
-  - **Copy Property**: Copy the property name to clipboard
+  - **🔍 Show in VS Code**: Navigate directly to the element
+  - **⚙️ Open in Settings**: Jump to VS Code color settings
+  - **📋 Copy Property**: Copy property name to clipboard
 
-### 📍 Supported Elements
+### � Database Statistics
 
-The navigation system includes detailed information for:
-- **Editor Elements**: Background, foreground, selection, line highlighting
-- **Activity Bar**: Icons, background, active borders
+- **80+ Theme Elements** covering all major VS Code UI components
+- **15+ Categories** including editor, activity bar, sidebar, status bar, tabs, inputs, buttons, panels, terminal, and more
+- **Comprehensive Coverage** of all standard VS Code theme properties
+- **Live Examples** with interactive color testing
+- **Smart Relationships** between related properties
 - **Sidebar**: File explorer, search panels, backgrounds
 - **Status Bar**: Bottom bar with git info, line numbers
 - **Tabs**: Active/inactive tab styling
@@ -118,6 +152,32 @@ The navigation system includes detailed information for:
 - 🌈 **Multi-format Support**: Works with JSON themes and VSIX packages
 
 ## 🚀 Quick Start
+
+### Basic Usage
+
+1. **Start with Startup Menu**: The extension automatically shows a startup menu when activated
+2. **Open Command Palette**: Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
+3. **Search Commands**: Type "Theme Live Preview" to see all available commands
+
+### Key Commands
+
+**Startup & Main Features:**
+- `Theme Live Preview: Show Startup Menu` - Access the main startup workflow
+- `Theme Live Preview: Open Sidebar` - Open the theme editing sidebar
+- `Theme Live Preview: Open Value Editor` - Advanced property editing with live preview
+
+**Database & Navigation:**
+- `Theme Database: Search Theme Database` - Find elements by keyword
+- `Theme Database: Browse Elements by Category` - Explore by component type  
+- `Theme Database: Show Random Element` - Discover elements for inspiration
+- `Theme Database: Generate Sample Theme` - Create theme from base color
+- `Theme Database: Show Database Statistics` - View database overview
+- `Theme Database: Database Help` - Usage information and tips
+
+**Import & Export:**
+- `Theme Live Preview: Load Theme` - Import JSON/VSIX theme files
+- `Theme Live Preview: Export CSS` - Export current theme as CSS
+- `Theme Live Preview: Create VSIX` - Package theme as VS Code extension
 
 ### Installation
 

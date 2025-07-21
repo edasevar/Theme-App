@@ -5,6 +5,7 @@ import { ThemeExtractor } from './themeExtractor';
 import { PreviewPanel } from './previewPanel';
 import { SidebarProvider } from './sidebarProvider';
 import { StartupMenuProvider } from './startupMenuProvider';
+import { DatabaseUtils } from './databaseUtils';
 
 const EnhancedVSCodeThemeExtractor = require('../enhanced_theme_extractor');
 
@@ -46,6 +47,9 @@ async function convertCSSToTheme(cssContent: string): Promise<any> {
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
+
+    // Set context for database utilities
+    DatabaseUtils.setContext(context);
 
     const themeExtractor = new ThemeExtractor();
     let previewPanel: PreviewPanel | undefined;
@@ -509,6 +513,42 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    // =================================================
+    // DATABASE UTILITY COMMANDS
+    // =================================================
+    
+    const showDatabaseStatsCommand = vscode.commands.registerCommand('themeLivePreview.showDatabaseStats', () => {
+        DatabaseUtils.showDatabaseStats();
+    });
+
+    const searchDatabaseCommand = vscode.commands.registerCommand('themeLivePreview.searchDatabase', async () => {
+        await DatabaseUtils.searchDatabase();
+    });
+
+    const browseByCategoryCommand = vscode.commands.registerCommand('themeLivePreview.browseByCategory', async () => {
+        await DatabaseUtils.browseByCategory();
+    });
+
+    const exportDatabaseCommand = vscode.commands.registerCommand('themeLivePreview.exportDatabase', async () => {
+        await DatabaseUtils.exportDatabase();
+    });
+
+    const generateSampleThemeCommand = vscode.commands.registerCommand('themeLivePreview.generateSampleTheme', async () => {
+        await DatabaseUtils.generateSampleTheme();
+    });
+
+    const showRandomElementCommand = vscode.commands.registerCommand('themeLivePreview.showRandomElement', async () => {
+        await DatabaseUtils.showRandomElement();
+    });
+
+    const validateThemeFileCommand = vscode.commands.registerCommand('themeLivePreview.validateThemeFile', async () => {
+        await DatabaseUtils.validateThemeFile();
+    });
+
+    const showDatabaseHelpCommand = vscode.commands.registerCommand('themeLivePreview.showDatabaseHelp', () => {
+        DatabaseUtils.showHelp();
+    });
+
     // Add all commands to subscriptions
     context.subscriptions.push(
         showStartupMenuCommand,
@@ -525,7 +565,16 @@ export function activate(context: vscode.ExtensionContext) {
         createVSIXCommand,
         exportThemeCommand,
         openValueEditorCommand,
-        showElementExamplesCommand
+        showElementExamplesCommand,
+        // Database utility commands
+        showDatabaseStatsCommand,
+        searchDatabaseCommand,
+        browseByCategoryCommand,
+        exportDatabaseCommand,
+        generateSampleThemeCommand,
+        showRandomElementCommand,
+        validateThemeFileCommand,
+        showDatabaseHelpCommand
     );
 
     // Create TreeView for the sidebar
