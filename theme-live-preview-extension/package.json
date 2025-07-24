@@ -1,8 +1,9 @@
 {
   "name": "theme-live-preview",
   "displayName": "Theme Live Preview",
-  "description": "Live preview VS Code themes with CSS configuration",
-  "version": "0.0.1",
+  "description": "Live preview and edit VS Code themes with advanced database navigation and CSS export capabilities",
+  "version": "1.0.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/edasevar/Theme-App.git"

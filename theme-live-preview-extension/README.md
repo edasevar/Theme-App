@@ -1,6 +1,6 @@
 # 🎨 Theme Live Preview Extension
 
-A powerful VS Code extension that provides **live previ  - Or manually open with: `Ctrl+Shift+P` → "Theme Live Preview: Show Startup Menu"
+A powerful VS Code extension that provides **live preview** - Or manually open with: `Ctrl+Shift+P` → "Theme Live Preview: Show Startup Menu"
 
 ## ✏️ Value Editor
 
@@ -109,10 +109,12 @@ Access via Command Palette (`Ctrl+Shift+P`):
 - **Lists**: File lists, search results, hover effects
 - **Buttons**: Primary and secondary button styling
 
-## 📖 Usage Guide* and **real-time editing** of VS Code themes with advanced CSS conversion capabilities. Transform any VS Code theme into customizable CSS for web projects or theme development.
+## 📖 Complete Usage Guide
+
+The **Theme Live Preview Extension** provides **live preview** and **real-time editing** of VS Code themes with advanced CSS conversion capabilities. Transform any VS Code theme into customizable CSS for web projects or theme development.
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.60.0+-blue)](https://code.visualstudio.com/)
-[![Version](https://img.shields.io/badge/version-0.0.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/version-1.0.0-green)](package.json)
 
 ## ✨ Features
 
