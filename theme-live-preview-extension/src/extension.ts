@@ -48,25 +48,32 @@ async function convertCSSToTheme(cssContent: string): Promise<any> {
 export function activate(context: vscode.ExtensionContext) {
     console.log('Theme Live Preview extension is now active!');
 
-    // Set context for database utilities
-    DatabaseUtils.setContext(context);
+    try {
+        // Set context for database utilities
+        DatabaseUtils.setContext(context);
 
-    const themeExtractor = new ThemeExtractor();
-    let previewPanel: PreviewPanel | undefined;
+        const themeExtractor = new ThemeExtractor();
+        let previewPanel: PreviewPanel | undefined;
 
-    // Show startup menu on activation if enabled
-    const showStartupOnActivation = vscode.workspace.getConfiguration('themeLivePreview').get('showStartupMenuOnActivation', true);
-    if (showStartupOnActivation) {
-        setTimeout(() => {
-            StartupMenuProvider.showStartupMenu(context);
-        }, 1500);
-    }
+        // Show startup menu on activation if enabled
+        const showStartupOnActivation = vscode.workspace.getConfiguration('themeLivePreview').get('showStartupMenuOnActivation', true);
+        if (showStartupOnActivation) {
+            setTimeout(() => {
+                try {
+                    StartupMenuProvider.showStartupMenu(context);
+                } catch (error) {
+                    console.error('Error showing startup menu:', error);
+                    vscode.window.showErrorMessage('Failed to show Theme Live Preview startup menu');
+                }
+            }, 1500);
+        }
 
-    // Register the sidebar provider
-    const sidebarProvider = new SidebarProvider(context.extensionUri, context);
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(SidebarProvider.viewType, sidebarProvider)
-    );
+        // Register the sidebar provider with viewType constant
+        const SIDEBAR_VIEW_TYPE = 'themeEditor';
+        const sidebarProvider = new SidebarProvider(context.extensionUri, context);
+        context.subscriptions.push(
+            vscode.window.registerWebviewViewProvider(SIDEBAR_VIEW_TYPE, sidebarProvider)
+        );
 
     // Command to open sidebar
     const openSidebarCommand = vscode.commands.registerCommand('themeLivePreview.openSidebar', () => {
@@ -580,6 +587,11 @@ export function activate(context: vscode.ExtensionContext) {
     // Create TreeView for the sidebar
     const provider = new ThemeTreeDataProvider(context);
     vscode.window.createTreeView('themeLivePreview', { treeDataProvider: provider });
+    
+    } catch (error) {
+        console.error('Error activating Theme Live Preview extension:', error);
+        vscode.window.showErrorMessage('Failed to activate Theme Live Preview extension. Please check the console for details.');
+    }
 }
 
 class ThemeTreeDataProvider implements vscode.TreeDataProvider<ThemeTreeItem> {

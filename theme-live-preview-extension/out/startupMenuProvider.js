@@ -1,32 +1,8 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.StartupMenuProvider = void 0;
-const vscode = __importStar(require("vscode"));
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
+// Replace the problematic __importStar usage with direct imports
+const vscode = require("vscode");
+const fs = require("fs");
+const path = require("path");
 class StartupMenuProvider {
     static async showStartupMenu(context) {
         const panel = vscode.window.createWebviewPanel('startupMenu', 'Theme Editor - Start New Project', vscode.ViewColumn.One, {
@@ -608,13 +584,22 @@ class StartupMenuProvider {
 
     <script>
         const vscode = acquireVsCodeApi();
-        
+
         function executeCommand(command) {
+            // Ensure 'command' is defined and passed correctly
+            if (!command) {
+                console.error("Command is undefined or null.");
+                return;
+            }
             vscode.postMessage({ command: command });
         }
-        
+
         function generateTheme() {
             const description = document.getElementById('themeDescription').value;
+            if (!description) {
+                console.error("Description is empty.");
+                return;
+            }
             vscode.postMessage({ 
                 command: 'generateTheme', 
                 description: description 
@@ -627,3 +612,4 @@ class StartupMenuProvider {
 }
 exports.StartupMenuProvider = StartupMenuProvider;
 //# sourceMappingURL=startupMenuProvider.js.map
+        
