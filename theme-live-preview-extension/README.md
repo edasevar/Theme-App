@@ -119,7 +119,7 @@ The **Theme Live Preview Extension** provides **live preview** and **real-time e
 ## ✨ Features
 
 - 🎨 **Smart Startup Menu**: Choose your workflow with an intuitive startup menu
-  - Create new themes from scratch using ELEMENTS.jsonc template
+  - Create new themes from scratch using [TEMPLATE](https://github.com/edasevar/Theme-App/blob/main/theme-live-preview-extension/themes/TEMPLATE.jsonc)
   - Edit your current VS Code theme
   - Choose from installed themes
   - Import JSON/JSONC, VSIX, or CSS files
